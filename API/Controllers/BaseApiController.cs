@@ -12,13 +12,13 @@ namespace API.Controllers;
 
 public class BaseApiController : ControllerBase
 {
-    protected readonly IUnitOfWork _unitOFWork;
+    protected readonly IUnitOfWork _unitOfWork;
     protected readonly IMapper _mapper;
 
     public BaseApiController(IUnitOfWork unitOfWork , IMapper mapper)
     {
         _mapper = mapper;
-        _unitOFWork = unitOfWork;
+        _unitOfWork = unitOfWork;
     }
     
 }

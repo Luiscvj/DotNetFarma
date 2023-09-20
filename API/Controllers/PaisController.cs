@@ -24,9 +24,9 @@ public class PaisController : BaseApiController
     {
             Pais pais = _mapper.Map<Pais>(paisDto);
 
-            _unitOFWork.Paises.Add(pais);
+            _unitOfWork.Paises.Add(pais);
 
-            int numeroCambios =await  _unitOFWork.SaveAsyc();
+            int numeroCambios =await  _unitOfWork.SaveAsyc();
 
             if (numeroCambios == 0) return BadRequest();
 
@@ -43,9 +43,9 @@ public class PaisController : BaseApiController
     {
         IEnumerable<Pais> paises = _mapper.Map<IEnumerable<Pais>>(paisesDto);
 
-        _unitOFWork.Paises.AddRange(paises);
+        _unitOfWork.Paises.AddRange(paises);
 
-        int numeroCambios = await _unitOFWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsyc();
 
         if(numeroCambios == 0) return BadRequest();
 
@@ -65,7 +65,7 @@ public class PaisController : BaseApiController
 
     public async Task<ActionResult<PaisDto>> GetById(int id)
     {
-        Pais pais =await _unitOFWork.Paises.GetById(id);
+        Pais pais =await _unitOfWork.Paises.GetById(id);
 
         return _mapper.Map<PaisDto>(pais);
 
@@ -80,7 +80,7 @@ public class PaisController : BaseApiController
 
     public async Task<ActionResult<IEnumerable<PaisDto>>> GetAll()
     {
-        IEnumerable<Pais> paises = await _unitOFWork.Paises.GetAll();
+        IEnumerable<Pais> paises = await _unitOfWork.Paises.GetAll();
 
       var paisesDto= _mapper.Map<IEnumerable<PaisDto>>(paises);
 
