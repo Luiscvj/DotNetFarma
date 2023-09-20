@@ -9,21 +9,21 @@ public class DotNetFarmaContext : DbContext
     {
     }
 
-    DbSet<Proveedor> Proveedores {get;}
-    DbSet<Paciente> Pacientes {get;}
-    DbSet<Arl>Arls {get;}
-    DbSet<Eps> Epss {get;}
-    DbSet<Ciudad> Ciudades {get;}
-    DbSet<Pais> Paises {get;}
-    DbSet<Departamento> Departamentos {get;}
-    DbSet<Rol> Roles {get;}
-    DbSet<Cargo> Cargos {get;}
-    DbSet<Compra> Compras {get;}
-    DbSet<Empleado> Empleados {get;}
-    DbSet<Medicamento> Medicamentos {get;}
-    DbSet<Venta> Ventas {get;}
-    DbSet<Usuario> Usuarios {get;}
-    DbSet<RefreshToken> RefreshTokens {get;}
+    public DbSet<Proveedor> Proveedores {get;}
+    public DbSet<Paciente> Pacientes {get;}
+    public DbSet<Arl>Arls {get;}
+    public DbSet<Eps> Epss {get;}
+    public DbSet<Ciudad> Ciudades {get;}
+    public DbSet<Pais> Paises {get;}
+    public DbSet<Departamento> Departamentos {get;}
+    public DbSet<Rol> Roles {get;}
+    public DbSet<Cargo> Cargos {get;}
+    public DbSet<Compra> Compras {get;}
+    public DbSet<Empleado> Empleados {get;}
+    public DbSet<Medicamento> Medicamentos {get;}
+    public DbSet<Venta> Ventas {get;}
+    public DbSet<Usuario> Usuarios {get;}
+    public DbSet<RefreshToken> RefreshTokens {get;}
 
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)
     {
