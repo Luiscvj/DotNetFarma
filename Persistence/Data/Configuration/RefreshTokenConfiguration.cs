@@ -28,6 +28,7 @@ namespace Persistencia.Data.Configuration;
     builder.Property(x => x.Revocado)
             .HasColumnType("date");
    
+   
     builder.HasOne(x => x.Usuario)
         .WithMany(x => x.RefreshTokens)
         .HasForeignKey(x => x.UsuarioId);
