@@ -22,11 +22,15 @@ public class PaisController : BaseApiController
 
     public async Task<ActionResult> Add(PaisDto paisDto)
     {
-        Pais pais = _mapper.Map<Pais>(paisDto);
-        _unitOfWork.Paises.Add(pais);
-        int numeroCambios =await  _unitOfWork.SaveAsyc();
-        if (numeroCambios == 0) return BadRequest();
-        return CreatedAtAction(nameof(Add), new {id = pais.PaisId},pais);
+            Pais pais = _mapper.Map<Pais>(paisDto);
+
+            _unitOfWork.Paises.Add(pais);
+
+            int numeroCambios =await  _unitOfWork.SaveAsync();
+
+            if (numeroCambios == 0) return BadRequest();
+
+            return CreatedAtAction(nameof(Add), new {id = pais.PaisId},pais);
     }
 
 
@@ -39,7 +43,9 @@ public class PaisController : BaseApiController
     {
         IEnumerable<Pais> paises = _mapper.Map<IEnumerable<Pais>>(paisesDto);
         _unitOfWork.Paises.AddRange(paises);
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+
+        int numeroCambios = await _unitOfWork.SaveAsync();
+
         if(numeroCambios == 0) return BadRequest();
         foreach(Pais pais in paises)
         {
@@ -85,7 +91,7 @@ public class PaisController : BaseApiController
     {
         Pais pais = await _unitOfWork.Paises.GetById(id);
         _unitOfWork.Paises.Remove(pais);
-        int numeroCambios = await  _unitOfWork.SaveAsyc();
+        int numeroCambios = await  _unitOfWork.SaveAsync();
         if(numeroCambios == 0) return BadRequest();
         return Ok("Registro Borrado  con exito");
     }
@@ -102,7 +108,7 @@ public class PaisController : BaseApiController
         Pais pais =  await _unitOfWork.Paises.GetById(id);
         _mapper.Map(paisDto,pais);
         _unitOfWork.Paises.Update(pais);
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
     }

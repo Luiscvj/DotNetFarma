@@ -24,6 +24,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     RolRepository _rol;
     UsuarioRepository _usuario;
     VentaRepository _venta;
+    EmpleadoRepository _empleado;
+    CargoRepository _cargo;
+    CompraRepository _compra;
 
     public IArl Arls
     {
@@ -124,7 +127,34 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public async Task<int> SaveAsyc()
+    public ICargo Cargos
+    {
+        get
+        {
+            _cargo ??= new CargoRepository(_context);
+            return _cargo;
+        }
+    }
+
+    public IEmpleado Empleados
+    {
+        get
+        {
+            _empleado ??= new EmpleadoRepository(_context);
+            return _empleado;
+        }
+    }
+
+    public ICompra Compras
+    {
+        get
+        {
+            _compra ??= new CompraRepository(_context);
+            return _compra;
+        }
+    }
+
+    public async Task<int> SaveAsync()
     {
         return await _context.SaveChangesAsync();
     }
