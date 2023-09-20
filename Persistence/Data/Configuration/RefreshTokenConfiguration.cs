@@ -18,19 +18,17 @@ namespace Persistencia.Data.Configuration;
     public DateTime FechaExpiracion { get; set; }
     public bool Revocado { get; set; } */
 
-    builder.Property(x => x.TokenId)
+    builder.Property(x => x.RefreshTokenId)
             .IsRequired();
 
     builder.Property(x => x.FechaCreacion)
-            .HasColumnType("timestamp");//Posible a cambio
+            .HasColumnType("date");//Posible a cambio
     builder.Property(x => x.FechaExpiracion)
             .HasColumnType("date");
     builder.Property(x => x.Revocado)
             .HasColumnType("date");
-    builder.Property(x => x.IsActive)
-            .HasColumnType("boolean");
-    builder.Property(x => x.IsExpired)
-            .HasColumnType("boolean");
+   
+   
     builder.HasOne(x => x.Usuario)
         .WithMany(x => x.RefreshTokens)
         .HasForeignKey(x => x.UsuarioId);
