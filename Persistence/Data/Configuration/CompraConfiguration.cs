@@ -27,9 +27,5 @@ public class CompraConfiguration : IEntityTypeConfiguration<Compra>
                .HasForeignKey(i => i.ProveedorId)
                .IsRequired();
 
-        builder.HasOne(a => a.Medicamento)
-               .WithMany(e => e.Compras)
-               .HasForeignKey(i => i.MedicamentoId)
-               .IsRequired();
     }
 }

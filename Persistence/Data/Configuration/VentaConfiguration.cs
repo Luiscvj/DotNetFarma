@@ -25,17 +25,6 @@ public class VentaConfiguration : IEntityTypeConfiguration<Venta>
                .HasForeignKey(i => i.PacienteId)
                .IsRequired();
 
-        builder.Property(x => x.Cantidad)
-               .HasColumnType("int")
-               .IsRequired();
-
-        builder.Property(x => x.Precio)
-               .HasColumnType("double")
-               .IsRequired();
-
-        builder.HasOne(a => a.Medicamento)
-               .WithMany(e => e.Ventas)
-               .HasForeignKey(i => i.MedicamentoId)
-               .IsRequired();
+      
     }
 }
