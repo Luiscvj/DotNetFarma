@@ -17,12 +17,11 @@ public class CompraRepository : GenericRepository<Compra>, ICompra
         var query = _context.Compras as IQueryable<Compra>;
         if(!string.IsNullOrEmpty(search))
         {
-            query  = query.Where(p => p.FechaCompra.ToLower().Contains(search));
+            //query  = query.Where(p => p.FechaCompra.ToLower().Contains(search));
         }
 
         var totalRegistros = await query.CountAsync();
         var registros = await query
-                                .Include(u => u.Empleados)
                                 .Skip((pageIndex-1)*pageSize)
                                 .Take(pageSize)
                                 .ToListAsync();

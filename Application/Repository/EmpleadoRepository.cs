@@ -22,7 +22,6 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
 
         var totalRegistros = await query.CountAsync();
         var registros = await query
-                                .Include(u => u.Empleados)
                                 .Skip((pageIndex-1)*pageSize)
                                 .Take(pageSize)
                                 .ToListAsync();

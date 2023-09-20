@@ -24,7 +24,7 @@ public class ProveedorController : BaseApiController
     {
         Proveedor Proveedor = _mapper.Map<Proveedor>(ProveedorDto);
         _unitOfWork.Proveedores.Add(Proveedor);
-        int numeroCambios =await  _unitOfWork.SaveAsyc();
+        int numeroCambios =await  _unitOfWork.SaveAsync();
         if (numeroCambios == 0) return BadRequest();
         return CreatedAtAction(nameof(Add), new {id = Proveedor.ProveedorId},Proveedor);
     }
@@ -39,7 +39,7 @@ public class ProveedorController : BaseApiController
     {
         IEnumerable<Proveedor> Proveedores = _mapper.Map<IEnumerable<Proveedor>>(ProveedoresDto);
         _unitOfWork.Proveedores.AddRange(Proveedores);
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
         if(numeroCambios == 0) return BadRequest();
         foreach(Proveedor Proveedor in Proveedores)
         {
@@ -85,7 +85,7 @@ public class ProveedorController : BaseApiController
     {
         Proveedor Proveedor = await _unitOfWork.Proveedores.GetById(id);
         _unitOfWork.Proveedores.Remove(Proveedor);
-        int numeroCambios = await  _unitOfWork.SaveAsyc();
+        int numeroCambios = await  _unitOfWork.SaveAsync();
         if(numeroCambios == 0) return BadRequest();
         return Ok("Registro Borrado  con exito");
     }
@@ -102,7 +102,7 @@ public class ProveedorController : BaseApiController
         Proveedor Proveedor =  await _unitOfWork.Proveedores.GetById(id);
         _mapper.Map(ProveedorDto,Proveedor);
         _unitOfWork.Proveedores.Update(Proveedor);
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
     }   

@@ -24,7 +24,7 @@ public class PacienteController : BaseApiController
     {
         Paciente Paciente = _mapper.Map<Paciente>(PacienteDto);
         _unitOfWork.Pacientes.Add(Paciente);
-        int numeroCambios =await  _unitOfWork.SaveAsyc();
+        int numeroCambios =await  _unitOfWork.SaveAsync();
         if (numeroCambios == 0) return BadRequest();
         return CreatedAtAction(nameof(Add), new {id = Paciente.PacienteId},Paciente);
     }
@@ -41,7 +41,7 @@ public class PacienteController : BaseApiController
 
         _unitOfWork.Pacientes.AddRange(Pacientes);
 
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
 
         if(numeroCambios == 0) return BadRequest();
 
@@ -92,7 +92,7 @@ public class PacienteController : BaseApiController
 
         _unitOfWork.Pacientes.Remove(Paciente);
 
-        int numeroCambios = await  _unitOfWork.SaveAsyc();
+        int numeroCambios = await  _unitOfWork.SaveAsync();
         if(numeroCambios == 0) return BadRequest();
 
         return Ok("Registro Borrado  con exito");
@@ -113,7 +113,7 @@ public class PacienteController : BaseApiController
         _mapper.Map(PacienteDto,Paciente);
         _unitOfWork.Pacientes.Update(Paciente);
 
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
 
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
