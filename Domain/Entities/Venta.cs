@@ -9,8 +9,6 @@ public class Venta
     public Empleado Empleado { get; set; }
     public int PacienteId { get; set; }
     public Paciente Paciente { get; set; }
-    public int Cantidad { get; set; }
-    public double Precio { get; set; }
-    public int MedicamentoId { get; set; }
-    public Medicamento Medicamento { get; set; }
+ 
+   
 }

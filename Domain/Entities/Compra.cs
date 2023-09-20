@@ -9,6 +9,5 @@ public class Compra
     public Proveedor Proveedor { get; set; }
     public int Cantidad { get; set; }
     public double Precio { get; set; }
-    public int MedicamentoId { get; set; }
-    public Medicamento Medicamento { get; set; }
+    
 }

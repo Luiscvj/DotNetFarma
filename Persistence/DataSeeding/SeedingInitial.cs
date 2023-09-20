@@ -22,9 +22,9 @@ namespace Persistence.DataSeeding;
             var Aspirina = new Medicamento { MedicamentoId = 3, Nombre = "Aspirina", Precio = 2000, Stock = 75, FechaExpiracion = new DateTime(2024,12, 20), ProveedorId = ProveedorC.ProveedorId };
 
             // Compras
-            var Compra1 = new Compra {CompraId= 1, FechaCompra = new DateTime(2001,01,01),ProveedorId = ProveedorA.ProveedorId,Cantidad=200,Precio=200000,MedicamentoId =Paracetamol.MedicamentoId};
-            var Compra2 = new Compra { CompraId = 2, FechaCompra = new DateTime( 2022,03, 15), ProveedorId = ProveedorB.ProveedorId, Cantidad = 150, Precio = 180000, MedicamentoId = Ibuprofeno.MedicamentoId };
-            var Compra3 = new Compra { CompraId = 3, FechaCompra = new DateTime( 2023,10, 06), ProveedorId = ProveedorC.ProveedorId, Cantidad = 100, Precio = 150000, MedicamentoId = Aspirina.MedicamentoId };
+            var Compra1 = new Compra {CompraId= 1, FechaCompra = new DateTime(2001,01,01),ProveedorId = ProveedorA.ProveedorId,Cantidad=200,Precio=200000};
+            var Compra2 = new Compra { CompraId = 2, FechaCompra = new DateTime( 2022,03, 15), ProveedorId = ProveedorB.ProveedorId, Cantidad = 150, Precio = 180000 };
+            var Compra3 = new Compra { CompraId = 3, FechaCompra = new DateTime( 2023,10, 06), ProveedorId = ProveedorC.ProveedorId, Cantidad = 100, Precio = 150000};
 
             // Pacientes
             var Paciente1 = new Paciente {PacienteId =1 , Nombre ="Sofia",Apellidos ="Alvarez",Direccion="Cra 19 #8-45 Barrio Comuneros", Telefono="3224243429"};
@@ -67,14 +67,21 @@ namespace Persistence.DataSeeding;
             var Empleado3 = new Empleado { EmpleadoId = 3, CargoId = Cargo3.CargoId, Nombres = "Juan", Apellidos = "Perez", Direccion = "Av. 3 #8-15", Telefono = "3101234567", FechaContratacion = new DateTime(2019,05, 07), CiudadId = Ciudad3.CiudadId, ArlId = Arl3.ArlId, EpsId = Eps3.EpsId };
 
             // Ventas
-            var Venta1 = new Venta {VentaId =1 , FechaVenta = new DateTime(2023,02,10),EmpleadoId = Empleado1.EmpleadoId, PacienteId = Paciente1.PacienteId, Cantidad = 2, Precio= 2200 , MedicamentoId= Paracetamol.MedicamentoId};
-            var Venta2 = new Venta { VentaId = 2, FechaVenta = new DateTime( 2023,04, 18), EmpleadoId = Empleado2.EmpleadoId, PacienteId = Paciente2.PacienteId, Cantidad = 3, Precio = 2700, MedicamentoId = Ibuprofeno.MedicamentoId };
-            var Venta3 = new Venta { VentaId = 3, FechaVenta = new DateTime(2023,07, 22 ), EmpleadoId = Empleado3.EmpleadoId, PacienteId = Paciente3.PacienteId, Cantidad = 1, Precio = 1500, MedicamentoId = Aspirina.MedicamentoId };
+            var Venta1 = new Venta {VentaId =1 , FechaVenta = new DateTime(2023,02,10),EmpleadoId = Empleado1.EmpleadoId, PacienteId = Paciente1.PacienteId};
+            var Venta2 = new Venta { VentaId = 2, FechaVenta = new DateTime( 2023,04, 18), EmpleadoId = Empleado2.EmpleadoId, PacienteId = Paciente2.PacienteId };
+            var Venta3 = new Venta { VentaId = 3, FechaVenta = new DateTime(2023,07, 22 ), EmpleadoId = Empleado3.EmpleadoId, PacienteId = Paciente3.PacienteId};
 
-     
+            //MedicamentoCompra 
+           // var MedicamentoCompra1 = new MedicamentoCompra {MedicamentoCompraId =1, PrecioCompra=new decimal(29383.29) ,CantidadComprada =5000, MedicamentoId =Paracetamol.MedicamentoId,CompraId= Compra1.CompraId};
+            //var MedicamentoCompra2 = new MedicamentoCompra {MedicamentoCompraId =2, PrecioCompra=new decimal(4583.29) ,CantidadComprada =2000, MedicamentoId = Ibuprofeno.MedicamentoId,CompraId= Compra2.CompraId};
+            //var MedicamentoCompra3 = new MedicamentoCompra {MedicamentoCompraId =3, PrecioCompra=new decimal(57893.29) ,CantidadComprada =100,  MedicamentoId = Aspirina.MedicamentoId,CompraId= Compra3.CompraId};
+
+           // var MedicamentoVenta1 = new MedicamentoVenta {MedicamentoVentaId =1, Precio=new decimal(29383.29),CantidadVendida =200, MedicamentoId =Paracetamol.MedicamentoId,VentaId= Venta1.VentaId};
+            //var MedicamentoVenta2 = new MedicamentoVenta {MedicamentoVentaId =2, Precio=new decimal(4583.29), CantidadVendida =1000, MedicamentoId = Ibuprofeno.MedicamentoId,VentaId= Venta2.VentaId};
+            //var MedicamentoVenta3 = new MedicamentoVenta {MedicamentoVentaId =3, Precio=new decimal(57893.29),CantidadVendida =50,  MedicamentoId = Aspirina.MedicamentoId,VentaId= Venta3.VentaId};
 
             //Insercion de los datos,
-            modelBuilder.Entity<Proveedor>().HasData(ProveedorA, ProveedorB, ProveedorC);
+           /*  modelBuilder.Entity<Proveedor>().HasData(ProveedorA, ProveedorB, ProveedorC);
             modelBuilder.Entity<Medicamento>().HasData(Paracetamol, Aspirina, Ibuprofeno);
             modelBuilder.Entity<Compra>().HasData(Compra1,Compra2, Compra3);
             modelBuilder.Entity <Paciente>().HasData(Paciente1, Paciente2,Paciente3);
@@ -86,5 +93,8 @@ namespace Persistence.DataSeeding;
             modelBuilder.Entity <Eps>().HasData(Eps1, Eps2,Eps3);
             modelBuilder.Entity<Empleado>().HasData(Empleado1,Empleado2, Empleado3);
             modelBuilder.Entity <Venta>().HasData(Venta1, Venta2,Venta3);
+            modelBuilder.Entity<MedicamentoVenta>().HasData(MedicamentoVenta1,MedicamentoVenta2, MedicamentoVenta3);
+            modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3);
+             */
         }
     }
