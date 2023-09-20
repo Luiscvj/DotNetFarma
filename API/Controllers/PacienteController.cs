@@ -1,4 +1,4 @@
-using API.Dtos.PaisDto;
+using API.Dtos.PacienteDto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 
-public class PaisController : BaseApiController
+public class PacienteController : BaseApiController
 {
-    public PaisController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+    public PacienteController(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
     {
 
     }
@@ -20,13 +20,13 @@ public class PaisController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> Add(PaisDto paisDto)
+    public async Task<ActionResult> Add(PacienteDto PacienteDto)
     {
-        Pais pais = _mapper.Map<Pais>(paisDto);
-        _unitOfWork.Paises.Add(pais);
+        Paciente Paciente = _mapper.Map<Paciente>(PacienteDto);
+        _unitOfWork.Pacientes.Add(Paciente);
         int numeroCambios =await  _unitOfWork.SaveAsyc();
         if (numeroCambios == 0) return BadRequest();
-        return CreatedAtAction(nameof(Add), new {id = pais.PaisId},pais);
+        return CreatedAtAction(nameof(Add), new {id = Paciente.PacienteId},Paciente);
     }
 
 
@@ -35,15 +35,19 @@ public class PaisController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> AddRange(IEnumerable<PaisDto> paisesDto)
+    public async Task<ActionResult> AddRange(IEnumerable<PacienteDto> PacientesDto)
     {
-        IEnumerable<Pais> paises = _mapper.Map<IEnumerable<Pais>>(paisesDto);
-        _unitOfWork.Paises.AddRange(paises);
+        IEnumerable<Paciente> Pacientes = _mapper.Map<IEnumerable<Paciente>>(PacientesDto);
+
+        _unitOfWork.Pacientes.AddRange(Pacientes);
+
         int numeroCambios = await _unitOfWork.SaveAsyc();
+
         if(numeroCambios == 0) return BadRequest();
-        foreach(Pais pais in paises)
+
+        foreach(Paciente Paciente in Pacientes)
         {
-            CreatedAtAction(nameof(AddRange),new  {id= pais.PaisId},pais);
+            CreatedAtAction(nameof(AddRange),new  {id= Paciente.PacienteId},Paciente);
         }
 
         return Ok("Registros creados con exito");
@@ -55,10 +59,11 @@ public class PaisController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<PaisDto>> GetById(int id)
+    public async Task<ActionResult<PacienteDto>> GetById(int id)
     {
-        Pais pais =await _unitOfWork.Paises.GetById(id);
-        return _mapper.Map<PaisDto>(pais);
+        Paciente Paciente =await _unitOfWork.Pacientes.GetById(id);
+
+        return _mapper.Map<PacienteDto>(Paciente);
 
     }
 
@@ -69,11 +74,11 @@ public class PaisController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<PaisDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<PacienteDto>>> GetAll()
     {
-        IEnumerable<Pais> paises = await _unitOfWork.Paises.GetAll();
-        var paisesDto= _mapper.Map<IEnumerable<PaisDto>>(paises);
-        return Ok(paisesDto);
+        IEnumerable<Paciente> Pacientes = await _unitOfWork.Pacientes.GetAll();
+        var PacientesDto= _mapper.Map<IEnumerable<PacienteDto>>(Pacientes);
+        return Ok(PacientesDto);
     }
 
     [HttpDelete("{id}")]
@@ -83,10 +88,13 @@ public class PaisController : BaseApiController
 
     public async Task<ActionResult> Delete(int id)
     {
-        Pais pais = await _unitOfWork.Paises.GetById(id);
-        _unitOfWork.Paises.Remove(pais);
+        Paciente Paciente = await _unitOfWork.Pacientes.GetById(id);
+
+        _unitOfWork.Pacientes.Remove(Paciente);
+
         int numeroCambios = await  _unitOfWork.SaveAsyc();
         if(numeroCambios == 0) return BadRequest();
+
         return Ok("Registro Borrado  con exito");
     }
 
@@ -96,13 +104,17 @@ public class PaisController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult> Update(int id, [FromBody]PaisDto paisDto)
+    public async Task<ActionResult> Update(int id, [FromBody]PacienteDto PacienteDto)
     {
-        if(paisDto == null) return BadRequest();
-        Pais pais =  await _unitOfWork.Paises.GetById(id);
-        _mapper.Map(paisDto,pais);
-        _unitOfWork.Paises.Update(pais);
+        if(PacienteDto == null) return BadRequest();
+
+        Paciente Paciente =  await _unitOfWork.Pacientes.GetById(id);
+
+        _mapper.Map(PacienteDto,Paciente);
+        _unitOfWork.Pacientes.Update(Paciente);
+
         int numeroCambios = await _unitOfWork.SaveAsyc();
+
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
     }
