@@ -12,6 +12,15 @@ public class DotNetFarmaContext : DbContext
     DbSet<Paciente> Pacientes {get;}
     DbSet<Usuario> Usuarios {get;}
 
+    DbSet<Arl> Arls {get;}
+    DbSet<Cargo> Cargos {get;}
+    DbSet<Ciudad> Ciudades {get;}
+    DbSet<Compra> Compras {get;}
+    DbSet<Departamento> Departamentos {get;}
+    DbSet<Empleado> Empleados {get;}
+    DbSet<Eps> Eps {get;}
+    
+
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)
     {
         modelBuilder.Properties<string>().HaveMaxLength(150);
