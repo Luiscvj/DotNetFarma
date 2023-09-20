@@ -25,13 +25,8 @@ public class DotNetFarmaContext : DbContext
     public DbSet<Usuario> Usuarios {get;}
     public DbSet<RefreshToken> RefreshTokens {get;}
 
-    DbSet<Arl> Arls {get;}
-    DbSet<Cargo> Cargos {get;}
-    DbSet<Ciudad> Ciudades {get;}
-    DbSet<Compra> Compras {get;}
-    DbSet<Departamento> Departamentos {get;}
-    DbSet<Empleado> Empleados {get;}
-    DbSet<Eps> Eps {get;}
+
+
     
 
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)

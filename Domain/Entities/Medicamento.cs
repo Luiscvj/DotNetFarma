@@ -12,4 +12,6 @@ public class Medicamento
     public Proveedor Proveedor { get; set; }
     public ICollection<Compra> Compras { get; set; }
     public ICollection<Venta> Ventas { get; set; }
+    public ICollection<MedicamentoCompra> MedicamentoCompras { get; set; }
+    public List<MedicamentoVenta> MedicamentoVentas {get;set;}
 }

@@ -9,6 +9,5 @@ public class Venta
     public Empleado Empleado { get; set; }
     public int PacienteId { get; set; }
     public Paciente Paciente { get; set; }
- 
-   
+    public List<MedicamentoVenta> MedicamentoVentas {get;set;}  
 }
