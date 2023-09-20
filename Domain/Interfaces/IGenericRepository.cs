@@ -2,8 +2,6 @@ using System.Linq.Expressions;
 
 namespace Domain.Interfaces;
 
-
-
 public interface IGenericRepository<T>
 {
     Task<T> GetById(int id);
@@ -15,7 +13,4 @@ public interface IGenericRepository<T>
     void Update(T entity);
     void Remove(T entity);
     void RemoveRange(T entities);
-
-
-
 }
