@@ -14,5 +14,8 @@ public interface IUnitOfWork
     public IProveedor Proveedores {get;}
     public IPaciente Pacientes { get; }
     public IPais Paises { get;}
-    Task<int> SaveAsyc();
+    public ICargo Cargos {get;}
+    public ICompra Compras { get;}
+    IEmpleado Empleados {get; }
+    Task<int> SaveAsync();
 }

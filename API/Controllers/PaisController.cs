@@ -26,7 +26,7 @@ public class PaisController : BaseApiController
 
             _unitOfWork.Paises.Add(pais);
 
-            int numeroCambios =await  _unitOfWork.SaveAsyc();
+            int numeroCambios =await  _unitOfWork.SaveAsync();
 
             if (numeroCambios == 0) return BadRequest();
 
@@ -45,7 +45,7 @@ public class PaisController : BaseApiController
 
         _unitOfWork.Paises.AddRange(paises);
 
-        int numeroCambios = await _unitOfWork.SaveAsyc();
+        int numeroCambios = await _unitOfWork.SaveAsync();
 
         if(numeroCambios == 0) return BadRequest();
 
