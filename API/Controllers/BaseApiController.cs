@@ -1,4 +1,6 @@
 
+using AutoMapper;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -10,5 +12,13 @@ namespace API.Controllers;
 
 public class BaseApiController : ControllerBase
 {
+    protected readonly IUnitOfWork _unitOFWork;
+    protected readonly IMapper _mapper;
+
+    public BaseApiController(IUnitOfWork unitOfWork , IMapper mapper)
+    {
+        _mapper = mapper;
+        _unitOFWork = unitOfWork;
+    }
     
 }
