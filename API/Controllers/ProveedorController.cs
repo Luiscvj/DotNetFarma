@@ -55,7 +55,7 @@ public class ProveedorController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<ProveedorDto>> GetById(int id)
+    public async Task<ActionResult<ProveedorDto>> GetByIdProveedor(int id)
     {
         Proveedor Proveedor =await _unitOfWork.Proveedores.GetById(id);
         return _mapper.Map<ProveedorDto>(Proveedor);

@@ -56,12 +56,12 @@ public class PaisController : BaseApiController
     }
 
 
-    [HttpGet("/{id}")]
+    [HttpGet("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<PaisDto>> GetById(int id)
+    public async Task<ActionResult<PaisDto>> GetByIdPais(int id)
     {
         Pais pais =await _unitOfWork.Paises.GetById(id);
         return _mapper.Map<PaisDto>(pais);

@@ -54,12 +54,12 @@ public class PacienteController : BaseApiController
     }
 
 
-    [HttpGet("/{id}")]
+    [HttpGet("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<PacienteDto>> GetById(int id)
+    public async Task<ActionResult<PacienteDto>> GetByIdPaciente(int id)
     {
         Paciente Paciente =await _unitOfWork.Pacientes.GetById(id);
 
