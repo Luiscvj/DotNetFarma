@@ -9,9 +9,7 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
 {
     public ProveedorRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
-     private readonly DotNetFarmaContext _context;
      public override async Task<(int totalRegistros,IEnumerable<Proveedor> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
         var query = _context.Proveedores as IQueryable<Proveedor>;

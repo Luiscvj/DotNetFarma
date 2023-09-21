@@ -8,23 +8,22 @@ namespace Persistencia.Data.Configuration;
         public void Configure(EntityTypeBuilder<MedicamentoCompra> builder)
         {
             // Configure entity here
-               builder.ToTable("table_name");
+            builder.ToTable("medicamento_compra");
 
-               builder.Property(x => x.PrecioCompra)
-                       .HasPrecision(10,5);
-               
-               builder.HasOne(x => x.Medicamento)
+            builder.Property(x => x.CantidadComprada)
+                   .HasColumnType("int")
+                   .IsRequired();
+
+            builder.Property(x => x.PrecioCompra)
+                   .HasPrecision(10,5)
+                   .IsRequired();
+            
+            builder.HasOne(x => x.Medicamento)
                    .WithMany(x => x.MedicamentoCompras)
                    .HasForeignKey(x => x.MedicamentoId);
 
-               builder.HasOne(x => x.Compra)
+            builder.HasOne(x => x.Compra)
                    .WithMany(x => x.MedicamentoCompras)
-                   .HasForeignKey(x => x.CompraId);
-               builder.Property(x => x.PrecioCompra)
-                    .HasPrecision(10,5);
-                
-                
-               
-               
+                   .HasForeignKey(x => x.CompraId);     
         }
     }

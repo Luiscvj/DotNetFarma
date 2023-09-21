@@ -24,7 +24,5 @@ public class VentaConfiguration : IEntityTypeConfiguration<Venta>
                .WithMany(e => e.Ventas)
                .HasForeignKey(i => i.PacienteId)
                .IsRequired();
-
-      
     }
 }

@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class EpsRepository : GenericRepository<Eps>, IEps
-{ private readonly DotNetFarmaContext _context;
+{
     public EpsRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
      public override async Task<(int totalRegistros,IEnumerable<Eps> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
