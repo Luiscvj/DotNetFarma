@@ -18,6 +18,5 @@ public class Empleado
     public int EpsId { get; set; }
     public Eps Eps { get; set; }
     public ICollection<Venta> Ventas { get; set; }
-    public int UsuarioId { get; set; }
-    public Usuario Usuario { get; set; }
+  
 }

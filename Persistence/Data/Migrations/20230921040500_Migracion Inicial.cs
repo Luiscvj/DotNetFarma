@@ -319,7 +319,8 @@ namespace Persistence.Data.Migrations
                     FechaContratacion = table.Column<DateTime>(type: "date", nullable: false),
                     CiudadId = table.Column<int>(type: "int", nullable: false),
                     ArlId = table.Column<int>(type: "int", nullable: false),
-                    EpsId = table.Column<int>(type: "int", nullable: false)
+                    EpsId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -347,6 +348,12 @@ namespace Persistence.Data.Migrations
                         column: x => x.EpsId,
                         principalTable: "eps",
                         principalColumn: "EpsId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Empleado_usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuario",
+                        principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -559,12 +566,12 @@ namespace Persistence.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Empleado",
-                columns: new[] { "EmpleadoId", "Apellidos", "ArlId", "CargoId", "CiudadId", "Direccion", "EpsId", "FechaContratacion", "Nombres", "Telefono" },
+                columns: new[] { "EmpleadoId", "Apellidos", "ArlId", "CargoId", "CiudadId", "Direccion", "EpsId", "FechaContratacion", "Nombres", "Telefono", "UsuarioId" },
                 values: new object[,]
                 {
-                    { 1, "Escalante", 1, 1, 1, "Cra 33 #48-3", 1, new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jorge", "3294902231" },
-                    { 2, "López", 2, 2, 2, "Cra 18 #45-6", 2, new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "María", "3209876543" },
-                    { 3, "Perez", 3, 3, 3, "Av. 3 #8-15", 3, new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Juan", "3101234567" }
+                    { 1, "Escalante", 1, 1, 1, "Cra 33 #48-3", 1, new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jorge", "3294902231", 0 },
+                    { 2, "López", 2, 2, 2, "Cra 18 #45-6", 2, new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "María", "3209876543", 0 },
+                    { 3, "Perez", 3, 3, 3, "Av. 3 #8-15", 3, new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Juan", "3101234567", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -626,6 +633,12 @@ namespace Persistence.Data.Migrations
                 name: "IX_Empleado_EpsId",
                 table: "Empleado",
                 column: "EpsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleado_UsuarioId",
+                table: "Empleado",
+                column: "UsuarioId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_medicamento_ProveedorId",
@@ -706,9 +719,6 @@ namespace Persistence.Data.Migrations
                 name: "venta");
 
             migrationBuilder.DropTable(
-                name: "usuario");
-
-            migrationBuilder.DropTable(
                 name: "Compra");
 
             migrationBuilder.DropTable(
@@ -716,9 +726,6 @@ namespace Persistence.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "paciente");
-
-            migrationBuilder.DropTable(
-                name: "rol");
 
             migrationBuilder.DropTable(
                 name: "medicamento");
@@ -736,10 +743,16 @@ namespace Persistence.Data.Migrations
                 name: "eps");
 
             migrationBuilder.DropTable(
+                name: "usuario");
+
+            migrationBuilder.DropTable(
                 name: "proveedor");
 
             migrationBuilder.DropTable(
                 name: "departamento");
+
+            migrationBuilder.DropTable(
+                name: "rol");
 
             migrationBuilder.DropTable(
                 name: "pais");

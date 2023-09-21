@@ -319,6 +319,9 @@ namespace Persistence.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("EmpleadoId");
 
                     b.HasIndex("ArlId");
@@ -328,6 +331,9 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("CiudadId");
 
                     b.HasIndex("EpsId");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("Empleado", (string)null);
 
@@ -343,7 +349,8 @@ namespace Persistence.Data.Migrations
                             EpsId = 1,
                             FechaContratacion = new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombres = "Jorge",
-                            Telefono = "3294902231"
+                            Telefono = "3294902231",
+                            UsuarioId = 0
                         },
                         new
                         {
@@ -356,7 +363,8 @@ namespace Persistence.Data.Migrations
                             EpsId = 2,
                             FechaContratacion = new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombres = "María",
-                            Telefono = "3209876543"
+                            Telefono = "3209876543",
+                            UsuarioId = 0
                         },
                         new
                         {
@@ -369,7 +377,8 @@ namespace Persistence.Data.Migrations
                             EpsId = 3,
                             FechaContratacion = new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombres = "Juan",
-                            Telefono = "3101234567"
+                            Telefono = "3101234567",
+                            UsuarioId = 0
                         });
                 });
 
@@ -953,6 +962,12 @@ namespace Persistence.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Usuario", "Usuario")
+                        .WithOne("UsuarioDeEmpleado")
+                        .HasForeignKey("Domain.Entities.Empleado", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Arl");
 
                     b.Navigation("Cargo");
@@ -960,6 +975,8 @@ namespace Persistence.Data.Migrations
                     b.Navigation("Ciudad");
 
                     b.Navigation("Eps");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Domain.Entities.Medicamento", b =>
@@ -1127,6 +1144,8 @@ namespace Persistence.Data.Migrations
             modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UsuarioDeEmpleado");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>

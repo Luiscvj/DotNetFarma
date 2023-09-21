@@ -51,6 +51,7 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
                .IsRequired();
 
       
+      
               
     }
 }
