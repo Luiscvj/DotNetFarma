@@ -23,7 +23,7 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
         .IsRequired();
 
         builder.Property(x => x.Telefono)
-        .HasColumnType("int")
+        .HasMaxLength(20)
         .IsRequired();
 
         builder.Property(x => x.FechaContratacion)
