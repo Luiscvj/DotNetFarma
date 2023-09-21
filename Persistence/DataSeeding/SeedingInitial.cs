@@ -35,19 +35,23 @@ namespace Persistence.DataSeeding;
             var Cargo3 = new Cargo { CargoId = 3, Nombre = "Contador", Descripcion = "Maneja las finanzas de la empresa" };
 
             // Países
-            var Pais1 = new Pais {PaisId =1, Nombre ="Colombia"};
+            var Pais1 = new Pais { PaisId =1, Nombre ="Colombia"};
             var Pais2 = new Pais { PaisId = 2, Nombre = "Perú" };
             var Pais3 = new Pais { PaisId = 3, Nombre = "Argentina" };
 
             // Departamentos
-            var Departamento1 = new Departamento {DepartamentoId =1 , Nombre="Santander", PaisId= Pais1.PaisId};
-            var Departamento2 = new Departamento { DepartamentoId = 2, Nombre = "Lima", PaisId = Pais2.PaisId };
-            var Departamento3 = new Departamento { DepartamentoId = 3, Nombre = "Buenos Aires", PaisId = Pais3.PaisId };
+            var Departamento1 = new Departamento {DepartamentoId =1, Nombre="Santander",        PaisId= Pais1.PaisId};
+            var Departamento2 = new Departamento {DepartamentoId =2, Nombre = "Lima",           PaisId = Pais2.PaisId };
+            var Departamento3 = new Departamento {DepartamentoId =3, Nombre = "Buenos Aires",   PaisId = Pais3.PaisId };
+            var Departamento4 = new Departamento {DepartamentoId =4, Nombre="Norte de Santanader", PaisId= Pais1.PaisId};
+            var Departamento5 = new Departamento {DepartamentoId =5, Nombre="Cundinamarca",     PaisId= Pais1.PaisId};
 
             // Ciudades
             var Ciudad1 = new Ciudad {CiudadId = 1, Nombre ="Bucarmanga",DepartamentoId = Departamento1.DepartamentoId};
             var Ciudad2 = new Ciudad { CiudadId = 2, Nombre = "Lima", DepartamentoId = Departamento2.DepartamentoId };
             var Ciudad3 = new Ciudad { CiudadId = 3, Nombre = "Buenos Aires", DepartamentoId = Departamento3.DepartamentoId };
+            var Ciudad4 = new Ciudad {CiudadId = 4, Nombre ="Cúcuta",DepartamentoId = Departamento4.DepartamentoId};
+            var Ciudad5 = new Ciudad {CiudadId = 5, Nombre ="Bogotá",DepartamentoId = Departamento5.DepartamentoId};
 
             // Arls
             var Arl1 = new Arl {ArlId = 1, Nombre ="Cajasan", Telefono ="60793820", Email ="CajasanAyuda@gmail.com",Direccion ="calle 14 # 24-10"};
@@ -70,29 +74,29 @@ namespace Persistence.DataSeeding;
             var Venta3 = new Venta { VentaId = 3, FechaVenta = new DateTime(2023,07, 22 ), EmpleadoId = Empleado3.EmpleadoId, PacienteId = Paciente3.PacienteId};
 
             //MedicamentoCompra 
-           // var MedicamentoCompra1 = new MedicamentoCompra {MedicamentoCompraId =1, PrecioCompra=new decimal(29383.29) ,CantidadComprada =5000, MedicamentoId =Paracetamol.MedicamentoId,CompraId= Compra1.CompraId};
-            //var MedicamentoCompra2 = new MedicamentoCompra {MedicamentoCompraId =2, PrecioCompra=new decimal(4583.29) ,CantidadComprada =2000, MedicamentoId = Ibuprofeno.MedicamentoId,CompraId= Compra2.CompraId};
-            //var MedicamentoCompra3 = new MedicamentoCompra {MedicamentoCompraId =3, PrecioCompra=new decimal(57893.29) ,CantidadComprada =100,  MedicamentoId = Aspirina.MedicamentoId,CompraId= Compra3.CompraId};
+           var MedicamentoCompra1 = new MedicamentoCompra {MedicamentoCompraId =1, PrecioCompra=new decimal(29383.29) ,CantidadComprada =5000, MedicamentoId =Paracetamol.MedicamentoId,CompraId= Compra1.CompraId};
+            var MedicamentoCompra2 = new MedicamentoCompra {MedicamentoCompraId =2, PrecioCompra=new decimal(4583.29) ,CantidadComprada =2000, MedicamentoId = Ibuprofeno.MedicamentoId,CompraId= Compra2.CompraId};
+            var MedicamentoCompra3 = new MedicamentoCompra {MedicamentoCompraId =3, PrecioCompra=new decimal(57893.29) ,CantidadComprada =100,  MedicamentoId = Aspirina.MedicamentoId,CompraId= Compra3.CompraId};
 
-           // var MedicamentoVenta1 = new MedicamentoVenta {MedicamentoVentaId =1, Precio=new decimal(29383.29),CantidadVendida =200, MedicamentoId =Paracetamol.MedicamentoId,VentaId= Venta1.VentaId};
-            //var MedicamentoVenta2 = new MedicamentoVenta {MedicamentoVentaId =2, Precio=new decimal(4583.29), CantidadVendida =1000, MedicamentoId = Ibuprofeno.MedicamentoId,VentaId= Venta2.VentaId};
-            //var MedicamentoVenta3 = new MedicamentoVenta {MedicamentoVentaId =3, Precio=new decimal(57893.29),CantidadVendida =50,  MedicamentoId = Aspirina.MedicamentoId,VentaId= Venta3.VentaId};
+            var MedicamentoVenta1 = new MedicamentoVenta {MedicamentoVentaId =1, PrecioVenta=new decimal(29383.29),CantidadVendida =200, MedicamentoId =Paracetamol.MedicamentoId,VentaId= Venta1.VentaId};
+            var MedicamentoVenta2 = new MedicamentoVenta {MedicamentoVentaId =2, PrecioVenta=new decimal(4583.29), CantidadVendida =1000, MedicamentoId = Ibuprofeno.MedicamentoId,VentaId= Venta2.VentaId};
+            var MedicamentoVenta3 = new MedicamentoVenta {MedicamentoVentaId =3, PrecioVenta=new decimal(57893.29),CantidadVendida =50,  MedicamentoId = Aspirina.MedicamentoId,VentaId= Venta3.VentaId};
 
             //Insercion de los datos,
-           /*  modelBuilder.Entity<Proveedor>().HasData(ProveedorA, ProveedorB, ProveedorC);
+            modelBuilder.Entity <Pais>().HasData(Pais1, Pais2,Pais3);
+             modelBuilder.Entity<Proveedor>().HasData(ProveedorA, ProveedorB, ProveedorC);
             modelBuilder.Entity<Medicamento>().HasData(Paracetamol, Aspirina, Ibuprofeno);
             modelBuilder.Entity<Compra>().HasData(Compra1,Compra2, Compra3);
             modelBuilder.Entity <Paciente>().HasData(Paciente1, Paciente2,Paciente3);
             modelBuilder.Entity<Cargo>().HasData(Cargo1,Cargo2, Cargo3);
-            modelBuilder.Entity <Pais>().HasData(Pais1, Pais2,Pais3);
-            modelBuilder.Entity<Departamento>().HasData(Departamento1,Departamento2, Departamento3);
-            modelBuilder.Entity <Ciudad>().HasData(Ciudad1, Ciudad2,Ciudad3);
+            modelBuilder.Entity<Departamento>().HasData(Departamento1 ,Departamento2, Departamento3  ,Departamento4, Departamento5 );
+            modelBuilder.Entity <Ciudad>().HasData(Ciudad1, Ciudad2,Ciudad3  ,Ciudad5,Ciudad4 );
             modelBuilder.Entity<Arl>().HasData(Arl1,Arl2, Arl3);
             modelBuilder.Entity <Eps>().HasData(Eps1, Eps2,Eps3);
             modelBuilder.Entity<Empleado>().HasData(Empleado1,Empleado2, Empleado3);
             modelBuilder.Entity <Venta>().HasData(Venta1, Venta2,Venta3);
             modelBuilder.Entity<MedicamentoVenta>().HasData(MedicamentoVenta1,MedicamentoVenta2, MedicamentoVenta3);
             modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3);
-             */
+             
         }
     }

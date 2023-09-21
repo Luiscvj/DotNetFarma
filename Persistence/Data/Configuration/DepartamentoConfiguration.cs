@@ -17,7 +17,7 @@ public class DepartamentoConfiguration : IEntityTypeConfiguration<Departamento>
 
         builder.HasOne(a => a.Pais)
                .WithMany(e => e.Departamentos)
-               .HasForeignKey(i => i.DepartamentoId)
+               .HasForeignKey(i => i.PaisId)
                .IsRequired();
     }
 }

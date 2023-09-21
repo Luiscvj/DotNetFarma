@@ -22,8 +22,8 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
                .IsRequired();
 
         builder.Property(x => x.Telefono)
-               .HasMaxLength(20)
-               .IsRequired();
+              .HasMaxLength(20)
+              .IsRequired();
 
         builder.Property(x => x.FechaContratacion)
                .HasColumnType("date")
