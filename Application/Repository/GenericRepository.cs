@@ -7,7 +7,7 @@ namespace Application.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    protected readonly DotNetFarmaContext _context;
+    protected  readonly DotNetFarmaContext _context;
     public GenericRepository(DotNetFarmaContext context)
     {
         _context = context;

@@ -2,6 +2,7 @@ using API.Dtos.PaisDto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using IncApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -56,7 +57,7 @@ public class PaisController : BaseApiController
     }
 
 
-    [HttpGet("/{id}")]
+    [HttpGet("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,6 +82,20 @@ public class PaisController : BaseApiController
         var paisesDto= _mapper.Map<IEnumerable<PaisDto>>(paises);
         return Ok(paisesDto);
     }
+
+
+    [HttpGet("GetAllPage")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+     public async Task<ActionResult<Pager<PaisDepartamentoDto>>> GetChefPaginacion([FromQuery] Params PaisParmas)
+        {
+            var Pais = await _unitOfWork.Paises.GetAllAsync(PaisParmas.PageIndex,PaisParmas.PageSize,PaisParmas.Search);
+            var listPaisesDto =_mapper.Map<List<PaisDepartamentoDto>>(Pais.registros);
+
+            return new Pager<PaisDepartamentoDto>(listPaisesDto, PaisParmas.Search, Pais.totalRegistros, PaisParmas.PageIndex, PaisParmas.PageSize);
+        }
 
     [HttpDelete("{id}")]
     //[Authorize(Roles="")]

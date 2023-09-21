@@ -8,7 +8,7 @@ namespace Application.Repository;
 public class DepartamentoRepository : GenericRepository<Departamento>, IDepartamento
 { 
     public DepartamentoRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
      public override async Task<(int totalRegistros,IEnumerable<Departamento> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

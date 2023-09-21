@@ -8,7 +8,7 @@ namespace Application.Repository;
 public class MedicamentoCompraRepository : GenericRepository<MedicamentoCompra>, IMedicamentoCompra
 {
     public MedicamentoCompraRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
     public override async Task
     <(

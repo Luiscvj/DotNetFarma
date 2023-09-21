@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
-{
+{               
     public ProveedorRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
      public override async Task<(int totalRegistros,IEnumerable<Proveedor> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

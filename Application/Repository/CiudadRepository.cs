@@ -8,7 +8,8 @@ namespace Application.Repository;
 public class CiudadRepository : GenericRepository<Ciudad>, ICiudad
 {
     public CiudadRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
+        
     }
      public override async Task<(int totalRegistros,IEnumerable<Ciudad> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

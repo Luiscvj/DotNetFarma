@@ -10,18 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
-builder.Services.ConfigureCors();
-builder.Services.AddApplicationServices();
-builder.Services.ConfigureRateLimiting();
-builder.Services.ConfigureApiVersioning();
-
 builder.Services.AddDbContext<DotNetFarmaContext>(opt =>
 {
     string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
+builder.Services.ConfigureCors();
+builder.Services.AddApplicationServices();
+ builder.Services.ConfigureRateLimiting();
+ builder.Services.ConfigureApiVersioning();
+
 
 var app = builder.Build();
 
@@ -37,7 +37,7 @@ app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseIpRateLimiting();
-
+ 
 app.UseAuthentication();
 
 app.UseAuthorization();

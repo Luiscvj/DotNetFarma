@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class VentaRepository : GenericRepository<Venta>, IVenta
-{ 
+{          
     public VentaRepository(DotNetFarmaContext context) : base(context)
     {
     }
