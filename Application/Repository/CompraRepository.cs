@@ -6,10 +6,8 @@ namespace Application.Repository;
 
 public class CompraRepository : GenericRepository<Compra>, ICompra
 {
-    private readonly DotNetFarmaContext _context;
     public CompraRepository(DotNetFarmaContext context) : base(context)
     {
-        _context =  context;
     }
 
      public override async Task<(int totalRegistros,IEnumerable<Compra> registros)> GetAllAsync(int pageIndex,int pageSize,string search)

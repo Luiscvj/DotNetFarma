@@ -6,14 +6,11 @@ namespace Application.Repository;
 
 public class CargoRepository : GenericRepository<Cargo>, ICargo
 {
-    private readonly DotNetFarmaContext _context;
     public CargoRepository(DotNetFarmaContext context) : base(context)
     {
-        _context =  context;
     }
-
-     public override async Task<(int totalRegistros,IEnumerable<Cargo> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
-     {
+    public override async Task<(int totalRegistros,IEnumerable<Cargo> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
+    {
         var query = _context.Cargos as IQueryable<Cargo>;
         if(!string.IsNullOrEmpty(search))
         {
@@ -27,5 +24,5 @@ public class CargoRepository : GenericRepository<Cargo>, ICargo
                                 .Take(pageSize)
                                 .ToListAsync();
         return ( totalRegistros, registros);
-     }
+    }
 }

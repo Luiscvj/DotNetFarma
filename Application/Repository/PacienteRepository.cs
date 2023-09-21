@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class PacienteRepository : GenericRepository<Paciente>, IPaciente
-{ private readonly DotNetFarmaContext _context;
+{ 
     public PacienteRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
      public override async Task<(int totalRegistros,IEnumerable<Paciente> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

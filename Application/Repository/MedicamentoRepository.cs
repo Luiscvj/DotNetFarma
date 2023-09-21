@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicamento
-{ private readonly DotNetFarmaContext _context;
+{ 
     public MedicamentoRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
      public override async Task<(int totalRegistros,IEnumerable<Medicamento> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
@@ -21,7 +20,6 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
 
         var totalRegistros = await query.CountAsync();
         var registros = await query
-                                .Include(u => u.Compras)
                                 .Skip((pageIndex-1)*pageSize)
                                 .Take(pageSize)
                                 .ToListAsync();

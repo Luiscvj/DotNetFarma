@@ -7,12 +7,9 @@ namespace Application.Repository;
 
 public class CiudadRepository : GenericRepository<Ciudad>, ICiudad
 {
-    private readonly DotNetFarmaContext _context;
     public CiudadRepository(DotNetFarmaContext context) : base(context)
     {
-        _context =  context;
     }
-
      public override async Task<(int totalRegistros,IEnumerable<Ciudad> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
         var query = _context.Ciudades as IQueryable<Ciudad>;

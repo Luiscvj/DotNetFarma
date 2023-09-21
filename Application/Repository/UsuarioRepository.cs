@@ -7,10 +7,8 @@ namespace Application.Repository;
 
 public class UsuarioRepository : GenericRepository<Usuario>, IUsuario
 {
-     private readonly DotNetFarmaContext _context;
     public UsuarioRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
      public override async Task<(int totalRegistros,IEnumerable<Usuario> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

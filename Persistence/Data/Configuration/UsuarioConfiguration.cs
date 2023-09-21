@@ -14,9 +14,9 @@ namespace Persistencia.Data.Configuration;
                        .HasMaxLength(200)
                        .IsRequired();
 
-               builder.Property(x => x.Email)
-                       .HasMaxLength(200)
-                       .IsRequired();
+                builder.Property(x => x.Email)
+                        .HasMaxLength(200)
+                        .IsRequired();
 
                builder.Property(x => x.Password)
                        .HasMaxLength(255)

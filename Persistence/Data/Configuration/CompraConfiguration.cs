@@ -14,14 +14,6 @@ public class CompraConfiguration : IEntityTypeConfiguration<Compra>
                .HasColumnType("date")
                .IsRequired();
 
-        builder.Property(x => x.Cantidad)
-               .HasColumnType("int")
-               .IsRequired();
-
-        builder.Property(x => x.Precio)
-               .HasColumnType("int")
-               .IsRequired();
-
         builder.HasOne(a => a.Proveedor)
                .WithMany(e => e.Compras)
                .HasForeignKey(i => i.ProveedorId)

@@ -7,10 +7,8 @@ namespace Application.Repository;
 
 public class VentaRepository : GenericRepository<Venta>, IVenta
 { 
-     private readonly DotNetFarmaContext _context;
     public VentaRepository(DotNetFarmaContext context) : base(context)
     {
-        _context = context;
     }
      public override async Task<(int totalRegistros,IEnumerable<Venta> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
