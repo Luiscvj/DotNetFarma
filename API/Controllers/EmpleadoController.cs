@@ -27,33 +27,33 @@ public class EmpleadoController : BaseApiController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async  Task<ActionResult<IEnumerable<EmpleadoDto>>> Get()
+    public async  Task<ActionResult<IEnumerable<EmpleadoDtos>>> Get()
     {
         var empleados = await _unitOfWork.Empleados.GetAll();
-        return _mapper.Map<List<EmpleadoDto>>(empleados);
+        return _mapper.Map<List<EmpleadoDtos>>(empleados);
     }
     [HttpGet("Pager")]
     [Authorize]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<EmpleadoDto>>> Get11([FromQuery] Params empleadoParams)
+    public async Task<ActionResult<Pager<EmpleadoDtos>>> Get11([FromQuery] Params empleadoParams)
     {
         var empleado = await _unitOfWork.Empleados.GetAllAsync(empleadoParams.PageIndex,empleadoParams.PageSize,empleadoParams.Search);
-        var lstEmpleadosDto = _mapper.Map<List<EmpleadoDto>>(empleado.registros);
-        return new Pager<EmpleadoDto>(lstEmpleadosDto,empleadoParams.Search,empleado.totalRegistros,empleadoParams.PageIndex,empleadoParams.PageSize);
+        var lstEmpleadosDto = _mapper.Map<List<EmpleadoDtos>>(empleado.registros);
+        return new Pager<EmpleadoDtos>(lstEmpleadosDto,empleadoParams.Search,empleado.totalRegistros,empleadoParams.PageIndex,empleadoParams.PageSize);
     }
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<EmpleadoDto>> Get(int id)
+    public async Task<ActionResult<EmpleadoDtos>> Get(int id)
     {
         var empleado = await _unitOfWork.Empleados.GetById(id);
         if (empleado == null){
             return NotFound();
         }
-        return _mapper.Map<EmpleadoDto>(empleado);
+        return _mapper.Map<EmpleadoDtos>(empleado);
     }
     /*[HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -70,16 +70,16 @@ public class EmpleadoController : BaseApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Empleado>> Post(EmpleadoDto empleadoDto){
-        var empleado = _mapper.Map<Empleado>(empleadoDto);
+    public async Task<ActionResult<Empleado>> Post(EmpleadoDtos EmpleadoDtos){
+        var empleado = _mapper.Map<Empleado>(EmpleadoDtos);
         this._unitOfWork.Empleados.Add(empleado);
         await _unitOfWork.SaveAsync();
         if (empleado == null)
         {
             return BadRequest();
         }
-        empleadoDto.EmpleadoId = empleado.EmpleadoId;
-        return CreatedAtAction(nameof(Post),new {id= empleadoDto.EmpleadoId}, empleadoDto);
+        EmpleadoDtos.EmpleadoId = empleado.EmpleadoId;
+        return CreatedAtAction(nameof(Post),new {id= EmpleadoDtos.EmpleadoId}, EmpleadoDtos);
     }
     /*[HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -96,14 +96,14 @@ public class EmpleadoController : BaseApiController
     [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Update(int id , [FromBody]EmpleadoDto EmpleadoDto)
+        public async Task<ActionResult> Update(int id , [FromBody]EmpleadoDtos EmpleadoDtos)
         {
-            if(EmpleadoDto == null)
+            if(EmpleadoDtos == null)
                 return BadRequest();
 
             Empleado Empleado = await _unitOfWork.Empleados.GetById(id);
 
-            _mapper.Map(EmpleadoDto, Empleado);
+            _mapper.Map(EmpleadoDtos, Empleado);
             _unitOfWork.Empleados.Update(Empleado);
 
             int num = await _unitOfWork.SaveAsync();

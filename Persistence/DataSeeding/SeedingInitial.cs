@@ -74,9 +74,9 @@ namespace Persistence.DataSeeding;
             var Venta3 = new Venta { VentaId = 3, FechaVenta = new DateTime(2023,07, 22 ), EmpleadoId = Empleado3.EmpleadoId, PacienteId = Paciente3.PacienteId};
 
             //MedicamentoCompra 
-           var MedicamentoCompra1 = new MedicamentoCompra {MedicamentoCompraId =1, PrecioCompra=new decimal(29383.29) ,CantidadComprada =5000, MedicamentoId =Paracetamol.MedicamentoId,CompraId= Compra1.CompraId};
-            var MedicamentoCompra2 = new MedicamentoCompra {MedicamentoCompraId =2, PrecioCompra=new decimal(4583.29) ,CantidadComprada =2000, MedicamentoId = Ibuprofeno.MedicamentoId,CompraId= Compra2.CompraId};
-            var MedicamentoCompra3 = new MedicamentoCompra {MedicamentoCompraId =3, PrecioCompra=new decimal(57893.29) ,CantidadComprada =100,  MedicamentoId = Aspirina.MedicamentoId,CompraId= Compra3.CompraId};
+            // var MedicamentoCompra1 = new MedicamentoCompra {MedicamentoCompraId =1, PrecioCompra=new decimal(29383.29) ,CantidadComprada =5000, MedicamentoId =Paracetamol.MedicamentoId,CompraId= Compra1.CompraId};
+            // var MedicamentoCompra2 = new MedicamentoCompra {MedicamentoCompraId =2, PrecioCompra=new decimal(4583.29) ,CantidadComprada =2000, MedicamentoId = Ibuprofeno.MedicamentoId,CompraId= Compra2.CompraId};
+            // var MedicamentoCompra3 = new MedicamentoCompra {MedicamentoCompraId =3, PrecioCompra=new decimal(57893.29) ,CantidadComprada =100,  MedicamentoId = Aspirina.MedicamentoId,CompraId= Compra3.CompraId};
 
             var MedicamentoVenta1 = new MedicamentoVenta {MedicamentoVentaId =1, PrecioVenta=new decimal(29383.29),CantidadVendida =200, MedicamentoId =Paracetamol.MedicamentoId,VentaId= Venta1.VentaId};
             var MedicamentoVenta2 = new MedicamentoVenta {MedicamentoVentaId =2, PrecioVenta=new decimal(4583.29), CantidadVendida =1000, MedicamentoId = Ibuprofeno.MedicamentoId,VentaId= Venta2.VentaId};
@@ -86,7 +86,7 @@ namespace Persistence.DataSeeding;
             modelBuilder.Entity <Pais>().HasData(Pais1, Pais2,Pais3);
              modelBuilder.Entity<Proveedor>().HasData(ProveedorA, ProveedorB, ProveedorC);
             modelBuilder.Entity<Medicamento>().HasData(Paracetamol, Aspirina, Ibuprofeno);
-            modelBuilder.Entity<Compra>().HasData(Compra1,Compra2, Compra3);
+            // modelBuilder.Entity<Compra>().HasData(Compra1,Compra2, Compra3);
             modelBuilder.Entity <Paciente>().HasData(Paciente1, Paciente2,Paciente3);
             modelBuilder.Entity<Cargo>().HasData(Cargo1,Cargo2, Cargo3);
             modelBuilder.Entity<Departamento>().HasData(Departamento1 ,Departamento2, Departamento3  ,Departamento4, Departamento5 );
@@ -96,7 +96,7 @@ namespace Persistence.DataSeeding;
             modelBuilder.Entity<Empleado>().HasData(Empleado1,Empleado2, Empleado3);
             modelBuilder.Entity <Venta>().HasData(Venta1, Venta2,Venta3);
             modelBuilder.Entity<MedicamentoVenta>().HasData(MedicamentoVenta1,MedicamentoVenta2, MedicamentoVenta3);
-            modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3);
+            // modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3);
              
         }
     }
