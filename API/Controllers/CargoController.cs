@@ -23,7 +23,7 @@ public class CargoController : BaseApiController
         return Ok(regiones);
     }*/
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    /* [Authorize(Roles = "Administrador")] */
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -33,7 +33,7 @@ public class CargoController : BaseApiController
         return _mapper.Map<List<CargoDto>>(cargos);
     }
     [HttpGet("Pager")]
-    [Authorize]
+    /* [Authorize] */
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -93,7 +93,7 @@ public class CargoController : BaseApiController
         return cargo;
         
     }*/
-    [HttpPut]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(int id , [FromBody]CargoDto CargoDto)

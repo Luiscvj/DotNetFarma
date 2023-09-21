@@ -50,7 +50,7 @@ public class ProveedorController : BaseApiController
     }
 
 
-    [HttpGet("/{id}")]
+    [HttpGet("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

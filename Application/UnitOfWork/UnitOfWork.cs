@@ -14,20 +14,23 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     }
 
     ArlRepository _arl;
+    CargoRepository _cargo;
     CiudadRepository _ciudad;
+    CompraRepository _compra;
     DepartamentoRepository _departamento;
+    EmpleadoRepository _empleado;
     EpsRepository _eps;
     MedicamentoRepository _medicamento;
+    MedicamentoCompraRepository _medicamentoCompra;
+    MedicamentoVentaRepository _medicamentoVenta;
     PacienteRepository _paciente;
     PaisRepository _pais;
     ProveedorRepository _proveedor;
+    RefreshTokenRepository _refreshToken;
     RolRepository _rol;
     UsuarioRepository _usuario;
     VentaRepository _venta;
-    EmpleadoRepository _empleado;
-    CargoRepository _cargo;
-    CompraRepository _compra;
-
+    
     public IArl Arls
     {
         get
@@ -151,6 +154,33 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _compra ??= new CompraRepository(_context);
             return _compra;
+        }
+    }
+
+    public IMedicamentoCompra MedicamentoCompras
+    {
+        get
+        {
+            _medicamentoCompra ??= new MedicamentoCompraRepository(_context);
+            return _medicamentoCompra;
+        }
+    }
+
+    public IMedicamentoVenta MedicamentoIMedicamentoVentas
+    {
+        get
+        {
+            _medicamentoVenta ??= new MedicamentoVentaRepository(_context);
+            return _medicamentoVenta;
+        }
+    }
+
+    public IRefreshToken RefreshIRefreshTokens
+    {
+        get
+        {
+            _refreshToken ??= new RefreshTokenRepository(_context);
+            return _refreshToken;
         }
     }
 

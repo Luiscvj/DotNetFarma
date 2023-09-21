@@ -1,5 +1,5 @@
 namespace API.Dtos.EmpleadoDto;
-public class EmpleadoDto
+public class EmpleadoDtos
 {
     public int EmpleadoId { get; set; }
     public string Nombres { get; set; }
