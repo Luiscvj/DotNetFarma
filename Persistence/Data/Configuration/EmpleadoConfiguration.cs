@@ -8,27 +8,26 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
 {
     public void Configure(EntityTypeBuilder<Empleado> builder)
     {
-        builder.ToTable("Empleado");
+        builder.ToTable("empleado");
 
         builder.Property(x => x.Nombres)
                .HasMaxLength(100)
                .IsRequired();
 
         builder.Property(x => x.Apellidos)
-        .HasMaxLength(100)
-        .IsRequired();
+               .HasMaxLength(100)
+               .IsRequired();
 
         builder.Property(x => x.Direccion)
-        .HasMaxLength(150)
-        .IsRequired();
+               .IsRequired();
 
         builder.Property(x => x.Telefono)
-        .HasColumnType("int")
-        .IsRequired();
+               .HasMaxLength(20)
+               .IsRequired();
 
         builder.Property(x => x.FechaContratacion)
-        .HasColumnType("date")
-        .IsRequired();                                  
+               .HasColumnType("date")
+               .IsRequired();                                  
 
         builder.HasOne(a => a.Cargo)
                .WithMany(e => e.Empleados)

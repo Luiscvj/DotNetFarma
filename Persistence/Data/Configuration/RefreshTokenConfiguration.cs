@@ -7,43 +7,27 @@ namespace Persistencia.Data.Configuration;
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
-            // Configure entity here
-               builder.ToTable("refresh_token");
-/* 
-    public int TokenId { get; set; }
-    public string Token { get; set; }
-    public int UsuarioId { get; set; }
-    public Usuario Usuario { get; set; }
-    public DateTime FechaCreacion { get; set; } = DateTime.Now;
-    public DateTime FechaExpiracion { get; set; }
-    public bool Revocado { get; set; } */
+                // Configure entity here
+                builder.ToTable("refresh_token");
 
-    builder.Property(x => x.RefreshTokenId)
-            .IsRequired();
+                builder.Property(x => x.Token)
+                       .IsRequired();
 
-    builder.Property(x => x.FechaCreacion)
-            .HasColumnType("date");//Posible a cambio
-    builder.Property(x => x.FechaExpiracion)
-            .HasColumnType("date");
-    builder.Property(x => x.Revocado)
-            .HasColumnType("date");
-   
-   
-    builder.HasOne(x => x.Usuario)
-        .WithMany(x => x.RefreshTokens)
-        .HasForeignKey(x => x.UsuarioId);
-    
-  
-    
-    
-    
-    
-    
-    
-    
+                builder.Property(x => x.IsExpired)
+                       .IsRequired();
 
+                builder.Property(x => x.FechaExpiracion)
+                       .HasColumnType("datetime")
+                       .IsRequired();
 
+                builder.Property(x => x.Revocado)
+                       .IsRequired();
 
+                builder.Property(x => x.IsActive)
+                       .IsRequired();
 
+                builder.HasOne(x => x.Usuario)
+                       .WithMany(x => x.RefreshTokens)
+                       .HasForeignKey(x => x.UsuarioId);
         }
     }

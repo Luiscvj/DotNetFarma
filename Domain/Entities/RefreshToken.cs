@@ -8,9 +8,9 @@ public class RefreshToken
     public int UsuarioId { get; set; }
     public Usuario Usuario { get; set; }
     public bool  IsExpired {get;set;}
-    public DateTime FechaCreacion { get; set; }
+    public DateTime FechaCreacion { get; set; } = DateTime.Now;
     public DateTime FechaExpiracion { get; set; }
-    public DateTime ? Revocado { get; set; }
-    public bool  IsActive  {get;set;}
+    public bool Revocado { get; set; }
+    public bool IsActive  {get;set;}
 
 }

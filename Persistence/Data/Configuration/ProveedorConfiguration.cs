@@ -7,21 +7,21 @@ namespace Persistencia.Data.Configuration;
     {
         public void Configure(EntityTypeBuilder<Proveedor> builder)
         {
+            builder.ToTable("proveedor");
 
-  
-               builder.ToTable("proveedor");
+            builder.Property(x => x.Nombre)
+                    .HasMaxLength(100)
+                    .IsRequired();
 
-               builder.Property(x => x.Nombre)
-                       .HasMaxLength(100);
+            builder.Property(x => x.Telefono)
+                    .HasMaxLength(20)
+                    .IsRequired();
 
-               builder.Property(x => x.Telefono)
-                        .HasMaxLength(20);
-               builder.Property(x => x.Email)
-                       .HasMaxLength(120);
-               
-               
-                
-               
+            builder.Property(x => x.Email)
+                    .HasMaxLength(120)
+                    .IsRequired();
 
+            builder.Property(x => x.Direccion)
+                    .IsRequired();
         }
     }

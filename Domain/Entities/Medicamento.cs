@@ -10,8 +10,6 @@ public class Medicamento
     public DateTime FechaExpiracion { get; set; }
     public int ProveedorId { get; set; }
     public Proveedor Proveedor { get; set; }
-    public ICollection<Compra> Compras { get; set; }
-    public ICollection<Venta> Ventas { get; set; }
     public ICollection<MedicamentoCompra> MedicamentoCompras { get; set; }
-    public List<MedicamentoVenta> MedicamentoVentas {get;set;}
+    public ICollection<MedicamentoVenta> MedicamentoVentas {get;set;}
 }

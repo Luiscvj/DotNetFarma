@@ -8,8 +8,6 @@ namespace Persistence.DataSeeding;
     public class SeedingInitial
     {
         public static void Seed(ModelBuilder modelBuilder)
-
-
         {
             // Proveedores
             var ProveedorA = new Proveedor { ProveedorId =1, Nombre="ProveedorA",Telefono ="032238492",Email="ProveedorA@gmail.com",Direccion="Cra 19 # 839"};
@@ -22,9 +20,9 @@ namespace Persistence.DataSeeding;
             var Aspirina = new Medicamento { MedicamentoId = 3, Nombre = "Aspirina", Precio = 2000, Stock = 75, FechaExpiracion = new DateTime(2024,12, 20), ProveedorId = ProveedorC.ProveedorId };
 
             // Compras
-            var Compra1 = new Compra {CompraId= 1, FechaCompra = new DateTime(2001,01,01),ProveedorId = ProveedorA.ProveedorId,Cantidad=200,Precio=200000};
-            var Compra2 = new Compra { CompraId = 2, FechaCompra = new DateTime( 2022,03, 15), ProveedorId = ProveedorB.ProveedorId, Cantidad = 150, Precio = 180000 };
-            var Compra3 = new Compra { CompraId = 3, FechaCompra = new DateTime( 2023,10, 06), ProveedorId = ProveedorC.ProveedorId, Cantidad = 100, Precio = 150000};
+            // var Compra1 = new Compra {CompraId= 1, FechaCompra = new DateTime(2001,01,01),ProveedorId = ProveedorA.ProveedorId,Cantidad=200,Precio=200000};
+            // var Compra2 = new Compra { CompraId = 2, FechaCompra = new DateTime( 2022,03, 15), ProveedorId = ProveedorB.ProveedorId, Cantidad = 150, Precio = 180000 };
+            // var Compra3 = new Compra { CompraId = 3, FechaCompra = new DateTime( 2023,10, 06), ProveedorId = ProveedorC.ProveedorId, Cantidad = 100, Precio = 150000};
 
             // Pacientes
             var Paciente1 = new Paciente {PacienteId =1 , Nombre ="Sofia",Apellidos ="Alvarez",Direccion="Cra 19 #8-45 Barrio Comuneros", Telefono="3224243429"};
