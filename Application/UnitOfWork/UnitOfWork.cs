@@ -7,11 +7,6 @@ namespace Application.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
-    private readonly DotNetFarmaContext _context;
-    public UnitOfWork(DotNetFarmaContext context)
-    {
-        _context = context;
-    }
 
     ArlRepository _arl;
     CargoRepository _cargo;
@@ -30,7 +25,13 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     RolRepository _rol;
     UsuarioRepository _usuario;
     VentaRepository _venta;
-    
+   
+
+    private readonly DotNetFarmaContext _context;
+    public UnitOfWork(DotNetFarmaContext context)
+    {
+        _context = context;
+    }
     public IArl Arls
     {
         get

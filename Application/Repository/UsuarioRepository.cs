@@ -8,7 +8,7 @@ namespace Application.Repository;
 public class UsuarioRepository : GenericRepository<Usuario>, IUsuario
 {
     public UsuarioRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
      public override async Task<(int totalRegistros,IEnumerable<Usuario> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {

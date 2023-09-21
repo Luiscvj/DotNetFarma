@@ -29,10 +29,9 @@ namespace Persistencia.Data.Configuration;
                       .WithMany(r => r.Usuarios)
                       .HasForeignKey(u => u.RolId);
                 
-               
-             builder.HasOne(u => u.UsuarioDeEmpleado)
-                    .WithOne(e => e.Usuario)
-                    .HasForeignKey<Empleado>(e => e.UsuarioId);
+         
+                      
+                  
                     
                        
              

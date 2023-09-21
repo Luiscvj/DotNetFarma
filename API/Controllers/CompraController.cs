@@ -93,7 +93,7 @@ public class CompraController : BaseApiController
         return compra;
         
     }*/
-    [HttpPut]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(int id , [FromBody]CompraDto CompraDto)
@@ -113,6 +113,7 @@ public class CompraController : BaseApiController
 
             return Ok("REGISTRO ACTUALIZADO CON EXITO");
         }
+        
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

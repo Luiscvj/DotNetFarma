@@ -7,7 +7,7 @@ namespace Application.Repository;
 public class CompraRepository : GenericRepository<Compra>, ICompra
 {
     public CompraRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
 
      public override async Task<(int totalRegistros,IEnumerable<Compra> registros)> GetAllAsync(int pageIndex,int pageSize,string search)

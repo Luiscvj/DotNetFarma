@@ -8,6 +8,8 @@ using API.Dtos.PaisDto;
 using API.Dtos.ProveedorDto;
 using AutoMapper;
 using Domain.Entities;
+using API.Dtos.MedicamentoDtos;
+using API.Dtos.DepartamentoDtos;
 
 namespace API.Profiles;
 
@@ -21,5 +23,8 @@ public class MappingProfiles : Profile
         CreateMap<Cargo,CargoDto>().ReverseMap();
         CreateMap<Compra,CompraDto>().ReverseMap();
         CreateMap<Empleado,EmpleadoDtos>().ReverseMap();
+        CreateMap<Departamento,DepartamentoDto>().ReverseMap();
+        CreateMap<Pais,PaisDepartamentoDto>().ReverseMap();
+        CreateMap<Medicamento,MedicamentoDto>().ReverseMap();
     }
 }

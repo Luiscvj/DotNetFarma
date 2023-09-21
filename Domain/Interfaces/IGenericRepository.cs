@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 
 namespace Domain.Interfaces;
 
-public interface IGenericRepository<T>
+public interface IGenericRepository<T> where T : class
 {
     Task<T> GetById(int id);
     Task<IEnumerable<T>> GetAll();

@@ -6,8 +6,9 @@ namespace Application.Repository;
 
 public class CargoRepository : GenericRepository<Cargo>, ICargo
 {
+   
     public CargoRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
     public override async Task<(int totalRegistros,IEnumerable<Cargo> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
     {

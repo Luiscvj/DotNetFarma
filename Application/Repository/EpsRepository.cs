@@ -8,7 +8,7 @@ namespace Application.Repository;
 public class EpsRepository : GenericRepository<Eps>, IEps
 {
     public EpsRepository(DotNetFarmaContext context) : base(context)
-    {
+    { 
     }
      public override async Task<(int totalRegistros,IEnumerable<Eps> registros)> GetAllAsync(int pageIndex,int pageSize,string search)
      {
