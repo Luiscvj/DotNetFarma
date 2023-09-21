@@ -49,5 +49,8 @@ public class EmpleadoConfiguration : IEntityTypeConfiguration<Empleado>
                .WithMany(e => e.Empleados)
                .HasForeignKey(i => i.ArlId)
                .IsRequired();
+
+      
+              
     }
 }

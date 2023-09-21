@@ -9,13 +9,7 @@ namespace Persistencia.Data.Configuration;
         {
             // Configure entity here
                builder.ToTable("usuario");
-                 /* public int UsuarioId { get; set; }
-    public string Username   { get; set; }
-    public string Email  { get; set; }
-    public string Password { get; set; }
-    public int RolId { get; set; }
-    public Rol  Rol { get; set; }
-    public ICollection<RefreshToken> RefreshTokens { get; set; }  */
+               
                builder.Property(x => x.Username)
                        .HasMaxLength(200)
                        .IsRequired();
@@ -36,9 +30,12 @@ namespace Persistencia.Data.Configuration;
                       .HasForeignKey(u => u.RolId);
                 
                
+             builder.HasOne(u => u.UsuarioDeEmpleado)
+                    .WithOne(e => e.Usuario)
+                    .HasForeignKey<Empleado>(e => e.UsuarioId);
+                    
+                       
              
-                       
-                       
                
 
                
