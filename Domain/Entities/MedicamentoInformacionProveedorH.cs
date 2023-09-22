@@ -1,7 +1,7 @@
 namespace Domain.Entities;
 
 
-public class MedicamentoInformacionProveedor 
+public class MedicamentoInformacionProveedorH
 {
     public int  MedicamentoId   { get; set; }
     public string NombreMedicamento { get; set; }

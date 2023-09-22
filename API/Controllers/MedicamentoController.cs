@@ -82,6 +82,20 @@ public class MedicamentoController : BaseApiController
         return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
 
     }
+
+
+    [HttpGet("GetMedicamentosNoVnedidos")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVnedidos()
+    {
+        IEnumerable<Medicamento> Medicamento = await  _unitOfWork.Medicamentos.MedicamentosNoVendidos();
+
+        return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
+
+    }
     
     
 
@@ -108,7 +122,7 @@ public class MedicamentoController : BaseApiController
 
     public async Task<ActionResult<IEnumerable<MedicamentosInfoDto>>> GetAllMedicamentoInformacionProveedor()
     {
-        List<MedicamentoInformacionProveedor> medicamentos = await  _unitOfWork.Medicamentos.MedicamentosInformacionProveedores();
+        List<MedicamentoInformacionProveedorH> medicamentos = await  _unitOfWork.Medicamentos.MedicamentosInformacionProveedores();
         var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentosInfoDto>>(medicamentos);
         return Ok(MedicamentosDto);
     }
@@ -124,6 +138,20 @@ public class MedicamentoController : BaseApiController
     {
         IEnumerable<Medicamento> Medicamentos = await _unitOfWork.Medicamentos.MedicamentoMas50();
         var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoDto>>(Medicamentos);
+        return Ok(MedicamentosDto);
+    }
+
+    [HttpGet("GetAllMedicamentoExpiranAntesEnero2024")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentoExpiracionDto>>>GetAllMedicamentoExpiranAntesEnero2024()
+    {
+        DateTime fechaComparacion = new DateTime (2024,01,01);
+        IEnumerable<Medicamento> Medicamentos =  _unitOfWork.Medicamentos.Find(medicamento => medicamento.FechaExpiracion < fechaComparacion);
+        if (Medicamentos == null) return NoContent();
+        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoExpiracionDto>>(Medicamentos);
         return Ok(MedicamentosDto);
     }
 
