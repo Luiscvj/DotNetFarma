@@ -16,12 +16,12 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
         return  await _context.Medicamentos.Where(medicamento => medicamento.Stock < 50).ToListAsync();
     }
 
-    public  async  Task<List<MedicamentoInformacionProveedor>> MedicamentosInformacionProveedores()
+    public  async  Task<List<MedicamentoInformacionProveedorH>> MedicamentosInformacionProveedores()
     {
         IEnumerable<Medicamento> medicamentos = await _context.Medicamentos.ToListAsync();
         IEnumerable<Proveedor> proveedores = from i in _context.Proveedores
                                              select   i;
-      var unionMedicamentosProveedores =  medicamentos.Join(proveedores ,m => m.ProveedorId, p => p.ProveedorId,(m,p)=> new MedicamentoInformacionProveedor 
+      var unionMedicamentosProveedores =  medicamentos.Join(proveedores ,m => m.ProveedorId, p => p.ProveedorId,(m,p)=> new MedicamentoInformacionProveedorH
       {
         MedicamentoId = m.MedicamentoId,
         NombreMedicamento = m.Nombre,
@@ -72,7 +72,22 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
                                 .Take(pageSize)
                                 .ToListAsync();
                 return ( totalRegistros, registros);
-        } 
+        }
+
+    public async  Task<IEnumerable<Medicamento>> MedicamentosNoVendidos()
+    {
+        List<Medicamento> medicamentosNoVendidos = new List<Medicamento>();
+        IEnumerable<Medicamento> medicamentos = await _context.Medicamentos.ToListAsync();
+
+        foreach(Medicamento med in medicamentos)
+        {
+
+          bool MedicamentoVendido =   _context.MedicamentoVentas.Any( x => x.MedicamentoId == med.MedicamentoId);
+          if (!MedicamentoVendido) medicamentosNoVendidos.Add(med);
+        }
+
+        return medicamentosNoVendidos;
 
 
+    }
 }

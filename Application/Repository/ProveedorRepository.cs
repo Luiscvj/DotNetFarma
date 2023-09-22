@@ -27,5 +27,34 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         return ( totalRegistros, registros);
      }
 
-  
+
+     public async Task<List<ProveedorMedicamentoCompraH>> GetCantidadMedicamentosVendidosProveedor()
+     {
+        List<ProveedorMedicamentoCompraH> ListaProveedorMedicamentoCompraH = new List<ProveedorMedicamentoCompraH>();
+        IEnumerable<Proveedor> proveedor = await _context.Proveedores.Include(x => x.Compras)
+                                                                     .ThenInclude(x =>x.MedicamentoCompras)
+                                                                     .ToListAsync(); 
+            
+        foreach (Proveedor pro in  proveedor)
+        {
+            int cantidadVendido = pro.Compras
+                                 .SelectMany(compra => compra.MedicamentoCompras)
+                                 .Sum(medicamentoCompra => medicamentoCompra.CantidadComprada);
+
+
+
+         ProveedorMedicamentoCompraH proveedorMedicamentoCompraHs = new ProveedorMedicamentoCompraH()
+         {
+            ProveedorId = pro.ProveedorId,
+            NombreProveedor = pro.Nombre,
+            MedicamentoVendido = cantidadVendido
+         };
+
+         ListaProveedorMedicamentoCompraH.Add(proveedorMedicamentoCompraHs);
+                                 
+        }
+        return ListaProveedorMedicamentoCompraH;
+     }
+
+    
 }

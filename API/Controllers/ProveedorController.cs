@@ -76,6 +76,19 @@ public class ProveedorController : BaseApiController
         return Ok(ProveedoresDto);
     }
 
+
+    [HttpGet("GetAllMedicamentosVendidosProveedor")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<ProveedorMedicamentoCompraH>>> GetAllMedicamentosVendidosProveedor()
+    {
+        IEnumerable<ProveedorMedicamentoCompraH> Proveedores = await _unitOfWork.Proveedores.GetCantidadMedicamentosVendidosProveedor();
+   
+        return Ok(Proveedores);
+    }
+
     [HttpDelete("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]

@@ -9,7 +9,7 @@ namespace Persistence.DataSeeding;
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-            // Proveedores
+         /*    // Proveedores
             var ProveedorA = new Proveedor { ProveedorId =1, Nombre="ProveedorA",Telefono ="032238492",Email="ProveedorA@gmail.com",Direccion="Cra 19 # 839"};
             var ProveedorB = new Proveedor { ProveedorId = 2, Nombre = "ProveedorB", Telefono = "032238493", Email = "ProveedorB@gmail.com",Direccion="Cra 22 # 839" };
             var ProveedorC = new Proveedor { ProveedorId = 3, Nombre = "ProveedorC", Telefono = "032238494", Email = "ProveedorC@gmail.com" ,Direccion="Calle 14 # 839"};
@@ -96,7 +96,7 @@ namespace Persistence.DataSeeding;
             modelBuilder.Entity<Empleado>().HasData(Empleado1,Empleado2, Empleado3);
             modelBuilder.Entity <Venta>().HasData(Venta1, Venta2,Venta3);
             modelBuilder.Entity<MedicamentoVenta>().HasData(MedicamentoVenta1,MedicamentoVenta2, MedicamentoVenta3);
-            modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3);
+            modelBuilder.Entity <MedicamentoCompra>().HasData(MedicamentoCompra1, MedicamentoCompra2,MedicamentoCompra3); */
              
         }
     }
