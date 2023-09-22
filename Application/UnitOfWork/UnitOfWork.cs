@@ -167,7 +167,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public IMedicamentoVenta MedicamentoIMedicamentoVentas
+    public IMedicamentoVenta MedicamentoVentas
     {
         get
         {

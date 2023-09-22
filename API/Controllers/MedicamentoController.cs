@@ -70,16 +70,46 @@ public class MedicamentoController : BaseApiController
     }
 
 
-
-    [HttpGet("GetAll")]
+    [HttpGet("GetMedicamentosPorProveedorId{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>>GetMedicamentosPorProveedorId(int id)
     {
-        IEnumerable<Medicamento> Medicamentos = await _unitOfWork.Medicamentos.GetAll();
+        IEnumerable<Medicamento> Medicamento =  _unitOfWork.Medicamentos.Find(x =>x.ProveedorId == id);
+
+        return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
+
+    }
+    
+    
+
+
+    [HttpGet("GetMedicamentosPorProveedor/{NombreProveedor} :string")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetAllPorProveedor(string NombreProveedor)
+    {
+        IEnumerable<Medicamento> Medicamentos = await _unitOfWork.Medicamentos.MedicamentosPorProveedor(NombreProveedor);
         var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoDto>>(Medicamentos);
+        return Ok(MedicamentosDto);
+    }
+
+
+    
+
+    [HttpGet("GetAllMedicamentoInformacionProveedor")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentosInfoDto>>> GetAllMedicamentoInformacionProveedor()
+    {
+        List<MedicamentoInformacionProveedor> medicamentos = await  _unitOfWork.Medicamentos.MedicamentosInformacionProveedores();
+        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentosInfoDto>>(medicamentos);
         return Ok(MedicamentosDto);
     }
 

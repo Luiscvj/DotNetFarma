@@ -26,4 +26,6 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
                                 .ToListAsync();
         return ( totalRegistros, registros);
      }
+
+  
 }

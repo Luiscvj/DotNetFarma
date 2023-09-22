@@ -33,4 +33,9 @@ public class MedicamentoVentaRepository : GenericRepository<MedicamentoVenta>, I
                                    .ToListAsync();
         return (totalRegistros, registros);
     }
+
+    public async Task<int> GetAllVentasMedicamentoById(int id)
+    {
+        return   _context.MedicamentoVentas.Count( medicamentoVenta => medicamentoVenta.MedicamentoId == id);
+    }
 }

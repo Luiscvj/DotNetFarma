@@ -12,7 +12,7 @@ public interface IUnitOfWork
     public IEps Eps { get; }
     public IMedicamento Medicamentos { get; }
     public IMedicamentoCompra MedicamentoCompras { get; }
-    public IMedicamentoVenta MedicamentoIMedicamentoVentas { get; }
+    public IMedicamentoVenta MedicamentoVentas { get; }
     public IPaciente Pacientes { get; }
     public IPais Paises { get;}
     public IProveedor Proveedores {get;}

@@ -1,4 +1,5 @@
 
+using System.Security.Cryptography.X509Certificates;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -26,4 +27,17 @@ public class VentaRepository : GenericRepository<Venta>, IVenta
                                 .ToListAsync();
         return ( totalRegistros, registros);
      }
+
+    public async  Task<int> GetCountVentasMedicamentoByName(string Nombre)
+    {
+         Medicamento medicamento = await _context.Medicamentos.FirstOrDefaultAsync(medicamento => medicamento.Nombre.ToLower() == Nombre );
+        if (medicamento == null ) return -1;
+       
+
+        int numeroMedicamentosVendidos = _context.MedicamentoVentas.Count(venta => venta.MedicamentoVentaId == medicamento.MedicamentoId);
+
+        return numeroMedicamentosVendidos; 
+
+       
+    }
 }
