@@ -30,6 +30,9 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
         builder.HasOne(a => a.Proveedor)
                .WithMany(e => e.Medicamentos)
                .HasForeignKey(i => i.ProveedorId)
-               .IsRequired();        
+               .IsRequired();  
+
+       
+              
     }
 }
