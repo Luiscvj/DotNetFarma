@@ -90,4 +90,19 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
 
 
     }
+
+    public async Task<Medicamento> MedicamentoMasCaro()
+    {
+        double precio = _context.Medicamentos.Max(x => x.Precio);
+       return  await _context.Medicamentos.FirstOrDefaultAsync( x => x.Precio == precio);
+    }
+
+    public async Task<int> NumeroMedicamentosPorProveedor(int idProveedor)
+    {
+           var  num =  from i in _context.Medicamentos
+                    where i.ProveedorId == idProveedor
+                    select i.MedicamentoId;
+                    
+           return   num.Count();    
+    }
 }
