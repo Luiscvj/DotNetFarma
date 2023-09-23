@@ -21,10 +21,10 @@ public class DotNetFarmaContext : DbContext
     public DbSet<Paciente> Pacientes {get;set;}
     public DbSet<Pais> Paises {get;set;}
     public DbSet<Proveedor> Proveedores {get;set;}
-    public DbSet<RefreshToken> RefreshTokens {get;set;}
     public DbSet<Rol> Roles {get;set;}
     public DbSet<Usuario> Usuarios {get;set;}
     public DbSet<Venta> Ventas {get;set;}
+    public DbSet<UsuarioRoles> UsuarioRoles { get; set; }
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)
     {
         modelBuilder.Properties<string>().HaveMaxLength(150);

@@ -3,10 +3,10 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using IncApi.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
-
 
 public class PaisController : BaseApiController
 {
@@ -17,7 +17,7 @@ public class PaisController : BaseApiController
 
 
     [HttpPost]
-//[Authorize(Roles="")]
+    [Authorize(Roles="Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -72,7 +72,7 @@ public class PaisController : BaseApiController
 
 
     [HttpGet("GetAll")]
-    //[Authorize(Roles="")]
+    [Authorize(Roles="Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

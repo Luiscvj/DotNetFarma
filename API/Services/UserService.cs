@@ -1,5 +1,6 @@
-/* using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using API.Dtos;
 using API.Helpers;
@@ -83,7 +84,7 @@ public class UserService : IUserService
             if (rolExiste != null)
             {
                 var usuarioTieneRol = usuario.Roles
-                                            .Any(u => u.Id == rolExiste.Id);
+                                            .Any(u => u.RolId == rolExiste.RolId);
 
                 if (usuarioTieneRol == false)
                 {
@@ -104,8 +105,8 @@ public class UserService : IUserService
                     .GetByUsernameAsync(model.Username);
         if (usuario == null)
         {
-            datosUsuarioDto.EstaAutenticado = false;
-            datosUsuarioDto.Mensaje = $"No existe ningún usuario con el username {model.Username}.";
+            datosUsuarioDto.IsAuthenticated = false;
+            datosUsuarioDto.Message = $"No existe ningún usuario con el username {model.Username}.";
             return datosUsuarioDto;
         }
 
@@ -113,21 +114,44 @@ public class UserService : IUserService
         if (result == PasswordVerificationResult.Success)
         {
 
-            datosUsuarioDto.Mensaje = "Ok";
-            datosUsuarioDto.EstaAutenticado = true;
+            datosUsuarioDto.Message = "Ok";
+            datosUsuarioDto.IsAuthenticated = true;
             JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
             datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             datosUsuarioDto.UserName = usuario.Username;
-            datosUsuarioDto.Email = usuario.Username;
+            datosUsuarioDto.Email = usuario.Email;
+            datosUsuarioDto.Roles =usuario.Roles
+                                                .Select( u => u.Nombre)
+                                                .ToList();
             //datosUsuarioDto.Token = _jwtGenerador.CrearToken(usuario);
+            if (usuario.RefreshTokens.Any(a => a.IsActive))
+                {
+                    var activeRefreshToken = usuario.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
+                    datosUsuarioDto.RefreshToken = activeRefreshToken.Token;
+                    datosUsuarioDto.RefreshTokenExpiration = activeRefreshToken.Expires;
+                }
+            else
+                {
+                    var refreshToken = CreateRefreshToken();
+                    datosUsuarioDto.RefreshToken = refreshToken.Token;
+                    datosUsuarioDto.RefreshTokenExpiration = refreshToken.Expires;
+                    usuario.RefreshTokens.Add(refreshToken);
+                    _unitOfWork.Usuarios.Update(usuario);
+                    await _unitOfWork.SaveAsync();
+                }
+
             return datosUsuarioDto;
-
         }
-        datosUsuarioDto.EstaAutenticado = false;
-        datosUsuarioDto.Mensaje = $"Credenciales incorrectas para el usuario {usuario.Username}.";
+        datosUsuarioDto.IsAuthenticated = false;
+        datosUsuarioDto.Message = $"Credenciales incorrectas para el usuario {usuario.Username}.";
         return datosUsuarioDto;
-
     }
+
+
+        
+        
+
+    
     private JwtSecurityToken CreateJwtToken(Usuario usuario)
     {
         var roles = usuario.Roles;
@@ -167,4 +191,69 @@ public class UserService : IUserService
         }
         return null;
     }
-} */
+
+     public async Task<DatosUsuarioDto> RefreshTokenAsync(string refreshToken)
+    {
+        var datosUsuarioDto = new DatosUsuarioDto();
+
+        var usuario = await _unitOfWork.Usuarios
+                        .GetByRefreshTokenAsync(refreshToken);
+
+        if (usuario == null)
+        {
+            datosUsuarioDto.IsAuthenticated = false;
+            datosUsuarioDto.Message = $"Token is not assigned to any user.";
+            return datosUsuarioDto;
+        }
+
+        var refreshTokenBd = usuario.RefreshTokens.Single(x => x.Token == refreshToken);
+
+        if (!refreshTokenBd.IsActive)
+        {
+            datosUsuarioDto.IsAuthenticated = false;
+            datosUsuarioDto.Message = $"Token is not active.";
+            return datosUsuarioDto;
+        }
+        //Revoque the current refresh token and
+        refreshTokenBd.Revoked = DateTime.UtcNow;
+        //generate a new refresh token and save it in the database
+        var newRefreshToken = CreateRefreshToken();
+        usuario.RefreshTokens.Add(newRefreshToken);
+        _unitOfWork.Usuarios.Update(usuario);
+        await _unitOfWork.SaveAsync();
+        //Generate a new Json Web Token
+        datosUsuarioDto.IsAuthenticated = true;
+        JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
+        datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+        datosUsuarioDto.Email = usuario.Email;
+        datosUsuarioDto.UserName = usuario.Username;
+        datosUsuarioDto.Roles = usuario.Roles
+                                        .Select(u => u.Nombre)
+                                        .ToList();
+        datosUsuarioDto.RefreshToken = newRefreshToken.Token;
+        datosUsuarioDto.RefreshTokenExpiration = newRefreshToken.Expires;
+        return datosUsuarioDto;
+    }
+
+
+     private RefreshToken CreateRefreshToken()
+    {
+        var randomNumber = new byte[32];
+        using (var generator = RandomNumberGenerator.Create())
+        {
+            generator.GetBytes(randomNumber);
+            return new RefreshToken
+            {
+                Token = Convert.ToBase64String(randomNumber),
+                Expires = DateTime.UtcNow.AddDays(10),
+                Created = DateTime.UtcNow
+            };
+        }
+    }
+
+
+
+    
+
+
+} 

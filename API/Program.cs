@@ -2,8 +2,17 @@ using System.Reflection;
 using API.Extensions;
 using AspNetCoreRateLimit;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+					.ReadFrom.Configuration(builder.Configuration)
+					.Enrich.FromLogContext()
+					.CreateLogger();
+
+//builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 
@@ -19,8 +28,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.ConfigureCors();
 builder.Services.AddApplicationServices();
- builder.Services.ConfigureRateLimiting();
- builder.Services.ConfigureApiVersioning();
+builder.Services.ConfigureRateLimiting();
+builder.Services.ConfigureApiVersioning();
+builder.Services.AddJwt(builder.Configuration);
 
 
 var app = builder.Build();
