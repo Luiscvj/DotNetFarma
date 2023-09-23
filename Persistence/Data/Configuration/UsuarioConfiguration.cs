@@ -25,19 +25,32 @@ namespace Persistencia.Data.Configuration;
                builder.HasIndex(e => e.Username).IsUnique();//Sirve para verificar que  el mismo usuario no este duplicado
                builder.HasIndex(e => e.Email).IsUnique();
 
-               builder.HasOne(u => u.Rol)
-                      .WithMany(r => r.Usuarios)
-                      .HasForeignKey(u => u.RolId);
-                
-         
-                      
-                  
-                    
-                       
-             
-               
+               builder.HasMany(x => x.Roles)
+                   .WithMany(x => x.Usuarios)
+                   .UsingEntity<UsuarioRoles>(
+                   
+                   j => j
+                   .HasOne(pt => pt.Rol)
+                   .WithMany(t => t.UsuarioRoles)
+                   .HasForeignKey(ut => ut.RolId),
 
-               
-                             
+                   j => j
+                   .HasOne(et => et.Usuario)
+                   .WithMany(et => et.UsuarioRoles)
+                   .HasForeignKey(el => el.UsuarioId),
+
+
+                    j =>
+                    
+                    {
+                         j. HasKey(t => new {t.RolId,t.UsuarioId});
+                    }
+                          
+                   );  
+
+
+                   builder.HasMany(x => x.RefreshTokens)
+                          .WithOne( r => r.Usuario)
+                          .HasForeignKey( x => x.UsuarioId);                       
         }
     }

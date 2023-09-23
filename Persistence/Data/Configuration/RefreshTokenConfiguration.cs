@@ -10,24 +10,6 @@ namespace Persistencia.Data.Configuration;
                 // Configure entity here
                 builder.ToTable("refresh_token");
 
-                builder.Property(x => x.Token)
-                       .IsRequired();
 
-                builder.Property(x => x.IsExpired)
-                       .IsRequired();
-
-                builder.Property(x => x.FechaExpiracion)
-                       .HasColumnType("datetime")
-                       .IsRequired();
-
-                builder.Property(x => x.Revocado)
-                       .IsRequired();
-
-                builder.Property(x => x.IsActive)
-                       .IsRequired();
-
-                builder.HasOne(x => x.Usuario)
-                       .WithMany(x => x.RefreshTokens)
-                       .HasForeignKey(x => x.UsuarioId);
         }
     }

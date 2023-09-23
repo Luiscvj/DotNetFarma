@@ -18,57 +18,52 @@ public class UsuariosController: ControllerBase
     {
         _userService = userService;
     }
-    [HttpPost("register")]
-    public async Task<ActionResult> RegisterAsync(RegisterDto model)
-    {
-        var result = await _userService.RegisterAsync(model);
-        return Ok(result);
-    }
-
-    [HttpPost("token")]
-    public async Task<IActionResult> GetTokenAsync(LoginDto model)
-    {
-        var result = await _userService.GetTokenAsync(model);
-        return Ok(result);
-    }
-
-/*     [HttpPost]
-    [Route("Validar")]
-    public  IActionResult Validar([FromBody] LoginDto request)
-    {
-
-        if (_userService.UserLogin(request) != null)
+        [HttpPost("register")]
+        public async Task<ActionResult> RegisterAsync(RegisterDto model)
         {
-            var keyBytes = Encoding.ASCII.GetBytes(secretKey);
-            var claims = new ClaimsIdentity();
-            claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, request.Username));
+            var result = await _userService.RegisterAsync(model);
+            return Ok(result);
+        }
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+        [HttpPost("token")]
+        public async Task<IActionResult> GetTokenAsync(LoginDto model)
+        {
+            var result = await _userService.GetTokenAsync(model);
+            SetRefreshTokenInCookie(result.RefreshToken);
+            return Ok(result);
+        }
+
+
+  
+        [HttpPost("addrole")]
+        public async Task<IActionResult> AddRoleAsync(AddRoleDto model)
+        {
+            var result = await _userService.AddRoleAsync(model);
+            return Ok(result);
+        }
+
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            var response = await _userService.RefreshTokenAsync(refreshToken);
+            if (!string.IsNullOrEmpty(response.RefreshToken))
+                SetRefreshTokenInCookie(response.RefreshToken);
+            return Ok(response);
+        }
+
+        private void SetRefreshTokenInCookie(string refreshToken)
             {
-                Subject = claims,
-                Expires = DateTime.UtcNow.AddMinutes(60),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
-            };
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.UtcNow.AddDays(10),
+                };
+                Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
+            }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
 
-            string tokencreado = tokenHandler.WriteToken(tokenConfig);
 
-            return StatusCode(StatusCodes.Status200OK, new { token = tokencreado });
 
-        }
-        else
-        {
-
-            return StatusCode(StatusCodes.Status401Unauthorized, new { token = "" });
-        }
-    } */
-
-    [HttpPost("addrole")]
-    public async Task<IActionResult> AddRoleAsync(AddRoleDto model)
-    {
-        var result = await _userService.AddRoleAsync(model);
-        return Ok(result);
-    }
 }
