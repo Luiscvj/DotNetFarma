@@ -14,4 +14,8 @@ public interface IMedicamento : IGenericRepository<Medicamento>
 
     Task<IEnumerable<Medicamento>> MedicamentosNoVendidos();
 
+    Task<Medicamento> MedicamentoMasCaro();
+
+    Task<int>  NumeroMedicamentosPorProveedor(int idProveedor);
+
 }

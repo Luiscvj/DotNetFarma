@@ -69,6 +69,20 @@ public class MedicamentoController : BaseApiController
 
     }
 
+    [HttpGet("GetNumeroMedicamentosPorProveedor{ProveedorId}")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<int>> GetNumeroMedicamentosPorProveedor(int ProveedorId)
+    {
+        int NumeroMedicamentoProveedor =await _unitOfWork.Medicamentos.NumeroMedicamentosPorProveedor(ProveedorId);
+        if(NumeroMedicamentoProveedor == 0) return NotFound();
+        return NumeroMedicamentoProveedor;
+
+    }
+
 
     [HttpGet("GetMedicamentosPorProveedorId{id}")]
     //[Authorize(Roles="")]
@@ -84,23 +98,36 @@ public class MedicamentoController : BaseApiController
     }
 
 
-    [HttpGet("GetMedicamentosNoVnedidos")]
+    [HttpGet("GetMedicamentosNoVendidos")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVnedidos()
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVendidos()
     {
         IEnumerable<Medicamento> Medicamento = await  _unitOfWork.Medicamentos.MedicamentosNoVendidos();
 
         return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
 
-    }
+    } 
+
+    [HttpGet("GetMedicamentosMasCaro")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<MedicamentoDto>> GetMedicamentosMasCaro()
+    {
+        Medicamento Medicamento = await  _unitOfWork.Medicamentos.MedicamentoMasCaro();
+
+        return Ok(_mapper.Map<MedicamentoDto>(Medicamento));
+
+    } 
     
     
 
 
-    [HttpGet("GetMedicamentosPorProveedor/{NombreProveedor} :string")]
+    [HttpGet("GetMedicamentosPorProveedor{NombreProveedor} :string")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

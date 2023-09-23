@@ -81,6 +81,20 @@ public class PacienteController : BaseApiController
         return Ok(PacientesDto);
     }
 
+
+    [HttpGet("GetAllVentasDeMedicamdnetoPacientePorNombreMedicamento/{NombreMedicamento}")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentoPorPacienteH>>> GetAllVentasDeMedicamdnetoPacientePorNombreMedicamento(string NombreMedicamento)
+    {
+        IEnumerable<MedicamentoPorPacienteH> medicamentoPorPacientes = await _unitOfWork.Pacientes.MedicamentoPacientePorNombreMedicamento(NombreMedicamento);
+        if (medicamentoPorPacientes == null) return NotFound();
+        return Ok(medicamentoPorPacientes);
+    }
+
     [HttpDelete("{id}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
