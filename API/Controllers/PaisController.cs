@@ -17,7 +17,7 @@ public class PaisController : BaseApiController
 
 
     [HttpPost]
-    [Authorize(Roles="Empleado")]
+   // [Authorize(Roles="Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -72,7 +72,7 @@ public class PaisController : BaseApiController
 
 
     [HttpGet("GetAll")]
-    [Authorize(Roles="Empleado")]
+   // [Authorize(Roles="Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

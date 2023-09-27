@@ -31,6 +31,11 @@ builder.Services.AddApplicationServices();
 builder.Services.ConfigureRateLimiting();
 builder.Services.ConfigureApiVersioning();
 builder.Services.AddJwt(builder.Configuration);
+/* builder.Services.AddHttpsRedirection(options =>
+    {
+        options.HttpsPort = 443;
+    }); */
+
 
 
 var app = builder.Build();

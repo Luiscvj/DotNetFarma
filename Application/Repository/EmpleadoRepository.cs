@@ -25,4 +25,24 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
                                 .ToListAsync();
         return ( totalRegistros, registros);
      }
+
+
+
+
+
+     public async Task<IEnumerable<Empleado>> EmpleadoConMenosDe5Ventas()
+     {
+        var fechaInicial = new DateTime(2023, 1, 1);
+        var fechaFinal = new DateTime(2023, 12, 31);
+
+       var empleadosConMenosDe5Ventas = await _context.Empleados
+        .Where(e => e.Ventas
+        .Count(v => v.FechaVenta >= fechaInicial && v.FechaVenta <= fechaFinal) < 5)
+        .ToListAsync();
+
+        return empleadosConMenosDe5Ventas;
+           
+
+
+     }
 }

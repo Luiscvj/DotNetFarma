@@ -23,7 +23,7 @@ public class EmpleadoController : BaseApiController
         return Ok(regiones);
     }*/
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -32,6 +32,19 @@ public class EmpleadoController : BaseApiController
         var empleados = await _unitOfWork.Empleados.GetAll();
         return _mapper.Map<List<EmpleadoDtos>>(empleados);
     }
+
+
+    [HttpGet("GetAllEmpleadoCoonMenos5Ventas2023")]
+    //[Authorize(Roles = "Administrador")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async  Task<ActionResult<IEnumerable<EmpleadoDtos>>> GetAllEmpleadoCoonMenos5Ventas2023()
+    {
+        var empleados = await _unitOfWork.Empleados.EmpleadoConMenosDe5Ventas();;
+        return _mapper.Map<List<EmpleadoDtos>>(empleados);
+    }
+
     [HttpGet("Pager")]
     [Authorize]
     [MapToApiVersion("1.1")]
@@ -81,6 +94,22 @@ public class EmpleadoController : BaseApiController
         EmpleadoDtos.EmpleadoId = empleado.EmpleadoId;
         return CreatedAtAction(nameof(Post),new {id= EmpleadoDtos.EmpleadoId}, EmpleadoDtos);
     }
+
+
+    [HttpPost("Foreing")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Empleado>> PostWithForeing(EmpleadoForeingDtos EmpleadoDtos){
+        var empleado = _mapper.Map<Empleado>(EmpleadoDtos);
+        this._unitOfWork.Empleados.Add(empleado);
+        await _unitOfWork.SaveAsync();
+        if (empleado == null)
+        {
+            return BadRequest();
+        }
+        EmpleadoDtos.EmpleadoId = empleado.EmpleadoId;
+        return CreatedAtAction(nameof(Post),new {id= EmpleadoDtos.EmpleadoId}, EmpleadoDtos);
+    }
     /*[HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -93,7 +122,7 @@ public class EmpleadoController : BaseApiController
         return empleado;
         
     }*/
-    [HttpPut]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(int id , [FromBody]EmpleadoDtos EmpleadoDtos)

@@ -19,9 +19,11 @@ public class ProveedorController : BaseApiController
 //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
 
     public async Task<ActionResult> Add(ProveedorDto ProveedorDto)
     {
+        Console.WriteLine(ProveedorDto);
         Proveedor Proveedor = _mapper.Map<Proveedor>(ProveedorDto);
         _unitOfWork.Proveedores.Add(Proveedor);
         int numeroCambios =await  _unitOfWork.SaveAsync();
@@ -75,6 +77,23 @@ public class ProveedorController : BaseApiController
         var ProveedoresDto= _mapper.Map<IEnumerable<ProveedorDto>>(Proveedores);
         return Ok(ProveedoresDto);
     }
+
+
+
+    [HttpGet("GetAllProveedorConMedicamentoMenos50U")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<ProveedorDto>>> GetAllProveedorConMedicamentoMenos50U()
+    {
+        IEnumerable<Proveedor> Proveedores = await _unitOfWork.Proveedores.ProveedoresMedicamentos();
+        IEnumerable<ProveedorDto>  proveedoresDto = _mapper.Map<IEnumerable<ProveedorDto>>(Proveedores);
+        return Ok(proveedoresDto);
+    }
+
+
+
 
 
     [HttpGet("GetAllMedicamentosVendidosProveedor")]

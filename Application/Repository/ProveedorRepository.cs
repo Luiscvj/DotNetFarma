@@ -56,5 +56,13 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         return ListaProveedorMedicamentoCompraH;
      }
 
+     public async Task<IEnumerable<Proveedor>> ProveedoresMedicamentos()
+     {
+         IEnumerable<Proveedor>   proveedor = await  _context.Proveedores.Where(e => e.Medicamentos.Any(medicamento => medicamento.Stock <50)).ToListAsync(); 
+         
+         return proveedor;
+
+     }
+
     
 }
