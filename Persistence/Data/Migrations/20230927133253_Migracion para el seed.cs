@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Migracionseeding : Migration
+    public partial class Migracionparaelseed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -450,9 +450,9 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "CargoId", "Descripcion", "Nombre" },
                 values: new object[,]
                 {
-                    { 1, "Se encarga de atender en la farmacia", "Auxiliar de farmacia" },
-                    { 2, "Brinda cuidados médicos a los pacientes", "Enfermera" },
-                    { 3, "Maneja las finanzas de la empresa", "Contador" }
+                    { 1, "... Gerente", "Gerente" },
+                    { 2, "... Admin", "Administrador" },
+                    { 3, "... Vendedor", "Vendedor" }
                 });
 
             migrationBuilder.InsertData(
@@ -460,9 +460,9 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "ArlId", "Direccion", "Email", "Nombre", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "calle 14 # 24-10", "CajasanAyuda@gmail.com", "Cajasan", "60793820" },
-                    { 2, "Calle 10 #30-45", "contacto@saludtotal.com", "SaludTotal", "601234567" },
-                    { 3, "Av. 5 #18-22", "info@cafesalud.com", "Cafesalud", "601112233" }
+                    { 1, "Calle arl 456", "arl1@gmail.com", "Arl1", "4342443324" },
+                    { 2, "Calle arl 789", "arl2@gmail.com", "Arl2", "2342346563" },
+                    { 3, "Calle arl 123", "arl3@gmail.com", "Arl3", "2457324355" }
                 });
 
             migrationBuilder.InsertData(
@@ -470,9 +470,9 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "EpsId", "Direccion", "Email", "Nombre", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "Calle 49 #43-2", "AtencionAlCliente@avanzar.co", "Avanzar", "60783822" },
-                    { 2, "Cra 15 #22-10", "atencion@coomeva.com", "Coomeva", "601987654" },
-                    { 3, "Av. 8 #12-30", "info@famisanar.com", "Famisanar", "601876543" }
+                    { 1, "Calle Eps 456", "eps1@gmail.com", "Eps1", "4342443324" },
+                    { 2, "Calle Eps 789", "eps2@gmail.com", "Eps2", "2342346563" },
+                    { 3, "Calle Eps 123", "eps3@gmail.com", "Eps3", "2457324355" }
                 });
 
             migrationBuilder.InsertData(
@@ -480,9 +480,9 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "PacienteId", "Apellidos", "Direccion", "Nombre", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "Alvarez", "Cra 19 #8-45 Barrio Comuneros", "Sofia", "3224243429" },
-                    { 2, "Gomez", "Cra 25 #12-34 Barrio Los Pinos", "Carlos", "3225556677" },
-                    { 3, "Ramirez", "Av. 4 #9-56 Barrio San Martin", "Laura", "3117778899" }
+                    { 1, "Perez", "Calle 123", "Juan", "555-1234" },
+                    { 2, "Villamizar", "Calle 456", "Maria", "555-5678" },
+                    { 3, "Garcia", "Calle 789", "Luis", "555-9012" }
                 });
 
             migrationBuilder.InsertData(
@@ -491,8 +491,8 @@ namespace Persistence.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Colombia" },
-                    { 2, "Perú" },
-                    { 3, "Argentina" }
+                    { 2, "Argentina" },
+                    { 3, "Mexico" }
                 });
 
             migrationBuilder.InsertData(
@@ -500,9 +500,26 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "ProveedorId", "Direccion", "Email", "Nombre", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "Cra 19 # 839", "ProveedorA@gmail.com", "ProveedorA", "032238492" },
-                    { 2, "Cra 22 # 839", "ProveedorB@gmail.com", "ProveedorB", "032238493" },
-                    { 3, "Calle 14 # 839", "ProveedorC@gmail.com", "ProveedorC", "032238494" }
+                    { 1, "Calle Proveedor 456", "contacto@proveedora.com", "ProveedorA", "32335232" },
+                    { 2, "Calle Proveedor 789", "contacto@proveedorb.com", "ProveedorB", "67835424" },
+                    { 3, "Calle Proveedor 123", "contacto@proveedorc.com", "ProveedorC", "34578724" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Compra",
+                columns: new[] { "CompraId", "FechaCompra", "ProveedorId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 3, new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 4, new DateTime(2023, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 5, new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 6, new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 7, new DateTime(2023, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 8, new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 9, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 10, new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -511,10 +528,8 @@ namespace Persistence.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Santander", 1 },
-                    { 2, "Lima", 2 },
-                    { 3, "Buenos Aires", 3 },
-                    { 4, "Norte de Santanader", 1 },
-                    { 5, "Cundinamarca", 1 }
+                    { 2, "Buenos Aires", 2 },
+                    { 3, "Ciudad Mexico", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -522,9 +537,16 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "MedicamentoId", "FechaExpiracion", "Nombre", "Precio", "ProveedorId", "Stock" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Paracetamol", 2500.0, 1, 150 },
-                    { 2, new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ibuprofeno", 3000.0, 2, 100 },
-                    { 3, new DateTime(2024, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Aspirina", 2000.0, 3, 75 }
+                    { 1, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Paracetamol", 20.0, 1, 150 },
+                    { 2, new DateTime(2024, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ibuprofeno", 25.0, 2, 50 },
+                    { 3, new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Aspirina", 15.0, 3, 30 },
+                    { 4, new DateTime(2025, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoxicilina", 40.0, 1, 75 },
+                    { 5, new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cetirizina", 10.0, 2, 110 },
+                    { 6, new DateTime(2024, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Losartan", 55.0, 3, 95 },
+                    { 7, new DateTime(2024, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Metformina", 60.0, 1, 180 },
+                    { 8, new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Atorvastatina", 45.0, 2, 200 },
+                    { 9, new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Clonazepam", 35.0, 3, 25 },
+                    { 10, new DateTime(2025, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Loratadina", 22.0, 1, 120 }
                 });
 
             migrationBuilder.InsertData(
@@ -532,11 +554,26 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "CiudadId", "DepartamentoId", "Nombre" },
                 values: new object[,]
                 {
-                    { 1, 1, "Bucarmanga" },
-                    { 2, 2, "Lima" },
-                    { 3, 3, "Buenos Aires" },
-                    { 4, 4, "Cúcuta" },
-                    { 5, 5, "Bogotá" }
+                    { 1, 1, "Bucaramanga" },
+                    { 2, 1, "Piedecuesta" },
+                    { 3, 1, "Giron" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "medicamento_compra",
+                columns: new[] { "MedicamentoCompraId", "CantidadComprada", "CompraId", "MedicamentoId", "PrecioCompra" },
+                values: new object[,]
+                {
+                    { 1, 50, 1, 1, 15m },
+                    { 2, 25, 2, 2, 20m },
+                    { 3, 10, 3, 3, 12m },
+                    { 4, 30, 4, 4, 35m },
+                    { 5, 50, 5, 5, 8m },
+                    { 6, 40, 6, 6, 50m },
+                    { 7, 60, 7, 7, 55m },
+                    { 8, 70, 8, 8, 40m },
+                    { 9, 15, 9, 9, 32m },
+                    { 10, 50, 10, 10, 20m }
                 });
 
             migrationBuilder.InsertData(
@@ -544,9 +581,10 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "EmpleadoId", "Apellidos", "ArlId", "CargoId", "CiudadId", "Direccion", "EpsId", "FechaContratacion", "Nombres", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "Escalante", 1, 1, 1, "Cra 33 #48-3", 1, new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jorge", "3294902231" },
-                    { 2, "López", 2, 2, 2, "Cra 18 #45-6", 2, new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "María", "3209876543" },
-                    { 3, "Perez", 3, 3, 3, "Av. 3 #8-15", 3, new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Juan", "3101234567" }
+                    { 1, "Perez", 1, 3, 1, "Calle 123", 1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pedro", "555-1234" },
+                    { 2, "Villamizar", 2, 3, 1, "Calle 123", 2, new DateTime(2019, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ana", "555-1234" },
+                    { 3, "Garcia", 3, 1, 1, "Calle 123", 3, new DateTime(2018, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Luis", "555-1234" },
+                    { 4, "Garcia", 1, 2, 1, "Calle 123", 3, new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sofia", "555-1234" }
                 });
 
             migrationBuilder.InsertData(
@@ -554,9 +592,16 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "VentaId", "EmpleadoId", "FechaVenta", "PacienteId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 2, new DateTime(2023, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 3, 3, new DateTime(2023, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 }
+                    { 1, 1, new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 2, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 3, 1, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 4, 1, new DateTime(2023, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 5, 2, new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, 2, new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 7, 1, new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 8, 1, new DateTime(2023, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 9, 2, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 10, 2, new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -564,9 +609,17 @@ namespace Persistence.Data.Migrations
                 columns: new[] { "MedicamentoVentaId", "CantidadVendida", "MedicamentoId", "PrecioVenta", "VentaId" },
                 values: new object[,]
                 {
-                    { 1, 200, 1, 29383.29m, 1 },
-                    { 2, 1000, 2, 4583.29m, 2 },
-                    { 3, 50, 3, 57893.29m, 3 }
+                    { 1, 2, 1, 20m, 1 },
+                    { 2, 1, 2, 25m, 2 },
+                    { 3, 2, 3, 15m, 2 },
+                    { 4, 1, 4, 40m, 3 },
+                    { 5, 1, 5, 10m, 4 },
+                    { 6, 1, 6, 55m, 5 },
+                    { 7, 1, 7, 60m, 6 },
+                    { 8, 1, 8, 45m, 7 },
+                    { 9, 1, 9, 35m, 8 },
+                    { 10, 1, 10, 22m, 9 },
+                    { 11, 2, 1, 20m, 10 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -721,4 +774,3 @@ namespace Persistence.Data.Migrations
         }
     }
 }
-

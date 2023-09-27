@@ -27,8 +27,29 @@ public class PacienteRepository : GenericRepository<Paciente>, IPaciente
         return ( totalRegistros, registros);
      }
 
+    public async  Task<dynamic> GetPacienteMasDineroGastado()
+    {
+        int yearToFilter = 2023; 
 
-     public async Task<List<MedicamentoPorPacienteH>> MedicamentoPacientePorNombreMedicamento(string NombreMedicamento)
+            return await _context.Pacientes
+                .Select(paciente => new
+                {
+                    Paciente = paciente,
+                    GastoTotalEn2023 = _context.Ventas
+                        .Where(venta => venta.FechaVenta.Year == yearToFilter && venta.PacienteId == paciente.PacienteId)
+                        .Join(
+                            _context.MedicamentoVentas,
+                            venta => venta.VentaId,
+                            medicamentoVenta => medicamentoVenta.VentaId,
+                            (venta, medicamentoVenta) => medicamentoVenta.CantidadVendida * medicamentoVenta.PrecioVenta)
+                        .Sum()
+                })
+                .OrderByDescending(resultado => resultado.GastoTotalEn2023)
+                .ToListAsync();
+    }
+
+
+    public async Task<List<MedicamentoPorPacienteH>> MedicamentoPacientePorNombreMedicamento(string NombreMedicamento)
      {
         List<MedicamentoPorPacienteH> pacienteCompra2  = new List<MedicamentoPorPacienteH>();
       

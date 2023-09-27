@@ -9,4 +9,8 @@ public interface IMedicamentoVenta : IGenericRepository<MedicamentoVenta>
 
     Task<decimal> GetTotalRecaudadoVentas();
 
+
+    Task<MedicamentoVenta> GetByIdVenta(int id);
+    Task<dynamic> GetMedicamentosNoVendidos();
+
 }

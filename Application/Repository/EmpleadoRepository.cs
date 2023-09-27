@@ -52,6 +52,25 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
         return ( totalRegistros, registros);
      }
 
+    public async Task<dynamic> GetEmpleados5Ventas()
+    {
+       int minVentas = 5;
+
+            return await _context.Empleados
+                                .GroupJoin(
+                                    _context.Ventas,
+                                    empleado => empleado.EmpleadoId,
+                                    venta => venta.EmpleadoId,
+                                    (empleado, ventas) => new
+                                    {
+                                        Id = empleado.EmpleadoId,
+                                        Empleado = empleado.Nombres,
+                                        CantidadVentas = ventas.Count()
+                                    })
+                                .Where(resultado => resultado.CantidadVentas >= minVentas) // Filtra empleados con más de 5 ventas
+                                .ToListAsync();
+    }
+
     public async Task<List<Empleado>> GetEmpleadosConMayorCantidadMedicamentosEn2023()
     {
         var empleadosConMayorCantidad = await _context.Ventas
@@ -72,5 +91,41 @@ public class EmpleadoRepository : GenericRepository<Empleado>, IEmpleado
             .ToListAsync();
 
         return empleados;
+    }
+
+    public async Task<dynamic> GetEmpleadosNoVentas()
+    {
+         int yearToFilter = 2023;
+
+            return await _context.Empleados
+                .Where(empleado =>
+                    !_context.Ventas.Any(venta =>
+                        venta.EmpleadoId == empleado.EmpleadoId && venta.FechaVenta.Year == yearToFilter))
+                .ToListAsync();
+    }
+
+    public async Task<List<int>> GetIdEmpleados()
+    {
+          return await _context.Empleados
+                                 .Select(x => x.EmpleadoId)
+                                 .ToListAsync();
+    }
+
+    public async Task<dynamic> GetVentasxEmpleado()
+    {
+         return await _context.Empleados
+                                 .GroupJoin
+                                 (
+                                    _context.Ventas
+                                            .Where(x => x.FechaVenta.Year == 2023),
+                                            Empleado => Empleado.EmpleadoId,
+                                            Venta => Venta.EmpleadoId,
+                                            (Empleado, Venta) => new
+                                            {
+                                                Id = Empleado.EmpleadoId,
+                                                Nombre = Empleado.Nombres,
+                                                TotalVentas = Venta.Count()
+                                            }
+                                 ).ToListAsync();
     }
 }

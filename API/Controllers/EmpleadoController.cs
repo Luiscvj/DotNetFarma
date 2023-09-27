@@ -166,4 +166,33 @@ public class EmpleadoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
+
+
+
+     [HttpGet("5Ventas")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetEmpleados5Ventas()
+        {
+            var registros = await _unitOfWork.Empleados.GetEmpleados5Ventas();
+            if(registros == null) return NotFound();
+            return registros;   
+        }
+
+
+
+        [HttpGet("noVentas")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetEmpleadosNoVentas()
+        {
+            var registros = await _unitOfWork.Empleados.GetEmpleadosNoVentas();
+            if(registros == null) return NotFound();
+            return registros;   
+        }
+
 }

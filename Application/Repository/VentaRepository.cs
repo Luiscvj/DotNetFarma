@@ -40,4 +40,28 @@ public class VentaRepository : GenericRepository<Venta>, IVenta
 
        
     }
+
+    public async  Task<dynamic> GetPromedioMedicamentosVendidos()
+    {
+        return await _context.Ventas
+                .Select(venta => new
+                {
+                    Venta = venta,
+                    CantidadMedicamentos = _context.MedicamentoVentas
+                        .Where(medicamentoVenta => medicamentoVenta.VentaId == venta.VentaId)
+                        .Sum(medicamentoVenta => medicamentoVenta.CantidadVendida)
+                })
+                .AverageAsync(resultado => resultado.CantidadMedicamentos);
+    }
+
+    public async Task<List<int>> GetVentasMarzo()
+    {
+       DateTime fechaInicio = new(2023, 03, 01);
+            DateTime fechaLimite = new(2023, 03, 31);
+
+            return await _context.Ventas
+                                 .Where(x => x.FechaVenta >= fechaInicio && x.FechaVenta <= fechaLimite)
+                                 .Select(x => x.VentaId)
+                                 .ToListAsync();
+    }
 }

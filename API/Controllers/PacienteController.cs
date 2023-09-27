@@ -132,6 +132,18 @@ public class PacienteController : BaseApiController
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
     }
+
+        [HttpGet("masDineroGastado")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetPacienteMasDineroGastado()
+        {
+            var registros = await _unitOfWork.Pacientes.GetPacienteMasDineroGastado();
+            if(registros == null) return NotFound();
+            return registros;  
+        }
     
     
 

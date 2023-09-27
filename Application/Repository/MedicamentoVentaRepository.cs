@@ -39,6 +39,22 @@ public class MedicamentoVentaRepository : GenericRepository<MedicamentoVenta>, I
         return   _context.MedicamentoVentas.Count( medicamentoVenta => medicamentoVenta.MedicamentoId == id);
     }
 
+    public async Task<MedicamentoVenta> GetByIdVenta(int id)
+    {
+          return await _context.MedicamentoVentas
+                                 .Where(x => x.VentaId == id)
+                                 .FirstAsync();
+    }
+
+    public async Task<dynamic> GetMedicamentosNoVendidos()
+    {
+         return await _context.Medicamentos
+                                 .Where(medicamento =>
+                                    !_context.MedicamentoVentas
+                                 .Any(venta => venta.MedicamentoId == medicamento.MedicamentoId))
+                                 .ToListAsync();
+    }
+
     public async Task<decimal> GetTotalRecaudadoVentas()
     {
         return  _context.MedicamentoVentas.Sum(x =>x.PrecioVenta);

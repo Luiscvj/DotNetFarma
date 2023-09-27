@@ -143,11 +143,34 @@ public class MedicamentoVentaController : BaseApiController
     
     
 
+        [HttpGet("marzo")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> GetTotalVentas()
+        {
+            var idRegistros = await _unitOfWork.Ventas.GetVentasMarzo();
+            if(idRegistros == null) return NotFound();
+            int totalMedicamentoVendidos = 0;
+            foreach(int id in idRegistros)
+            {
+                var registro = await _unitOfWork.MedicamentoVentas.GetByIdVenta(id);
+                var venta = _mapper.Map<MedicamentoVentaDto>(registro);
+                totalMedicamentoVendidos += venta.CantidadVendida;
+            }
+            return $"El total de medicamento vendidos en marzo de 2023 es de : {totalMedicamentoVendidos}";
+        }
 
-
-
-    
-    
-    
-    
+        [HttpGet("noVentas")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetMedicamentosNoVendidos()
+        {
+            var registros = await _unitOfWork.MedicamentoVentas.GetMedicamentosNoVendidos();
+            if(registros == null) return NotFound();
+            return  registros; 
+        }  
 }

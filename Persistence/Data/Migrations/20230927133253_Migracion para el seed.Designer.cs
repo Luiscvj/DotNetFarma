@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(DotNetFarmaContext))]
-    [Migration("20230924063211_Migracion seeding")]
-    partial class Migracionseeding
+    [Migration("20230927133253_Migracion para el seed")]
+    partial class Migracionparaelseed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,26 +55,26 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             ArlId = 1,
-                            Direccion = "calle 14 # 24-10",
-                            Email = "CajasanAyuda@gmail.com",
-                            Nombre = "Cajasan",
-                            Telefono = "60793820"
+                            Direccion = "Calle arl 456",
+                            Email = "arl1@gmail.com",
+                            Nombre = "Arl1",
+                            Telefono = "4342443324"
                         },
                         new
                         {
                             ArlId = 2,
-                            Direccion = "Calle 10 #30-45",
-                            Email = "contacto@saludtotal.com",
-                            Nombre = "SaludTotal",
-                            Telefono = "601234567"
+                            Direccion = "Calle arl 789",
+                            Email = "arl2@gmail.com",
+                            Nombre = "Arl2",
+                            Telefono = "2342346563"
                         },
                         new
                         {
                             ArlId = 3,
-                            Direccion = "Av. 5 #18-22",
-                            Email = "info@cafesalud.com",
-                            Nombre = "Cafesalud",
-                            Telefono = "601112233"
+                            Direccion = "Calle arl 123",
+                            Email = "arl3@gmail.com",
+                            Nombre = "Arl3",
+                            Telefono = "2457324355"
                         });
                 });
 
@@ -102,20 +102,20 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             CargoId = 1,
-                            Descripcion = "Se encarga de atender en la farmacia",
-                            Nombre = "Auxiliar de farmacia"
+                            Descripcion = "... Gerente",
+                            Nombre = "Gerente"
                         },
                         new
                         {
                             CargoId = 2,
-                            Descripcion = "Brinda cuidados médicos a los pacientes",
-                            Nombre = "Enfermera"
+                            Descripcion = "... Admin",
+                            Nombre = "Administrador"
                         },
                         new
                         {
                             CargoId = 3,
-                            Descripcion = "Maneja las finanzas de la empresa",
-                            Nombre = "Contador"
+                            Descripcion = "... Vendedor",
+                            Nombre = "Vendedor"
                         });
                 });
 
@@ -144,31 +144,19 @@ namespace Persistence.Data.Migrations
                         {
                             CiudadId = 1,
                             DepartamentoId = 1,
-                            Nombre = "Bucarmanga"
+                            Nombre = "Bucaramanga"
                         },
                         new
                         {
                             CiudadId = 2,
-                            DepartamentoId = 2,
-                            Nombre = "Lima"
+                            DepartamentoId = 1,
+                            Nombre = "Piedecuesta"
                         },
                         new
                         {
                             CiudadId = 3,
-                            DepartamentoId = 3,
-                            Nombre = "Buenos Aires"
-                        },
-                        new
-                        {
-                            CiudadId = 5,
-                            DepartamentoId = 5,
-                            Nombre = "Bogotá"
-                        },
-                        new
-                        {
-                            CiudadId = 4,
-                            DepartamentoId = 4,
-                            Nombre = "Cúcuta"
+                            DepartamentoId = 1,
+                            Nombre = "Giron"
                         });
                 });
 
@@ -189,6 +177,68 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("Compra", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CompraId = 1,
+                            FechaCompra = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 2,
+                            FechaCompra = new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 3,
+                            FechaCompra = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 4,
+                            FechaCompra = new DateTime(2023, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 5,
+                            FechaCompra = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 6,
+                            FechaCompra = new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 7,
+                            FechaCompra = new DateTime(2023, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 8,
+                            FechaCompra = new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 9,
+                            FechaCompra = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 10,
+                            FechaCompra = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Departamento", b =>
@@ -221,26 +271,14 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             DepartamentoId = 2,
-                            Nombre = "Lima",
+                            Nombre = "Buenos Aires",
                             PaisId = 2
                         },
                         new
                         {
                             DepartamentoId = 3,
-                            Nombre = "Buenos Aires",
+                            Nombre = "Ciudad Mexico",
                             PaisId = 3
-                        },
-                        new
-                        {
-                            DepartamentoId = 4,
-                            Nombre = "Norte de Santanader",
-                            PaisId = 1
-                        },
-                        new
-                        {
-                            DepartamentoId = 5,
-                            Nombre = "Cundinamarca",
-                            PaisId = 1
                         });
                 });
 
@@ -301,41 +339,54 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             EmpleadoId = 1,
-                            Apellidos = "Escalante",
+                            Apellidos = "Perez",
                             ArlId = 1,
-                            CargoId = 1,
+                            CargoId = 3,
                             CiudadId = 1,
-                            Direccion = "Cra 33 #48-3",
+                            Direccion = "Calle 123",
                             EpsId = 1,
-                            FechaContratacion = new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "Jorge",
-                            Telefono = "3294902231"
+                            FechaContratacion = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Pedro",
+                            Telefono = "555-1234"
                         },
                         new
                         {
                             EmpleadoId = 2,
-                            Apellidos = "López",
+                            Apellidos = "Villamizar",
                             ArlId = 2,
-                            CargoId = 2,
-                            CiudadId = 2,
-                            Direccion = "Cra 18 #45-6",
+                            CargoId = 3,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
                             EpsId = 2,
-                            FechaContratacion = new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "María",
-                            Telefono = "3209876543"
+                            FechaContratacion = new DateTime(2019, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Ana",
+                            Telefono = "555-1234"
                         },
                         new
                         {
                             EmpleadoId = 3,
-                            Apellidos = "Perez",
+                            Apellidos = "Garcia",
                             ArlId = 3,
-                            CargoId = 3,
-                            CiudadId = 3,
-                            Direccion = "Av. 3 #8-15",
+                            CargoId = 1,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
                             EpsId = 3,
-                            FechaContratacion = new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "Juan",
-                            Telefono = "3101234567"
+                            FechaContratacion = new DateTime(2018, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Luis",
+                            Telefono = "555-1234"
+                        },
+                        new
+                        {
+                            EmpleadoId = 4,
+                            Apellidos = "Garcia",
+                            ArlId = 1,
+                            CargoId = 2,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
+                            EpsId = 3,
+                            FechaContratacion = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Sofia",
+                            Telefono = "555-1234"
                         });
                 });
 
@@ -373,26 +424,26 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             EpsId = 1,
-                            Direccion = "Calle 49 #43-2",
-                            Email = "AtencionAlCliente@avanzar.co",
-                            Nombre = "Avanzar",
-                            Telefono = "60783822"
+                            Direccion = "Calle Eps 456",
+                            Email = "eps1@gmail.com",
+                            Nombre = "Eps1",
+                            Telefono = "4342443324"
                         },
                         new
                         {
                             EpsId = 2,
-                            Direccion = "Cra 15 #22-10",
-                            Email = "atencion@coomeva.com",
-                            Nombre = "Coomeva",
-                            Telefono = "601987654"
+                            Direccion = "Calle Eps 789",
+                            Email = "eps2@gmail.com",
+                            Nombre = "Eps2",
+                            Telefono = "2342346563"
                         },
                         new
                         {
                             EpsId = 3,
-                            Direccion = "Av. 8 #12-30",
-                            Email = "info@famisanar.com",
-                            Nombre = "Famisanar",
-                            Telefono = "601876543"
+                            Direccion = "Calle Eps 123",
+                            Email = "eps3@gmail.com",
+                            Nombre = "Eps3",
+                            Telefono = "2457324355"
                         });
                 });
 
@@ -431,27 +482,90 @@ namespace Persistence.Data.Migrations
                             MedicamentoId = 1,
                             FechaExpiracion = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Paracetamol",
-                            Precio = 2500.0,
+                            Precio = 20.0,
                             ProveedorId = 1,
                             Stock = 150
                         },
                         new
                         {
+                            MedicamentoId = 2,
+                            FechaExpiracion = new DateTime(2024, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Ibuprofeno",
+                            Precio = 25.0,
+                            ProveedorId = 2,
+                            Stock = 50
+                        },
+                        new
+                        {
                             MedicamentoId = 3,
-                            FechaExpiracion = new DateTime(2024, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaExpiracion = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "Aspirina",
-                            Precio = 2000.0,
+                            Precio = 15.0,
                             ProveedorId = 3,
+                            Stock = 30
+                        },
+                        new
+                        {
+                            MedicamentoId = 4,
+                            FechaExpiracion = new DateTime(2025, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Amoxicilina",
+                            Precio = 40.0,
+                            ProveedorId = 1,
                             Stock = 75
                         },
                         new
                         {
-                            MedicamentoId = 2,
-                            FechaExpiracion = new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Ibuprofeno",
-                            Precio = 3000.0,
+                            MedicamentoId = 5,
+                            FechaExpiracion = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Cetirizina",
+                            Precio = 10.0,
                             ProveedorId = 2,
-                            Stock = 100
+                            Stock = 110
+                        },
+                        new
+                        {
+                            MedicamentoId = 6,
+                            FechaExpiracion = new DateTime(2024, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Losartan",
+                            Precio = 55.0,
+                            ProveedorId = 3,
+                            Stock = 95
+                        },
+                        new
+                        {
+                            MedicamentoId = 7,
+                            FechaExpiracion = new DateTime(2024, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Metformina",
+                            Precio = 60.0,
+                            ProveedorId = 1,
+                            Stock = 180
+                        },
+                        new
+                        {
+                            MedicamentoId = 8,
+                            FechaExpiracion = new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Atorvastatina",
+                            Precio = 45.0,
+                            ProveedorId = 2,
+                            Stock = 200
+                        },
+                        new
+                        {
+                            MedicamentoId = 9,
+                            FechaExpiracion = new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Clonazepam",
+                            Precio = 35.0,
+                            ProveedorId = 3,
+                            Stock = 25
+                        },
+                        new
+                        {
+                            MedicamentoId = 10,
+                            FechaExpiracion = new DateTime(2025, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Loratadina",
+                            Precio = 22.0,
+                            ProveedorId = 1,
+                            Stock = 120
                         });
                 });
 
@@ -481,6 +595,88 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("MedicamentoId");
 
                     b.ToTable("medicamento_compra", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentoCompraId = 1,
+                            CantidadComprada = 50,
+                            CompraId = 1,
+                            MedicamentoId = 1,
+                            PrecioCompra = 15m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 2,
+                            CantidadComprada = 25,
+                            CompraId = 2,
+                            MedicamentoId = 2,
+                            PrecioCompra = 20m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 3,
+                            CantidadComprada = 10,
+                            CompraId = 3,
+                            MedicamentoId = 3,
+                            PrecioCompra = 12m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 4,
+                            CantidadComprada = 30,
+                            CompraId = 4,
+                            MedicamentoId = 4,
+                            PrecioCompra = 35m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 5,
+                            CantidadComprada = 50,
+                            CompraId = 5,
+                            MedicamentoId = 5,
+                            PrecioCompra = 8m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 6,
+                            CantidadComprada = 40,
+                            CompraId = 6,
+                            MedicamentoId = 6,
+                            PrecioCompra = 50m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 7,
+                            CantidadComprada = 60,
+                            CompraId = 7,
+                            MedicamentoId = 7,
+                            PrecioCompra = 55m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 8,
+                            CantidadComprada = 70,
+                            CompraId = 8,
+                            MedicamentoId = 8,
+                            PrecioCompra = 40m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 9,
+                            CantidadComprada = 15,
+                            CompraId = 9,
+                            MedicamentoId = 9,
+                            PrecioCompra = 32m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 10,
+                            CantidadComprada = 50,
+                            CompraId = 10,
+                            MedicamentoId = 10,
+                            PrecioCompra = 20m
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoVenta", b =>
@@ -514,26 +710,90 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             MedicamentoVentaId = 1,
-                            CantidadVendida = 200,
+                            CantidadVendida = 2,
                             MedicamentoId = 1,
-                            PrecioVenta = 29383.29m,
+                            PrecioVenta = 20m,
                             VentaId = 1
                         },
                         new
                         {
                             MedicamentoVentaId = 2,
-                            CantidadVendida = 1000,
+                            CantidadVendida = 1,
                             MedicamentoId = 2,
-                            PrecioVenta = 4583.29m,
+                            PrecioVenta = 25m,
                             VentaId = 2
                         },
                         new
                         {
                             MedicamentoVentaId = 3,
-                            CantidadVendida = 50,
+                            CantidadVendida = 2,
                             MedicamentoId = 3,
-                            PrecioVenta = 57893.29m,
+                            PrecioVenta = 15m,
+                            VentaId = 2
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 4,
+                            CantidadVendida = 1,
+                            MedicamentoId = 4,
+                            PrecioVenta = 40m,
                             VentaId = 3
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 5,
+                            CantidadVendida = 1,
+                            MedicamentoId = 5,
+                            PrecioVenta = 10m,
+                            VentaId = 4
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 6,
+                            CantidadVendida = 1,
+                            MedicamentoId = 6,
+                            PrecioVenta = 55m,
+                            VentaId = 5
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 7,
+                            CantidadVendida = 1,
+                            MedicamentoId = 7,
+                            PrecioVenta = 60m,
+                            VentaId = 6
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 8,
+                            CantidadVendida = 1,
+                            MedicamentoId = 8,
+                            PrecioVenta = 45m,
+                            VentaId = 7
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 9,
+                            CantidadVendida = 1,
+                            MedicamentoId = 9,
+                            PrecioVenta = 35m,
+                            VentaId = 8
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 10,
+                            CantidadVendida = 1,
+                            MedicamentoId = 10,
+                            PrecioVenta = 22m,
+                            VentaId = 9
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 11,
+                            CantidadVendida = 2,
+                            MedicamentoId = 1,
+                            PrecioVenta = 20m,
+                            VentaId = 10
                         });
                 });
 
@@ -571,26 +831,26 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             PacienteId = 1,
-                            Apellidos = "Alvarez",
-                            Direccion = "Cra 19 #8-45 Barrio Comuneros",
-                            Nombre = "Sofia",
-                            Telefono = "3224243429"
+                            Apellidos = "Perez",
+                            Direccion = "Calle 123",
+                            Nombre = "Juan",
+                            Telefono = "555-1234"
                         },
                         new
                         {
                             PacienteId = 2,
-                            Apellidos = "Gomez",
-                            Direccion = "Cra 25 #12-34 Barrio Los Pinos",
-                            Nombre = "Carlos",
-                            Telefono = "3225556677"
+                            Apellidos = "Villamizar",
+                            Direccion = "Calle 456",
+                            Nombre = "Maria",
+                            Telefono = "555-5678"
                         },
                         new
                         {
                             PacienteId = 3,
-                            Apellidos = "Ramirez",
-                            Direccion = "Av. 4 #9-56 Barrio San Martin",
-                            Nombre = "Laura",
-                            Telefono = "3117778899"
+                            Apellidos = "Garcia",
+                            Direccion = "Calle 789",
+                            Nombre = "Luis",
+                            Telefono = "555-9012"
                         });
                 });
 
@@ -618,12 +878,12 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             PaisId = 2,
-                            Nombre = "Perú"
+                            Nombre = "Argentina"
                         },
                         new
                         {
                             PaisId = 3,
-                            Nombre = "Argentina"
+                            Nombre = "Mexico"
                         });
                 });
 
@@ -661,26 +921,26 @@ namespace Persistence.Data.Migrations
                         new
                         {
                             ProveedorId = 1,
-                            Direccion = "Cra 19 # 839",
-                            Email = "ProveedorA@gmail.com",
+                            Direccion = "Calle Proveedor 456",
+                            Email = "contacto@proveedora.com",
                             Nombre = "ProveedorA",
-                            Telefono = "032238492"
+                            Telefono = "32335232"
                         },
                         new
                         {
                             ProveedorId = 2,
-                            Direccion = "Cra 22 # 839",
-                            Email = "ProveedorB@gmail.com",
+                            Direccion = "Calle Proveedor 789",
+                            Email = "contacto@proveedorb.com",
                             Nombre = "ProveedorB",
-                            Telefono = "032238493"
+                            Telefono = "67835424"
                         },
                         new
                         {
                             ProveedorId = 3,
-                            Direccion = "Calle 14 # 839",
-                            Email = "ProveedorC@gmail.com",
+                            Direccion = "Calle Proveedor 123",
+                            Email = "contacto@proveedorc.com",
                             Nombre = "ProveedorC",
-                            Telefono = "032238494"
+                            Telefono = "34578724"
                         });
                 });
 
@@ -810,22 +1070,71 @@ namespace Persistence.Data.Migrations
                         {
                             VentaId = 1,
                             EmpleadoId = 1,
-                            FechaVenta = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaVenta = new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PacienteId = 1
                         },
                         new
                         {
                             VentaId = 2,
                             EmpleadoId = 2,
-                            FechaVenta = new DateTime(2023, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaVenta = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PacienteId = 2
                         },
                         new
                         {
                             VentaId = 3,
-                            EmpleadoId = 3,
-                            FechaVenta = new DateTime(2023, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PacienteId = 3
+                        },
+                        new
+                        {
+                            VentaId = 4,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 5,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 1
+                        },
+                        new
+                        {
+                            VentaId = 6,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 7,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 8,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 9,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 1
+                        },
+                        new
+                        {
+                            VentaId = 10,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
                         });
                 });
 
@@ -1074,4 +1383,3 @@ namespace Persistence.Data.Migrations
         }
     }
 }
-

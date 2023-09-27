@@ -17,5 +17,9 @@ public interface IMedicamento : IGenericRepository<Medicamento>
     Task<Medicamento> MedicamentoMasCaro();
 
     Task<int>  NumeroMedicamentosPorProveedor(int idProveedor);
+    Task<List<Medicamento>> GetExpiran2024();
+    Task<dynamic> GetPacientesCompraronParacetamol();
+    Task<dynamic> GetMedicamentoMenosVendido();
+    Task<dynamic> GetTotalMedicamentosVendidosxMes();
 
 }

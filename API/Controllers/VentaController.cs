@@ -178,7 +178,36 @@ public class VentaController : BaseApiController
     
     
 
+         
 
+        [HttpGet("ventaxEmpleado")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetVentasxEmpleado()
+        {
+            var empleados = await _unitOfWork.Empleados.GetVentasxEmpleado();
+            if(empleados == null) return NotFound();
+            return empleados;
+            foreach(int id in empleados)
+            {
+
+            }
+            // return _mapper.Map<List<EmpleadoDto>>(empleados);   
+        }
+
+        [HttpGet("promedioMedicamentosVendidos")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> PromedioMedicamentosVendidos()
+        {
+            var promedio = await _unitOfWork.Ventas.GetPromedioMedicamentosVendidos();
+            if(promedio == null) return NotFound();
+            return promedio;  
+        }
 
 
     

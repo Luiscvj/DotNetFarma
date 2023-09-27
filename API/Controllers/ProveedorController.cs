@@ -137,7 +137,34 @@ public class ProveedorController : BaseApiController
         int numeroCambios = await _unitOfWork.SaveAsync();
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
-    }   
+    } 
+
+
+
+
+        [HttpGet("totalComprasProveedor")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetTotalVentasProveedor()
+        {
+            var registros = await _unitOfWork.Proveedores.GetTotalGananciaProveedor();
+            if(registros == null) return NotFound();
+            return registros;  
+        }
+
+        [HttpGet("masHanSuministrado")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetProveedoresMasHanSuministrado()
+        {
+            var registros = await _unitOfWork.Proveedores.GetProveedoresMasHanSuministrado();
+            if(registros == null) return NotFound();
+            return registros;  
+        }  
 }
     
     

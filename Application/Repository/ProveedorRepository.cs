@@ -56,7 +56,42 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         return ListaProveedorMedicamentoCompraH;
      }
 
-     public async Task<IEnumerable<Proveedor>> ProveedoresMedicamentos()
+    public async Task<dynamic> GetProveedoresMasHanSuministrado()
+    {
+         int yearToFilter = 2023; // Año que deseas filtrar
+
+            return await _context.Proveedores
+                .Select(proveedor => new
+                {
+                    Proveedor = proveedor,
+                    CantidadMedicamentosSuministrados = _context.Compras
+                        .Where(compra => compra.FechaCompra.Year == yearToFilter && compra.ProveedorId == proveedor.ProveedorId)
+                        .SelectMany(compra => compra.MedicamentoCompras)
+                        .Sum(medicamentoCompra => medicamentoCompra.CantidadComprada)
+                })
+                .OrderByDescending(resultado => resultado.CantidadMedicamentosSuministrados)
+                .FirstOrDefaultAsync();
+    }
+
+    public async Task<dynamic> GetTotalGananciaProveedor()
+    {
+         return await _context.Proveedores
+                .Select(proveedor => new
+                {
+                    Proveedor = proveedor,
+                    TotalCompra = _context.Compras
+                        .Where(compra => compra.ProveedorId == proveedor.ProveedorId)
+                        .Join(
+                            _context.MedicamentoCompras,
+                            compra => compra.CompraId,
+                            medicamentoCompra => medicamentoCompra.CompraId,
+                            (compra, medicamentoCompra) => medicamentoCompra.PrecioCompra)
+                        .Sum()
+                })
+                .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Proveedor>> ProveedoresMedicamentos()
      {
          IEnumerable<Proveedor>   proveedor = await  _context.Proveedores.Where(e => e.Medicamentos.Any(medicamento => medicamento.Stock <50)).ToListAsync(); 
          

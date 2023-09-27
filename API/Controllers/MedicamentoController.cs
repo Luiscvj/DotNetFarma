@@ -223,7 +223,41 @@ public class MedicamentoController : BaseApiController
     
 
 
+        [HttpGet("compraronParacetamol")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetPacienteCompraronParacetamol()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetPacientesCompraronParacetamol();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
 
+        [HttpGet("menosVendido")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetMedicamentoMenosVendido()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetMedicamentoMenosVendido();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
+
+        [HttpGet("ventasxMes")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetTotalMedicamentosVendidosxMes()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetTotalMedicamentosVendidosxMes();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
 
     
     

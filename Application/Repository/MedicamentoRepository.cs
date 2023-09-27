@@ -105,4 +105,76 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
                     
            return   num.Count();    
     }
+
+    public async Task<List<Medicamento>> GetExpiran2024()
+    {
+        DateTime fechaInicial = new(2024, 01, 01);
+            DateTime fechaLimite = new(2024, 12, 31);
+
+            return await _context.Medicamentos 
+                                 .Where(x => x.FechaExpiracion > fechaInicial && x.FechaExpiracion <= fechaLimite)
+                                 .ToListAsync();
+    }
+
+    public async  Task<dynamic> GetPacientesCompraronParacetamol()
+    {
+         int yearToFilter = 2023; // Año que deseas filtrar
+            string medicamentoNombre = "paracetamol";
+
+            return await _context.Pacientes
+            .Where(paciente =>
+                _context.Ventas
+                    .Any(venta =>
+                        venta.PacienteId == paciente.PacienteId &&
+                        venta.FechaVenta.Year == yearToFilter &&
+                        _context.MedicamentoVentas
+                            .Any(medicamentoVenta =>
+                                medicamentoVenta.VentaId == venta.VentaId &&
+                                _context.Medicamentos
+                                    .Any(medicamento =>
+                                        medicamentoVenta.MedicamentoId == medicamento.MedicamentoId &&
+                                        medicamento.Nombre.ToLower() == medicamentoNombre))))
+            .ToListAsync();
+    }
+
+    public async Task<dynamic> GetMedicamentoMenosVendido()
+    {
+        int yearToFilter = 2023;
+
+            return await _context.Medicamentos
+                .GroupJoin(
+                    _context.MedicamentoVentas
+                        .Where(medicamentoVenta => medicamentoVenta.Venta.FechaVenta.Year == yearToFilter), // Filtra las ventas por el año 2023
+                    medicamento => medicamento.MedicamentoId,
+                    medicamentoVenta => medicamentoVenta.MedicamentoId,
+                    (medicamento, ventas) => new
+                    {
+                        Medicamento = medicamento,
+                        CantidadVentas = ventas.Count()
+                    })
+                .OrderBy(resultado => resultado.CantidadVentas)
+                .FirstOrDefaultAsync();
+    }
+
+    public async Task<dynamic> GetTotalMedicamentosVendidosxMes()
+    {
+        int yearToFilter = 2023;
+
+            var medicamentosVendidosPorMesEn2023 = Enumerable.Range(1, 12)
+                .Select(month => new
+                {
+                    Mes = month,
+                    TotalMedicamentosVendidos = _context.Ventas
+                        .Where(venta => venta.FechaVenta.Year == yearToFilter && venta.FechaVenta.Month == month)
+                        .Join(
+                            _context.MedicamentoVentas,
+                            venta => venta.VentaId,
+                            medicamentoVenta => medicamentoVenta.VentaId,
+                            (venta, medicamentoVenta) => medicamentoVenta.CantidadVendida)
+                        .Sum()
+                })
+                .ToList();
+
+            return medicamentosVendidosPorMesEn2023;
+    }
 }
