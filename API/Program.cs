@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<DotNetFarmaContext>(opt =>
 {
-    string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionLuis");
+    string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 builder.Services.AddSwaggerGen();

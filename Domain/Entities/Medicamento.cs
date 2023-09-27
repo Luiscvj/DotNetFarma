@@ -3,8 +3,10 @@ namespace Domain.Entities;
 
 public class Medicamento
 {
+    public readonly DateTime FechaVenta;
+
     public int MedicamentoId { get; set; }
-    public string Nombre { get; set; }
+    public string NombreMedicamento { get; set; }
     public double Precio { get; set; }
     public int Stock { get; set; }
     public DateTime FechaExpiracion { get; set; }

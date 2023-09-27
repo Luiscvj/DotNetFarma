@@ -30,7 +30,7 @@ public class VentaRepository : GenericRepository<Venta>, IVenta
 
     public async  Task<int> GetCountVentasMedicamentoByName(string Nombre)
     {
-         Medicamento medicamento = await _context.Medicamentos.FirstOrDefaultAsync(medicamento => medicamento.Nombre.ToLower() == Nombre );
+         Medicamento medicamento = await _context.Medicamentos.FirstOrDefaultAsync(medicamento => medicamento.NombreMedicamento.ToLower() == Nombre );
         if (medicamento == null ) return -1;
        
 
@@ -40,4 +40,5 @@ public class VentaRepository : GenericRepository<Venta>, IVenta
 
        
     }
+
 }

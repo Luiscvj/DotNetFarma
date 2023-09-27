@@ -24,7 +24,8 @@ public class DotNetFarmaContext : DbContext
     public DbSet<RefreshToken> RefreshTokens {get;set;}
     public DbSet<Rol> Roles {get;set;}
     public DbSet<Usuario> Usuarios {get;set;}
-    public DbSet<Venta> Ventas {get;set;}
+    public DbSet<Venta> Ventas { get; set; }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)
     {
         modelBuilder.Properties<string>().HaveMaxLength(150);

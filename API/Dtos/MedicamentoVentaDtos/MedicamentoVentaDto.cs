@@ -7,4 +7,5 @@ public class MedicamentoVentaDto
     public decimal PrecioVenta { get; set; }
     public int VentaId { get; set; }
     public int MedicamentoId { get; set; }
+    public DateTime FechaVenta { get; set; }
 }

@@ -76,6 +76,28 @@ public class ProveedorController : BaseApiController
         return Ok(ProveedoresDto);
     }
 
+    [HttpGet("ProveedoresMedicamentos50U")]
+    //[Authorize(Roles = "Administrador")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async  Task<IEnumerable<ProveedorDto>> ProveedoresMedicamentos50U()
+    {
+        var Proveedores = await _unitOfWork.Proveedores.ProveedoresMedicamentos50U();
+        var proveedordto =_mapper.Map<List<ProveedorDto>>(Proveedores);
+        return proveedordto;
+    }
+
+    [HttpGet("Proveedores5MedicamentosDiferentes2023")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<ProveedorDto>> GetProveedores5MedicamentosDiferentes2023()
+    {
+    var proveedores = await _unitOfWork.Proveedores.GetProveedores5MedicamentosDiferentes2023();
+    var proveedorDtos = _mapper.Map<List<ProveedorDto>>(proveedores);
+    
+    return proveedorDtos;
+    }
 
     [HttpGet("GetAllMedicamentosVendidosProveedor")]
     //[Authorize(Roles="")]

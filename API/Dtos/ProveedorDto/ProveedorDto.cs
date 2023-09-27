@@ -1,3 +1,5 @@
+using API.Dtos.MedicamentoDtos;
+
 namespace API.Dtos.ProveedorDto;
 
 public class ProveedorDto

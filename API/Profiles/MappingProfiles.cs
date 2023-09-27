@@ -1,7 +1,7 @@
 
 using API.Dtos.CargoDto;
 using API.Dtos.CompraDto;
-using API.Dtos.EmpleadoDto;
+using API.Dtos.Empleado;
 using API.Dtos.ArlDto;
 using API.Dtos.PacienteDto;
 using API.Dtos.PaisDto;
@@ -20,13 +20,14 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
+        CreateMap<Medicamento,MedicamentoSoloDto>().ReverseMap();
         CreateMap<Pais,PaisDto>().ReverseMap();
         CreateMap<Paciente,PacienteDto>().ReverseMap();
         CreateMap<Proveedor,ProveedorDto>().ReverseMap();
         CreateMap<Cargo,CargoDto>().ReverseMap();
         CreateMap<Compra,CompraDto>().ReverseMap();
         CreateMap<Compra,CompraProveedorDto>().ReverseMap();
-        CreateMap<Empleado,EmpleadoDtos>().ReverseMap();
+        CreateMap<Empleado,EmpleadoDto>().ReverseMap();
         CreateMap<Departamento,DepartamentoDto>().ReverseMap();
         CreateMap<Pais,PaisDepartamentoDto>().ReverseMap();
         CreateMap<Medicamento,MedicamentoDto>().ReverseMap();

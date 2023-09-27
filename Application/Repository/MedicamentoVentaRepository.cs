@@ -43,4 +43,16 @@ public class MedicamentoVentaRepository : GenericRepository<MedicamentoVenta>, I
     {
         return  _context.MedicamentoVentas.Sum(x =>x.PrecioVenta);
     }
+
+    public async Task<IEnumerable<MedicamentoVenta>> GetMedicamentosNoVendidos()
+    {
+        var medicamentos = await (
+            from medicamentoVenta in _context.MedicamentoVentas
+            where medicamentoVenta.CantidadVendida == 0
+            select medicamentoVenta
+        ).ToListAsync();
+
+        return medicamentos;
+    }
+
 }

@@ -23,7 +23,7 @@ public class CompraController : BaseApiController
         return Ok(regiones);
     }*/
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -33,7 +33,7 @@ public class CompraController : BaseApiController
         return _mapper.Map<List<CompraDto>>(compras);
     }
     [HttpGet("Pager")]
-    [Authorize]
+    //[Authorize]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -55,6 +55,17 @@ public class CompraController : BaseApiController
         }
         return _mapper.Map<CompraDto>(compra);
     }
+    
+    [HttpGet("TotalProveedores2023Suministran")]
+    //[Authorize(Roles = "Administrador")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async  Task<int> TotalProveedores2023Suministran()
+    {
+        var compras = await _unitOfWork.Compras.TotalProveedores2023Suministran();;
+        return compras;
+    }
     /*[HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,16 +81,16 @@ public class CompraController : BaseApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Compra>> Post(CompraProveedorDto compraDto){
-        var compra = _mapper.Map<Compra>(compraDto);
+    public async Task<ActionResult<Compra>> Post(CompraDto CompraDto){
+        var compra = _mapper.Map<Compra>(CompraDto);
         this._unitOfWork.Compras.Add(compra);
         await _unitOfWork.SaveAsync();
         if (compra == null)
         {
             return BadRequest();
         }
-   
-        return CreatedAtAction(nameof(Post),new {id= compra.CompraId}, compra);
+        CompraDto.CompraId = compra.CompraId;
+        return CreatedAtAction(nameof(Post),new {id= CompraDto.CompraId}, CompraDto);
     }
     /*[HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

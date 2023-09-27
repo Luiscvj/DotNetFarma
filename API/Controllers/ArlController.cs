@@ -74,7 +74,7 @@ public class ArlController : BaseApiController
     // [HttpGet("pager")]
     // [ProducesResponseType(StatusCodes.Status200OK)]
     // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    // public async Task<ActionResult<Pager<ArlxEmpleadoDto>>> GetWhithPage([FromQuery] Params arlParams)
+    // public async Task<ActionResult<Pager<ArlxDtosDto>>> GetWhithPage([FromQuery] Params arlParams)
     // {
     //     var (totalRegistros, registros) = await _unitOfWork.Arls.GetAllAsync
     //     (
@@ -82,8 +82,8 @@ public class ArlController : BaseApiController
     //         arlParams.PageSize,
     //         arlParams.Search
     //     );
-    //     var lstarl = _mapper.Map<List<ArlxEmpleadoDto>>(registros);
-    //     return new Pager<ArlxEmpleadoDto>
+    //     var lstarl = _mapper.Map<List<ArlxDtosDto>>(registros);
+    //     return new Pager<ArlxDtosDto>
     //     (
     //         lstarl,
     //         arlParams.Search,

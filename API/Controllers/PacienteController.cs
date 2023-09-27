@@ -67,7 +67,35 @@ public class PacienteController : BaseApiController
 
     }
 
+    [HttpGet("PacientesParacetamol")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
+    public async Task<ActionResult<PacienteDto>> PacientesParacetamol()
+    {
+        var paciente = await _unitOfWork.Pacientes.PacientesParacetamol();
+        var pacienteDto = _mapper.Map<IEnumerable<PacienteDto>>(paciente);
+        // Devuelve el paciente
+        return Ok(pacienteDto);
+    }
+
+    [HttpGet("TotalGastadoPorPacienteEn2023")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Dictionary<string, decimal>>> TotalGastadoPorPacienteEn2023()
+    {
+        try
+        {
+            var totalGastado = await _unitOfWork.Pacientes.TotalGastadoPorPacienteEn2023();
+            return Ok(totalGastado);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    
 
     [HttpGet("GetAll")]
     //[Authorize(Roles="")]
@@ -118,14 +146,5 @@ public class PacienteController : BaseApiController
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
     }
-    
-    
-
-
-
-
-    
-    
-    
     
 }

@@ -4,12 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Persistence.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Migracioninicial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -199,7 +197,7 @@ namespace Persistence.Data.Migrations
                 {
                     MedicamentoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                    NombreMedicamento = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Precio = table.Column<double>(type: "double", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
@@ -428,150 +426,6 @@ namespace Persistence.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.InsertData(
-                table: "Cargo",
-                columns: new[] { "CargoId", "Descripcion", "Nombre" },
-                values: new object[,]
-                {
-                    { 1, "Se encarga de atender en la farmacia", "Auxiliar de farmacia" },
-                    { 2, "Brinda cuidados médicos a los pacientes", "Enfermera" },
-                    { 3, "Maneja las finanzas de la empresa", "Contador" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "arl",
-                columns: new[] { "ArlId", "Direccion", "Email", "Nombre", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "calle 14 # 24-10", "CajasanAyuda@gmail.com", "Cajasan", "60793820" },
-                    { 2, "Calle 10 #30-45", "contacto@saludtotal.com", "SaludTotal", "601234567" },
-                    { 3, "Av. 5 #18-22", "info@cafesalud.com", "Cafesalud", "601112233" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "eps",
-                columns: new[] { "EpsId", "Direccion", "Email", "Nombre", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "Calle 49 #43-2", "AtencionAlCliente@avanzar.co", "Avanzar", "60783822" },
-                    { 2, "Cra 15 #22-10", "atencion@coomeva.com", "Coomeva", "601987654" },
-                    { 3, "Av. 8 #12-30", "info@famisanar.com", "Famisanar", "601876543" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "paciente",
-                columns: new[] { "PacienteId", "Apellidos", "Direccion", "Nombre", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "Alvarez", "Cra 19 #8-45 Barrio Comuneros", "Sofia", "3224243429" },
-                    { 2, "Gomez", "Cra 25 #12-34 Barrio Los Pinos", "Carlos", "3225556677" },
-                    { 3, "Ramirez", "Av. 4 #9-56 Barrio San Martin", "Laura", "3117778899" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "pais",
-                columns: new[] { "PaisId", "Nombre" },
-                values: new object[,]
-                {
-                    { 1, "Colombia" },
-                    { 2, "Perú" },
-                    { 3, "Argentina" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "proveedor",
-                columns: new[] { "ProveedorId", "Direccion", "Email", "Nombre", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "Cra 19 # 839", "ProveedorA@gmail.com", "ProveedorA", "032238492" },
-                    { 2, "Cra 22 # 839", "ProveedorB@gmail.com", "ProveedorB", "032238493" },
-                    { 3, "Calle 14 # 839", "ProveedorC@gmail.com", "ProveedorC", "032238494" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Compra",
-                columns: new[] { "CompraId", "FechaCompra", "ProveedorId" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, new DateTime(2022, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 3, new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "departamento",
-                columns: new[] { "DepartamentoId", "Nombre", "PaisId" },
-                values: new object[,]
-                {
-                    { 1, "Santander", 1 },
-                    { 2, "Lima", 2 },
-                    { 3, "Buenos Aires", 3 },
-                    { 4, "Norte de Santanader", 1 },
-                    { 5, "Cundinamarca", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "medicamento",
-                columns: new[] { "MedicamentoId", "FechaExpiracion", "Nombre", "Precio", "ProveedorId", "Stock" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Paracetamol", 2500.0, 1, 150 },
-                    { 2, new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ibuprofeno", 3000.0, 2, 100 },
-                    { 3, new DateTime(2024, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Aspirina", 2000.0, 3, 75 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ciudad",
-                columns: new[] { "CiudadId", "DepartamentoId", "Nombre" },
-                values: new object[,]
-                {
-                    { 1, 1, "Bucarmanga" },
-                    { 2, 2, "Lima" },
-                    { 3, 3, "Buenos Aires" },
-                    { 4, 4, "Cúcuta" },
-                    { 5, 5, "Bogotá" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "medicamento_compra",
-                columns: new[] { "MedicamentoCompraId", "CantidadComprada", "CompraId", "MedicamentoId", "PrecioCompra" },
-                values: new object[,]
-                {
-                    { 1, 5000, 1, 1, 29383.29m },
-                    { 2, 2000, 2, 2, 4583.29m },
-                    { 3, 100, 3, 3, 57893.29m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "empleado",
-                columns: new[] { "EmpleadoId", "Apellidos", "ArlId", "CargoId", "CiudadId", "Direccion", "EpsId", "FechaContratacion", "Nombres", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "Escalante", 1, 1, 1, "Cra 33 #48-3", 1, new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jorge", "3294902231" },
-                    { 2, "López", 2, 2, 2, "Cra 18 #45-6", 2, new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "María", "3209876543" },
-                    { 3, "Perez", 3, 3, 3, "Av. 3 #8-15", 3, new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Juan", "3101234567" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "venta",
-                columns: new[] { "VentaId", "EmpleadoId", "FechaVenta", "PacienteId" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 2, new DateTime(2023, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 3, 3, new DateTime(2023, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "medicamento_venta",
-                columns: new[] { "MedicamentoVentaId", "CantidadVendida", "MedicamentoId", "PrecioVenta", "VentaId" },
-                values: new object[,]
-                {
-                    { 1, 200, 1, 29383.29m, 1 },
-                    { 2, 1000, 2, 4583.29m, 2 },
-                    { 3, 50, 3, 57893.29m, 3 }
-                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ciudad_DepartamentoId",

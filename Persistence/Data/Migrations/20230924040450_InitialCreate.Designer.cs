@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(DotNetFarmaContext))]
-    [Migration("20230921231435_Migracion inicial")]
-    partial class Migracioninicial
+    [Migration("20230924040450_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,32 +50,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ArlId");
 
                     b.ToTable("arl", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ArlId = 1,
-                            Direccion = "calle 14 # 24-10",
-                            Email = "CajasanAyuda@gmail.com",
-                            Nombre = "Cajasan",
-                            Telefono = "60793820"
-                        },
-                        new
-                        {
-                            ArlId = 2,
-                            Direccion = "Calle 10 #30-45",
-                            Email = "contacto@saludtotal.com",
-                            Nombre = "SaludTotal",
-                            Telefono = "601234567"
-                        },
-                        new
-                        {
-                            ArlId = 3,
-                            Direccion = "Av. 5 #18-22",
-                            Email = "info@cafesalud.com",
-                            Nombre = "Cafesalud",
-                            Telefono = "601112233"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Cargo", b =>
@@ -97,26 +71,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("Cargo", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CargoId = 1,
-                            Descripcion = "Se encarga de atender en la farmacia",
-                            Nombre = "Auxiliar de farmacia"
-                        },
-                        new
-                        {
-                            CargoId = 2,
-                            Descripcion = "Brinda cuidados médicos a los pacientes",
-                            Nombre = "Enfermera"
-                        },
-                        new
-                        {
-                            CargoId = 3,
-                            Descripcion = "Maneja las finanzas de la empresa",
-                            Nombre = "Contador"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>
@@ -138,38 +92,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("DepartamentoId");
 
                     b.ToTable("ciudad", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CiudadId = 1,
-                            DepartamentoId = 1,
-                            Nombre = "Bucarmanga"
-                        },
-                        new
-                        {
-                            CiudadId = 2,
-                            DepartamentoId = 2,
-                            Nombre = "Lima"
-                        },
-                        new
-                        {
-                            CiudadId = 3,
-                            DepartamentoId = 3,
-                            Nombre = "Buenos Aires"
-                        },
-                        new
-                        {
-                            CiudadId = 5,
-                            DepartamentoId = 5,
-                            Nombre = "Bogotá"
-                        },
-                        new
-                        {
-                            CiudadId = 4,
-                            DepartamentoId = 4,
-                            Nombre = "Cúcuta"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Compra", b =>
@@ -189,26 +111,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("Compra", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CompraId = 1,
-                            FechaCompra = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProveedorId = 1
-                        },
-                        new
-                        {
-                            CompraId = 2,
-                            FechaCompra = new DateTime(2022, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProveedorId = 2
-                        },
-                        new
-                        {
-                            CompraId = 3,
-                            FechaCompra = new DateTime(2023, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProveedorId = 3
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Departamento", b =>
@@ -230,38 +132,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("departamento", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            DepartamentoId = 1,
-                            Nombre = "Santander",
-                            PaisId = 1
-                        },
-                        new
-                        {
-                            DepartamentoId = 2,
-                            Nombre = "Lima",
-                            PaisId = 2
-                        },
-                        new
-                        {
-                            DepartamentoId = 3,
-                            Nombre = "Buenos Aires",
-                            PaisId = 3
-                        },
-                        new
-                        {
-                            DepartamentoId = 4,
-                            Nombre = "Norte de Santanader",
-                            PaisId = 1
-                        },
-                        new
-                        {
-                            DepartamentoId = 5,
-                            Nombre = "Cundinamarca",
-                            PaisId = 1
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Empleado", b =>
@@ -316,47 +186,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("EpsId");
 
                     b.ToTable("empleado", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            EmpleadoId = 1,
-                            Apellidos = "Escalante",
-                            ArlId = 1,
-                            CargoId = 1,
-                            CiudadId = 1,
-                            Direccion = "Cra 33 #48-3",
-                            EpsId = 1,
-                            FechaContratacion = new DateTime(2011, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "Jorge",
-                            Telefono = "3294902231"
-                        },
-                        new
-                        {
-                            EmpleadoId = 2,
-                            Apellidos = "López",
-                            ArlId = 2,
-                            CargoId = 2,
-                            CiudadId = 2,
-                            Direccion = "Cra 18 #45-6",
-                            EpsId = 2,
-                            FechaContratacion = new DateTime(2015, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "María",
-                            Telefono = "3209876543"
-                        },
-                        new
-                        {
-                            EmpleadoId = 3,
-                            Apellidos = "Perez",
-                            ArlId = 3,
-                            CargoId = 3,
-                            CiudadId = 3,
-                            Direccion = "Av. 3 #8-15",
-                            EpsId = 3,
-                            FechaContratacion = new DateTime(2019, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombres = "Juan",
-                            Telefono = "3101234567"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Eps", b =>
@@ -388,32 +217,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("EpsId");
 
                     b.ToTable("eps", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            EpsId = 1,
-                            Direccion = "Calle 49 #43-2",
-                            Email = "AtencionAlCliente@avanzar.co",
-                            Nombre = "Avanzar",
-                            Telefono = "60783822"
-                        },
-                        new
-                        {
-                            EpsId = 2,
-                            Direccion = "Cra 15 #22-10",
-                            Email = "atencion@coomeva.com",
-                            Nombre = "Coomeva",
-                            Telefono = "601987654"
-                        },
-                        new
-                        {
-                            EpsId = 3,
-                            Direccion = "Av. 8 #12-30",
-                            Email = "info@famisanar.com",
-                            Nombre = "Famisanar",
-                            Telefono = "601876543"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Medicamento", b =>
@@ -425,7 +228,7 @@ namespace Persistence.Data.Migrations
                     b.Property<DateTime>("FechaExpiracion")
                         .HasColumnType("date");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreMedicamento")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
@@ -444,35 +247,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("medicamento", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            MedicamentoId = 1,
-                            FechaExpiracion = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Paracetamol",
-                            Precio = 2500.0,
-                            ProveedorId = 1,
-                            Stock = 150
-                        },
-                        new
-                        {
-                            MedicamentoId = 3,
-                            FechaExpiracion = new DateTime(2024, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Aspirina",
-                            Precio = 2000.0,
-                            ProveedorId = 3,
-                            Stock = 75
-                        },
-                        new
-                        {
-                            MedicamentoId = 2,
-                            FechaExpiracion = new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Ibuprofeno",
-                            Precio = 3000.0,
-                            ProveedorId = 2,
-                            Stock = 100
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoCompra", b =>
@@ -501,32 +275,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("MedicamentoId");
 
                     b.ToTable("medicamento_compra", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            MedicamentoCompraId = 1,
-                            CantidadComprada = 5000,
-                            CompraId = 1,
-                            MedicamentoId = 1,
-                            PrecioCompra = 29383.29m
-                        },
-                        new
-                        {
-                            MedicamentoCompraId = 2,
-                            CantidadComprada = 2000,
-                            CompraId = 2,
-                            MedicamentoId = 2,
-                            PrecioCompra = 4583.29m
-                        },
-                        new
-                        {
-                            MedicamentoCompraId = 3,
-                            CantidadComprada = 100,
-                            CompraId = 3,
-                            MedicamentoId = 3,
-                            PrecioCompra = 57893.29m
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoVenta", b =>
@@ -555,32 +303,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("VentaId");
 
                     b.ToTable("medicamento_venta", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            MedicamentoVentaId = 1,
-                            CantidadVendida = 200,
-                            MedicamentoId = 1,
-                            PrecioVenta = 29383.29m,
-                            VentaId = 1
-                        },
-                        new
-                        {
-                            MedicamentoVentaId = 2,
-                            CantidadVendida = 1000,
-                            MedicamentoId = 2,
-                            PrecioVenta = 4583.29m,
-                            VentaId = 2
-                        },
-                        new
-                        {
-                            MedicamentoVentaId = 3,
-                            CantidadVendida = 50,
-                            MedicamentoId = 3,
-                            PrecioVenta = 57893.29m,
-                            VentaId = 3
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Paciente", b =>
@@ -612,32 +334,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PacienteId");
 
                     b.ToTable("paciente", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PacienteId = 1,
-                            Apellidos = "Alvarez",
-                            Direccion = "Cra 19 #8-45 Barrio Comuneros",
-                            Nombre = "Sofia",
-                            Telefono = "3224243429"
-                        },
-                        new
-                        {
-                            PacienteId = 2,
-                            Apellidos = "Gomez",
-                            Direccion = "Cra 25 #12-34 Barrio Los Pinos",
-                            Nombre = "Carlos",
-                            Telefono = "3225556677"
-                        },
-                        new
-                        {
-                            PacienteId = 3,
-                            Apellidos = "Ramirez",
-                            Direccion = "Av. 4 #9-56 Barrio San Martin",
-                            Nombre = "Laura",
-                            Telefono = "3117778899"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Pais", b =>
@@ -654,23 +350,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PaisId");
 
                     b.ToTable("pais", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PaisId = 1,
-                            Nombre = "Colombia"
-                        },
-                        new
-                        {
-                            PaisId = 2,
-                            Nombre = "Perú"
-                        },
-                        new
-                        {
-                            PaisId = 3,
-                            Nombre = "Argentina"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
@@ -702,32 +381,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ProveedorId");
 
                     b.ToTable("proveedor", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ProveedorId = 1,
-                            Direccion = "Cra 19 # 839",
-                            Email = "ProveedorA@gmail.com",
-                            Nombre = "ProveedorA",
-                            Telefono = "032238492"
-                        },
-                        new
-                        {
-                            ProveedorId = 2,
-                            Direccion = "Cra 22 # 839",
-                            Email = "ProveedorB@gmail.com",
-                            Nombre = "ProveedorB",
-                            Telefono = "032238493"
-                        },
-                        new
-                        {
-                            ProveedorId = 3,
-                            Direccion = "Calle 14 # 839",
-                            Email = "ProveedorC@gmail.com",
-                            Nombre = "ProveedorC",
-                            Telefono = "032238494"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.RefreshToken", b =>
@@ -846,29 +499,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PacienteId");
 
                     b.ToTable("venta", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            VentaId = 1,
-                            EmpleadoId = 1,
-                            FechaVenta = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PacienteId = 1
-                        },
-                        new
-                        {
-                            VentaId = 2,
-                            EmpleadoId = 2,
-                            FechaVenta = new DateTime(2023, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PacienteId = 2
-                        },
-                        new
-                        {
-                            VentaId = 3,
-                            EmpleadoId = 3,
-                            FechaVenta = new DateTime(2023, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PacienteId = 3
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>

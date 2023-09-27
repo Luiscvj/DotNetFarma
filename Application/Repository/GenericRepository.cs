@@ -62,5 +62,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     public void Update(T Entity)
     {
         _context.Set<T>().Update(Entity);
-    } 
+    }
+
+    public IEnumerable<T> Where(Expression<Func<T, bool>> expression)
+    {
+        throw new NotImplementedException();
+    }
 }

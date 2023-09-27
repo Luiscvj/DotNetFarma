@@ -1,9 +1,10 @@
-
 using API.Dtos.MedicamentoDtos;
+using API.Dtos.ProveedorDto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -83,21 +84,24 @@ public class MedicamentoController : BaseApiController
 
     }
 
+    [HttpGet("GetMedicamentosPrecioMayorA50YStockMenorA100")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<MedicamentoSoloDto>>> GetMedicamentosPrecioMayorA50YStockMenorA100()
+    {
+        var medicamentos = await _unitOfWork.Medicamentos.GetMedicamentosPrecioMayorA50YStockMenorA100();
+        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoSoloDto>>(medicamentos);
+        return Ok(MedicamentosDto);
+    }
 
-    [HttpGet("GetMedicamentosNoVnedidos")]
-    //[Authorize(Roles="")]
+    [HttpGet("NoVendidos")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
-    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVnedidos()
+    public async Task<ActionResult<List<MedicamentoSoloDto>>> GetMedicamentosNoVendidos()
     {
-        IEnumerable<Medicamento> Medicamento = await  _unitOfWork.Medicamentos.MedicamentosNoVendidos();
-
-        return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
-
+        var medicamentos = await _unitOfWork.Medicamentos.MedicamentosNoVendidos();
+        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoSoloDto>>(medicamentos);
+        return Ok(MedicamentosDto);
     }
-    
-    
 
 
     [HttpGet("GetMedicamentosPorProveedor/{NombreProveedor} :string")]
@@ -127,19 +131,48 @@ public class MedicamentoController : BaseApiController
         return Ok(MedicamentosDto);
     }
 
+    [HttpGet("GetTotalMedicamentosVendidosPorMes2023")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<Dictionary<int, int>>> GetTotalMedicamentosVendidosPorMes2023()
+    {
+        var totalMedicamentosPorMes = await _unitOfWork.Medicamentos.GetTotalMedicamentosVendidosPorMes2023();
+        return Ok(totalMedicamentosPorMes);
+    }
 
 
-    [HttpGet("GetAllMedicamentoMenos50")]
-    //[Authorize(Roles="")]
+    [HttpGet("TotalMedicamentosVendidosPrimerTrimestre")]
+    //[Authorize(Roles = "Administrador")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
-    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetAllMedicamentoMenos50()
+    public async Task<string> TotalMedicamentosVendidosPrimerTrimestre()
     {
-        IEnumerable<Medicamento> Medicamentos = await _unitOfWork.Medicamentos.MedicamentoMas50();
-        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoDto>>(Medicamentos);
-        return Ok(MedicamentosDto);
+        // Obtener el total de medicamentos vendidos en el primer trimestre
+        var totalMedicamentos = await _unitOfWork.Medicamentos.TotalMedicamentosVendidosPrimerTrimestre();
+
+        // Agregar el mensaje al resultado
+        var mensaje = $"{totalMedicamentos} medicamentos vendidos el primer trimestre.";
+
+        return mensaje;
     }
+
+
+    [HttpGet("GetMedicamentosVendidosPorMes2023")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<Dictionary<int, List<MedicamentoSoloDto>>>> GetMedicamentosVendidosPorMes2023()
+    {
+        var medicamentosPorMes = await _unitOfWork.Medicamentos.GetMedicamentosVendidosPorMes2023();
+        var medicamentosPorMesDto = new Dictionary<int, List<MedicamentoSoloDto>>();
+
+        foreach (var mes in medicamentosPorMes.Keys)
+        {
+            var medicamentosDto = _mapper.Map<List<MedicamentoSoloDto>>(medicamentosPorMes[mes]);
+            medicamentosPorMesDto.Add(mes, medicamentosDto);
+        }
+
+        return Ok(medicamentosPorMesDto);
+    }
+
 
     [HttpGet("GetAllMedicamentoExpiranAntesEnero2024")]
     //[Authorize(Roles="")]

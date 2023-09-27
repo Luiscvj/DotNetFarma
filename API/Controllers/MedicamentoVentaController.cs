@@ -82,8 +82,6 @@ public class MedicamentoVentaController : BaseApiController
 
     }
 
-
-
     [HttpGet("GetAll")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]

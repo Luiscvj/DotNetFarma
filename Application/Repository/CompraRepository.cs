@@ -25,4 +25,17 @@ public class CompraRepository : GenericRepository<Compra>, ICompra
                                 .ToListAsync();
         return ( totalRegistros, registros);
      }
+
+     public async Task<int> TotalProveedores2023Suministran()
+    {
+        var fechaInicial = new DateTime(2023, 1, 1);
+        var fechaFinal = new DateTime(2023, 12, 31);
+
+        var proveedoresCon2023Compras = await _context.Proveedores
+            .Where(p => p.Compras.Any(c => c.FechaCompra >= fechaInicial && c.FechaCompra <= fechaFinal))
+            .Select(p => p.ProveedorId)
+            .ToListAsync();
+
+        return proveedoresCon2023Compras.Count();
+    }
 }

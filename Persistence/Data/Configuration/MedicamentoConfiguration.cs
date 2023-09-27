@@ -11,7 +11,7 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
     {
         builder.ToTable("medicamento");
 
-        builder.Property(x => x.Nombre)
+        builder.Property(x => x.NombreMedicamento)
                .HasMaxLength(100)
                .IsRequired();
         
