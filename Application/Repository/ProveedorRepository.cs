@@ -83,25 +83,37 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
 
    }
 
-   /* public async Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023()
-{
-    var fechaInicial = new DateTime(2023, 1, 1);
-    var fechaFinal = new DateTime(2023, 12, 31);
+    public async Task<List<Proveedor>> GetProveedoresSinVenderMedicamentosUltimoAño()
+      {
+         var fechaInicial = DateTime.Now.AddYears(-1);
 
-    var proveedores = await _context.Proveedores
-        .Where(p =>
-            p.Compras
-                .Where(c =>
-                    c.FechaCompra >= fechaInicial && c.FechaCompra <= fechaFinal)
-                .SelectMany(c => c.MedicamentoCompras)
-                .GroupBy(mc => mc.MedicamentoId) // Agrupa por ID del medicamento
-                .Where(group => group.Count() >= 5) // Filtra grupos con al menos 5 elementos
-                .Any()) // Verifica si hay al menos un grupo con 5 elementos
-        .ToListAsync();
+         var proveedoresSinVentas = await _context.Proveedores
+            .Where(p => !p.Compras.Any(c => c.FechaCompra >= fechaInicial))
+            .ToListAsync();
 
-    return proveedores;
-}
- */
+         return proveedoresSinVentas;
+      }
+
+
+    /* public async Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023()
+ {
+     var fechaInicial = new DateTime(2023, 1, 1);
+     var fechaFinal = new DateTime(2023, 12, 31);
+
+     var proveedores = await _context.Proveedores
+         .Where(p =>
+             p.Compras
+                 .Where(c =>
+                     c.FechaCompra >= fechaInicial && c.FechaCompra <= fechaFinal)
+                 .SelectMany(c => c.MedicamentoCompras)
+                 .GroupBy(mc => mc.MedicamentoId) // Agrupa por ID del medicamento
+                 .Where(group => group.Count() >= 5) // Filtra grupos con al menos 5 elementos
+                 .Any()) // Verifica si hay al menos un grupo con 5 elementos
+         .ToListAsync();
+
+     return proveedores;
+ }
+  */
 
 
 }

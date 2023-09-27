@@ -7,4 +7,7 @@ public interface IProveedor : IGenericRepository<Proveedor>
    Task<List<ProveedorMedicamentoCompraH>> GetCantidadMedicamentosVendidosProveedor();
    Task<IEnumerable<Proveedor>> ProveedoresMedicamentos50U();
    Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023();
+   Task<List<Proveedor>> GetProveedoresSinVenderMedicamentosUltimoAño();
+   
+
 }

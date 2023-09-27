@@ -99,6 +99,17 @@ public class ProveedorController : BaseApiController
     return proveedorDtos;
     }
 
+    [HttpGet("GetProveedoresSinVenderMedicamentosUltimoAño")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<ProveedorDto>> GetProveedoresSinVenderMedicamentosUltimoAño()
+    {
+    var proveedores = await _unitOfWork.Proveedores.GetProveedoresSinVenderMedicamentosUltimoAño();
+    var proveedorDtos = _mapper.Map<List<ProveedorDto>>(proveedores);
+    
+    return proveedorDtos;
+    }
+
     [HttpGet("GetAllMedicamentosVendidosProveedor")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
