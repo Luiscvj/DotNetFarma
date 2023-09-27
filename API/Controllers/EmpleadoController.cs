@@ -32,6 +32,10 @@ public class EmpleadoController : BaseApiController
         var empleados = await _unitOfWork.Empleados.GetAll();
         return _mapper.Map<List<EmpleadoDto>>(empleados);
     }
+
+
+   
+
     [HttpGet("Pager")]
     [Authorize]
     [MapToApiVersion("1.1")]
@@ -116,6 +120,9 @@ public class EmpleadoController : BaseApiController
         EmpleadoDto.EmpleadoId = empleado.EmpleadoId;
         return CreatedAtAction(nameof(Post),new {id= EmpleadoDto.EmpleadoId}, EmpleadoDto);
     }
+
+
+   
     /*[HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -127,7 +134,7 @@ public class EmpleadoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return empleado;
     }*/
-    [HttpPut]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Update(int id , [FromBody]EmpleadoDto EmpleadoDto)
