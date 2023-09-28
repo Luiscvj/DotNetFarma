@@ -3,6 +3,7 @@ namespace API.Dtos.MedicamentoVentaDtos;
 
 public class MedicamentoVentaDto
 {
+    
     public int CantidadVendida { get; set; }
     public decimal PrecioVenta { get; set; }
     public int VentaId { get; set; }

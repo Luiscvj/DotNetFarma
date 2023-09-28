@@ -19,9 +19,11 @@ public class ProveedorController : BaseApiController
 //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
 
     public async Task<ActionResult> Add(ProveedorDto ProveedorDto)
     {
+        Console.WriteLine(ProveedorDto);
         Proveedor Proveedor = _mapper.Map<Proveedor>(ProveedorDto);
         _unitOfWork.Proveedores.Add(Proveedor);
         int numeroCambios =await  _unitOfWork.SaveAsync();
@@ -110,6 +112,23 @@ public class ProveedorController : BaseApiController
     return proveedorDtos;
     }
 
+
+    [HttpGet("GetAllProveedorConMedicamentoMenos50U")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<ProveedorDto>>> GetAllProveedorConMedicamentoMenos50U()
+    {
+        IEnumerable<Proveedor> Proveedores = await _unitOfWork.Proveedores.ProveedoresMedicamentos();
+        IEnumerable<ProveedorDto>  proveedoresDto = _mapper.Map<IEnumerable<ProveedorDto>>(Proveedores);
+        return Ok(proveedoresDto);
+    }
+
+
+
+
+
     [HttpGet("GetAllMedicamentosVendidosProveedor")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -151,7 +170,34 @@ public class ProveedorController : BaseApiController
         int numeroCambios = await _unitOfWork.SaveAsync();
         if(numeroCambios == 0 ) return BadRequest();
         return Ok("Registro actualizado con exito");
-    }   
+    } 
+
+
+
+
+        [HttpGet("totalComprasProveedor")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetTotalVentasProveedor()
+        {
+            var registros = await _unitOfWork.Proveedores.GetTotalGananciaProveedor();
+            if(registros == null) return NotFound();
+            return registros;  
+        }
+
+        [HttpGet("masHanSuministrado")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetProveedoresMasHanSuministrado()
+        {
+            var registros = await _unitOfWork.Proveedores.GetProveedoresMasHanSuministrado();
+            if(registros == null) return NotFound();
+            return registros;  
+        }  
 }
     
     

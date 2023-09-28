@@ -5,9 +5,8 @@ namespace Domain.Interfaces;
 public interface IProveedor : IGenericRepository<Proveedor>
 {
    Task<List<ProveedorMedicamentoCompraH>> GetCantidadMedicamentosVendidosProveedor();
-   Task<IEnumerable<Proveedor>> ProveedoresMedicamentos50U();
-   Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023();
-   Task<List<Proveedor>> GetProveedoresSinVenderMedicamentosUltimoAño();
-   
+   Task<IEnumerable<Proveedor>> ProveedoresMedicamentos();
+   Task<dynamic> GetTotalGananciaProveedor();
+   Task<dynamic> GetProveedoresMasHanSuministrado();
 
 }

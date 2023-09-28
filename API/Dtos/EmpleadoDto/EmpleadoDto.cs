@@ -1,4 +1,4 @@
-namespace API.Dtos.Empleado;
+namespace API.Dtos.EmpleadoDtos;
 
 public class EmpleadoDto
 {

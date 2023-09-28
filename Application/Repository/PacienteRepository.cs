@@ -27,64 +27,61 @@ public class PacienteRepository : GenericRepository<Paciente>, IPaciente
         return ( totalRegistros, registros);
      }
 
-    public async Task<List<Paciente>> PacientesParacetamol()
+    public async  Task<dynamic> GetPacienteMasDineroGastado()
     {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 12, 31);
+        int yearToFilter = 2023; 
 
-        var pacientesParacetamol = await _context.Ventas
-            .Where(v => v.FechaVenta >= fechaInicial && v.FechaVenta <= fechaFinal)
-            .Join(_context.MedicamentoVentas,
-                venta => venta.VentaId,
-                medicamentoVenta => medicamentoVenta.VentaId,
-                (venta, medicamentoVenta) => new { Venta = venta, MedicamentoVenta = medicamentoVenta })
-            .Join(_context.Medicamentos,
-                vm => vm.MedicamentoVenta.MedicamentoId,
-                medicamento => medicamento.MedicamentoId,
-                (vm, medicamento) => new { Venta = vm.Venta, Medicamento = medicamento })
-            .Where(vm => vm.Medicamento.NombreMedicamento == "Paracetamol")
-            .Select(vm => vm.Venta.Paciente)
-            .Distinct()
-            .ToListAsync();
-
-        return pacientesParacetamol;
+            return await _context.Pacientes
+                .Select(paciente => new
+                {
+                    Paciente = paciente,
+                    GastoTotalEn2023 = _context.Ventas
+                        .Where(venta => venta.FechaVenta.Year == yearToFilter && venta.PacienteId == paciente.PacienteId)
+                        .Join(
+                            _context.MedicamentoVentas,
+                            venta => venta.VentaId,
+                            medicamentoVenta => medicamentoVenta.VentaId,
+                            (venta, medicamentoVenta) => medicamentoVenta.CantidadVendida * medicamentoVenta.PrecioVenta)
+                        .Sum()
+                })
+                .OrderByDescending(resultado => resultado.GastoTotalEn2023)
+                .ToListAsync();
     }
 
-    public async Task<List<Paciente>> PacientesSinComprasEn2023()
-    {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 12, 31);
 
-        var pacientesConComprasEn2023 = await _context.Ventas
-            .Where(c => c.FechaVenta >= fechaInicial && c.FechaVenta <= fechaFinal)
-            .Select(c => c.Paciente)
-            .Distinct()
-            .ToListAsync();
+    public async Task<List<MedicamentoPorPacienteH>> MedicamentoPacientePorNombreMedicamento(string NombreMedicamento)
+     {
+        List<MedicamentoPorPacienteH> pacienteCompra2  = new List<MedicamentoPorPacienteH>();
+      
+        Medicamento medicamentoBuscado = await _context.Medicamentos.FirstOrDefaultAsync(x => x.Nombre.ToLower() == NombreMedicamento.ToLower()); 
 
-        var todosLosPacientes = await _context.Pacientes.ToListAsync();
+       
+        IEnumerable<Paciente> lstPaciente = await _context.Pacientes.Include(x => x.Ventas)    
+                                         .ThenInclude(v => v.MedicamentoVentas)
+                                         .ToListAsync();
 
-        var pacientesSinComprasEn2023 = todosLosPacientes.Except(pacientesConComprasEn2023).ToList();
-
-        return pacientesSinComprasEn2023;
-    }
-
-    public async Task<Dictionary<string, decimal>> TotalGastadoPorPacienteEn2023()
-    {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 12, 31);
-
-        var gastoPorPaciente = await _context.Ventas
-            .Where(v => v.FechaVenta >= fechaInicial && v.FechaVenta <= fechaFinal)
-            .GroupBy(v => v.Paciente.Nombre)
-            .Select(g => new
+        
+            foreach(Paciente paciente in lstPaciente)
             {
-                Paciente = g.Key,
-                TotalGastado = g.Sum(v => v.MedicamentoVentas.Sum(m => m.PrecioVenta))
-            })
-            .ToDictionaryAsync(g => g.Paciente, g => g.TotalGastado);
+                 var  pacienteCompra3 =  paciente.Ventas
+                                     .SelectMany(ventas => ventas.MedicamentoVentas)
+                                     .Where(ventaMedicamento => ventaMedicamento.MedicamentoId == medicamentoBuscado.MedicamentoId )
+                                     .Select( datos => new 
+                                     MedicamentoPorPacienteH
+                                     {   
+                                       IdVenta = datos.VentaId,
+                                       NombrePaciente = paciente.Nombre,
+                                       CantidadVendida = datos.CantidadVendida,
+                                       PrecioVenta = datos.PrecioVenta
+                                       
+                                       
+                                     }).ToList();//Me sirve para aplanar los datos , pues sino me retorna una secuencia de secuencia de objetos por lo que estpy en el bucle
 
-        return gastoPorPaciente;
-    }
+        
+              pacienteCompra2.AddRange(pacienteCompra3);
+            }
 
+            return pacienteCompra2;
 
+     }
 }

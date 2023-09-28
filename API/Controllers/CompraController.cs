@@ -81,16 +81,16 @@ public class CompraController : BaseApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Compra>> Post(CompraDto CompraDto){
-        var compra = _mapper.Map<Compra>(CompraDto);
+    public async Task<ActionResult<Compra>> Post(CompraDto compraDto){
+        var compra = _mapper.Map<Compra>(compraDto);
         this._unitOfWork.Compras.Add(compra);
         await _unitOfWork.SaveAsync();
         if (compra == null)
         {
             return BadRequest();
         }
-        CompraDto.CompraId = compra.CompraId;
-        return CreatedAtAction(nameof(Post),new {id= CompraDto.CompraId}, CompraDto);
+   
+        return CreatedAtAction(nameof(Post),new {id= compra.CompraId}, compra);
     }
     /*[HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

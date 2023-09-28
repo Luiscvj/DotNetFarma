@@ -47,6 +47,35 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ArlId");
 
                     b.ToTable("arl", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            ArlId = 1,
+                            Direccion = "Calle arl 456",
+                            Email = "arl1@gmail.com",
+                            Nombre = "Arl1",
+                            Telefono = "4342443324"
+                        },
+                        new
+                        {
+                            ArlId = 2,
+                            Direccion = "Calle arl 789",
+                            Email = "arl2@gmail.com",
+                            Nombre = "Arl2",
+                            Telefono = "2342346563"
+                        },
+                        new
+                        {
+                            ArlId = 3,
+                            Direccion = "Calle arl 123",
+                            Email = "arl3@gmail.com",
+                            Nombre = "Arl3",
+                            Telefono = "2457324355"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Cargo", b =>
@@ -68,6 +97,29 @@ namespace Persistence.Data.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("Cargo", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            CargoId = 1,
+                            Descripcion = "... Gerente",
+                            Nombre = "Gerente"
+                        },
+                        new
+                        {
+                            CargoId = 2,
+                            Descripcion = "... Admin",
+                            Nombre = "Administrador"
+                        },
+                        new
+                        {
+                            CargoId = 3,
+                            Descripcion = "... Vendedor",
+                            Nombre = "Vendedor"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>
@@ -89,6 +141,29 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("DepartamentoId");
 
                     b.ToTable("ciudad", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            CiudadId = 1,
+                            DepartamentoId = 1,
+                            Nombre = "Bucaramanga"
+                        },
+                        new
+                        {
+                            CiudadId = 2,
+                            DepartamentoId = 1,
+                            Nombre = "Piedecuesta"
+                        },
+                        new
+                        {
+                            CiudadId = 3,
+                            DepartamentoId = 1,
+                            Nombre = "Giron"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Compra", b =>
@@ -108,6 +183,71 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("Compra", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            CompraId = 1,
+                            FechaCompra = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 2,
+                            FechaCompra = new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 3,
+                            FechaCompra = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 4,
+                            FechaCompra = new DateTime(2023, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 5,
+                            FechaCompra = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 6,
+                            FechaCompra = new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 7,
+                            FechaCompra = new DateTime(2023, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            CompraId = 8,
+                            FechaCompra = new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            CompraId = 9,
+                            FechaCompra = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            CompraId = 10,
+                            FechaCompra = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProveedorId = 1
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Departamento", b =>
@@ -129,6 +269,29 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("departamento", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            DepartamentoId = 1,
+                            Nombre = "Santander",
+                            PaisId = 1
+                        },
+                        new
+                        {
+                            DepartamentoId = 2,
+                            Nombre = "Buenos Aires",
+                            PaisId = 2
+                        },
+                        new
+                        {
+                            DepartamentoId = 3,
+                            Nombre = "Ciudad Mexico",
+                            PaisId = 3
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Empleado", b =>
@@ -183,6 +346,63 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("EpsId");
 
                     b.ToTable("empleado", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            EmpleadoId = 1,
+                            Apellidos = "Perez",
+                            ArlId = 1,
+                            CargoId = 3,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
+                            EpsId = 1,
+                            FechaContratacion = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Pedro",
+                            Telefono = "555-1234"
+                        },
+                        new
+                        {
+                            EmpleadoId = 2,
+                            Apellidos = "Villamizar",
+                            ArlId = 2,
+                            CargoId = 3,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
+                            EpsId = 2,
+                            FechaContratacion = new DateTime(2019, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Ana",
+                            Telefono = "555-1234"
+                        },
+                        new
+                        {
+                            EmpleadoId = 3,
+                            Apellidos = "Garcia",
+                            ArlId = 3,
+                            CargoId = 1,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
+                            EpsId = 3,
+                            FechaContratacion = new DateTime(2018, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Luis",
+                            Telefono = "555-1234"
+                        },
+                        new
+                        {
+                            EmpleadoId = 4,
+                            Apellidos = "Garcia",
+                            ArlId = 1,
+                            CargoId = 2,
+                            CiudadId = 1,
+                            Direccion = "Calle 123",
+                            EpsId = 3,
+                            FechaContratacion = new DateTime(2021, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombres = "Sofia",
+                            Telefono = "555-1234"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Eps", b =>
@@ -214,6 +434,35 @@ namespace Persistence.Data.Migrations
                     b.HasKey("EpsId");
 
                     b.ToTable("eps", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            EpsId = 1,
+                            Direccion = "Calle Eps 456",
+                            Email = "eps1@gmail.com",
+                            Nombre = "Eps1",
+                            Telefono = "4342443324"
+                        },
+                        new
+                        {
+                            EpsId = 2,
+                            Direccion = "Calle Eps 789",
+                            Email = "eps2@gmail.com",
+                            Nombre = "Eps2",
+                            Telefono = "2342346563"
+                        },
+                        new
+                        {
+                            EpsId = 3,
+                            Direccion = "Calle Eps 123",
+                            Email = "eps3@gmail.com",
+                            Nombre = "Eps3",
+                            Telefono = "2457324355"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Medicamento", b =>
@@ -244,6 +493,101 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("medicamento", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentoId = 1,
+                            FechaExpiracion = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Paracetamol",
+                            Precio = 20.0,
+                            ProveedorId = 1,
+                            Stock = 150
+                        },
+                        new
+                        {
+                            MedicamentoId = 2,
+                            FechaExpiracion = new DateTime(2024, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Ibuprofeno",
+                            Precio = 25.0,
+                            ProveedorId = 2,
+                            Stock = 50
+                        },
+                        new
+                        {
+                            MedicamentoId = 3,
+                            FechaExpiracion = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Aspirina",
+                            Precio = 15.0,
+                            ProveedorId = 3,
+                            Stock = 30
+                        },
+                        new
+                        {
+                            MedicamentoId = 4,
+                            FechaExpiracion = new DateTime(2025, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Amoxicilina",
+                            Precio = 40.0,
+                            ProveedorId = 1,
+                            Stock = 75
+                        },
+                        new
+                        {
+                            MedicamentoId = 5,
+                            FechaExpiracion = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Cetirizina",
+                            Precio = 10.0,
+                            ProveedorId = 2,
+                            Stock = 110
+                        },
+                        new
+                        {
+                            MedicamentoId = 6,
+                            FechaExpiracion = new DateTime(2024, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Losartan",
+                            Precio = 55.0,
+                            ProveedorId = 3,
+                            Stock = 95
+                        },
+                        new
+                        {
+                            MedicamentoId = 7,
+                            FechaExpiracion = new DateTime(2024, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Metformina",
+                            Precio = 60.0,
+                            ProveedorId = 1,
+                            Stock = 180
+                        },
+                        new
+                        {
+                            MedicamentoId = 8,
+                            FechaExpiracion = new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Atorvastatina",
+                            Precio = 45.0,
+                            ProveedorId = 2,
+                            Stock = 200
+                        },
+                        new
+                        {
+                            MedicamentoId = 9,
+                            FechaExpiracion = new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Clonazepam",
+                            Precio = 35.0,
+                            ProveedorId = 3,
+                            Stock = 25
+                        },
+                        new
+                        {
+                            MedicamentoId = 10,
+                            FechaExpiracion = new DateTime(2025, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nombre = "Loratadina",
+                            Precio = 22.0,
+                            ProveedorId = 1,
+                            Stock = 120
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoCompra", b =>
@@ -272,6 +616,91 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("MedicamentoId");
 
                     b.ToTable("medicamento_compra", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentoCompraId = 1,
+                            CantidadComprada = 50,
+                            CompraId = 1,
+                            MedicamentoId = 1,
+                            PrecioCompra = 15m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 2,
+                            CantidadComprada = 25,
+                            CompraId = 2,
+                            MedicamentoId = 2,
+                            PrecioCompra = 20m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 3,
+                            CantidadComprada = 10,
+                            CompraId = 3,
+                            MedicamentoId = 3,
+                            PrecioCompra = 12m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 4,
+                            CantidadComprada = 30,
+                            CompraId = 4,
+                            MedicamentoId = 4,
+                            PrecioCompra = 35m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 5,
+                            CantidadComprada = 50,
+                            CompraId = 5,
+                            MedicamentoId = 5,
+                            PrecioCompra = 8m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 6,
+                            CantidadComprada = 40,
+                            CompraId = 6,
+                            MedicamentoId = 6,
+                            PrecioCompra = 50m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 7,
+                            CantidadComprada = 60,
+                            CompraId = 7,
+                            MedicamentoId = 7,
+                            PrecioCompra = 55m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 8,
+                            CantidadComprada = 70,
+                            CompraId = 8,
+                            MedicamentoId = 8,
+                            PrecioCompra = 40m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 9,
+                            CantidadComprada = 15,
+                            CompraId = 9,
+                            MedicamentoId = 9,
+                            PrecioCompra = 32m
+                        },
+                        new
+                        {
+                            MedicamentoCompraId = 10,
+                            CantidadComprada = 50,
+                            CompraId = 10,
+                            MedicamentoId = 10,
+                            PrecioCompra = 20m
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoVenta", b =>
@@ -300,6 +729,99 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("VentaId");
 
                     b.ToTable("medicamento_venta", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            MedicamentoVentaId = 1,
+                            CantidadVendida = 2,
+                            MedicamentoId = 1,
+                            PrecioVenta = 20m,
+                            VentaId = 1
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 2,
+                            CantidadVendida = 1,
+                            MedicamentoId = 2,
+                            PrecioVenta = 25m,
+                            VentaId = 2
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 3,
+                            CantidadVendida = 2,
+                            MedicamentoId = 3,
+                            PrecioVenta = 15m,
+                            VentaId = 2
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 4,
+                            CantidadVendida = 1,
+                            MedicamentoId = 4,
+                            PrecioVenta = 40m,
+                            VentaId = 3
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 5,
+                            CantidadVendida = 1,
+                            MedicamentoId = 5,
+                            PrecioVenta = 10m,
+                            VentaId = 4
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 6,
+                            CantidadVendida = 1,
+                            MedicamentoId = 6,
+                            PrecioVenta = 55m,
+                            VentaId = 5
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 7,
+                            CantidadVendida = 1,
+                            MedicamentoId = 7,
+                            PrecioVenta = 60m,
+                            VentaId = 6
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 8,
+                            CantidadVendida = 1,
+                            MedicamentoId = 8,
+                            PrecioVenta = 45m,
+                            VentaId = 7
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 9,
+                            CantidadVendida = 1,
+                            MedicamentoId = 9,
+                            PrecioVenta = 35m,
+                            VentaId = 8
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 10,
+                            CantidadVendida = 1,
+                            MedicamentoId = 10,
+                            PrecioVenta = 22m,
+                            VentaId = 9
+                        },
+                        new
+                        {
+                            MedicamentoVentaId = 11,
+                            CantidadVendida = 2,
+                            MedicamentoId = 1,
+                            PrecioVenta = 20m,
+                            VentaId = 10
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Paciente", b =>
@@ -331,6 +853,35 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PacienteId");
 
                     b.ToTable("paciente", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            PacienteId = 1,
+                            Apellidos = "Perez",
+                            Direccion = "Calle 123",
+                            Nombre = "Juan",
+                            Telefono = "555-1234"
+                        },
+                        new
+                        {
+                            PacienteId = 2,
+                            Apellidos = "Villamizar",
+                            Direccion = "Calle 456",
+                            Nombre = "Maria",
+                            Telefono = "555-5678"
+                        },
+                        new
+                        {
+                            PacienteId = 3,
+                            Apellidos = "Garcia",
+                            Direccion = "Calle 789",
+                            Nombre = "Luis",
+                            Telefono = "555-9012"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Pais", b =>
@@ -347,6 +898,26 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PaisId");
 
                     b.ToTable("pais", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            PaisId = 1,
+                            Nombre = "Colombia"
+                        },
+                        new
+                        {
+                            PaisId = 2,
+                            Nombre = "Argentina"
+                        },
+                        new
+                        {
+                            PaisId = 3,
+                            Nombre = "Mexico"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
@@ -378,6 +949,35 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ProveedorId");
 
                     b.ToTable("proveedor", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            ProveedorId = 1,
+                            Direccion = "Calle Proveedor 456",
+                            Email = "contacto@proveedora.com",
+                            Nombre = "ProveedorA",
+                            Telefono = "32335232"
+                        },
+                        new
+                        {
+                            ProveedorId = 2,
+                            Direccion = "Calle Proveedor 789",
+                            Email = "contacto@proveedorb.com",
+                            Nombre = "ProveedorB",
+                            Telefono = "67835424"
+                        },
+                        new
+                        {
+                            ProveedorId = 3,
+                            Direccion = "Calle Proveedor 123",
+                            Email = "contacto@proveedorc.com",
+                            Nombre = "ProveedorC",
+                            Telefono = "34578724"
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.RefreshToken", b =>
@@ -386,20 +986,14 @@ namespace Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaCreacion")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaExpiracion")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsExpired")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("Revocado")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<DateTime?>("Revoked")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Token")
                         .IsRequired()
@@ -453,9 +1047,6 @@ namespace Persistence.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -466,12 +1057,25 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("RolId");
-
                     b.HasIndex("Username")
                         .IsUnique();
 
                     b.ToTable("usuario", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.UsuarioRoles", b =>
+                {
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolId", "UsuarioId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("UsuarioRoles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>
@@ -496,6 +1100,81 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PacienteId");
 
                     b.ToTable("venta", (string)null);
+<<<<<<< HEAD
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            VentaId = 1,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 1
+                        },
+                        new
+                        {
+                            VentaId = 2,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 3,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 3
+                        },
+                        new
+                        {
+                            VentaId = 4,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 5,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 1
+                        },
+                        new
+                        {
+                            VentaId = 6,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 7,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 8,
+                            EmpleadoId = 1,
+                            FechaVenta = new DateTime(2023, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        },
+                        new
+                        {
+                            VentaId = 9,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 1
+                        },
+                        new
+                        {
+                            VentaId = 10,
+                            EmpleadoId = 2,
+                            FechaVenta = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PacienteId = 2
+                        });
+>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>
@@ -626,15 +1305,23 @@ namespace Persistence.Data.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Usuario", b =>
+            modelBuilder.Entity("Domain.Entities.UsuarioRoles", b =>
                 {
                     b.HasOne("Domain.Entities.Rol", "Rol")
-                        .WithMany("Usuarios")
+                        .WithMany("UsuarioRoles")
                         .HasForeignKey("RolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Usuario", "Usuario")
+                        .WithMany("UsuarioRoles")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Rol");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>
@@ -717,12 +1404,14 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Rol", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.Navigation("UsuarioRoles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
                     b.Navigation("RefreshTokens");
+
+                    b.Navigation("UsuarioRoles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>

@@ -1,4 +1,5 @@
-using API.Dtos.Empleado;
+
+using API.Dtos.EmpleadoDtos;
 
 namespace API.Dtos.ArlDto;
 

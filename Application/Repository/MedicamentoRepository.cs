@@ -95,82 +95,105 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
         return medicamentosNoVendidos;
     }
 
-    public async Task<int> TotalMedicamentosVendidosPrimerTrimestre()
+    public async Task<Medicamento> MedicamentoMasCaro()
     {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 3, 31);
-
-        var totalMedicamentosPrimerTrimestre = await _context.MedicamentoVentas
-            .Where(mv => mv.Venta.FechaVenta >= fechaInicial && mv.Venta.FechaVenta <= fechaFinal)
-            .SumAsync(mv => mv.CantidadVendida);
-
-        return totalMedicamentosPrimerTrimestre;
+        double precio = _context.Medicamentos.Max(x => x.Precio);
+       return  await _context.Medicamentos.FirstOrDefaultAsync( x => x.Precio == precio);
     }
 
-
-    public async Task<Dictionary<int, List<Medicamento>>> GetMedicamentosVendidosPorMes2023()
+    public async Task<int> NumeroMedicamentosPorProveedor(int idProveedor)
     {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 12, 31);
+           var  num =  from i in _context.Medicamentos
+                    where i.ProveedorId == idProveedor
+                    select i.MedicamentoId;
+                    
+           return   num.Count();    
+    }
 
-        var medicamentosVendidosPorMes = await _context.MedicamentoVentas
-            .Where(mv => mv.Venta.FechaVenta >= fechaInicial && mv.Venta.FechaVenta <= fechaFinal)
-            .GroupBy(mv => new { mv.MedicamentoId, mv.Venta.FechaVenta.Year, mv.Venta.FechaVenta.Month })
-            .Select(group => new
-            {
-                MedicamentoId = group.Key.MedicamentoId,
-                Year = group.Key.Year,
-                Month = group.Key.Month
-            })
-            .Where(v => v.Year == 2023)
+    public async Task<List<Medicamento>> GetExpiran2024()
+    {
+        DateTime fechaInicial = new(2024, 01, 01);
+            DateTime fechaLimite = new(2024, 12, 31);
+
+            return await _context.Medicamentos 
+                                 .Where(x => x.FechaExpiracion > fechaInicial && x.FechaExpiracion <= fechaLimite)
+                                 .ToListAsync();
+    }
+
+    public async  Task<dynamic> GetPacientesCompraronParacetamol()
+    {
+         int yearToFilter = 2023; // Año que deseas filtrar
+            string medicamentoNombre = "paracetamol";
+
+            return await _context.Pacientes
+            .Where(paciente =>
+                _context.Ventas
+                    .Any(venta =>
+                        venta.PacienteId == paciente.PacienteId &&
+                        venta.FechaVenta.Year == yearToFilter &&
+                        _context.MedicamentoVentas
+                            .Any(medicamentoVenta =>
+                                medicamentoVenta.VentaId == venta.VentaId &&
+                                _context.Medicamentos
+                                    .Any(medicamento =>
+                                        medicamentoVenta.MedicamentoId == medicamento.MedicamentoId &&
+                                        medicamento.NombreMedicamento.ToLower() == medicamentoNombre))))
             .ToListAsync();
+    }
 
-        // Crear un diccionario donde las claves son los meses y los valores son las listas de medicamentos vendidos
-        var medicamentosPorMes = new Dictionary<int, List<Medicamento>>();
+    public async Task<dynamic> GetMedicamentoMenosVendido()
+    {
+        int yearToFilter = 2023;
 
-        for (int mes = 1; mes <= 12; mes++)
-        {
-            var medicamentoIdsMes = medicamentosVendidosPorMes
-                .Where(v => v.Month == mes)
-                .Select(v => v.MedicamentoId)
+            return await _context.Medicamentos
+                .GroupJoin(
+                    _context.MedicamentoVentas
+                        .Where(medicamentoVenta => medicamentoVenta.Venta.FechaVenta.Year == yearToFilter), // Filtra las ventas por el año 2023
+                    medicamento => medicamento.MedicamentoId,
+                    medicamentoVenta => medicamentoVenta.MedicamentoId,
+                    (medicamento, ventas) => new
+                    {
+                        Medicamento = medicamento,
+                        CantidadVentas = ventas.Count()
+                    })
+                .OrderBy(resultado => resultado.CantidadVentas)
+                .FirstOrDefaultAsync();
+    }
+
+    public async Task<dynamic> GetTotalMedicamentosVendidosxMes()
+    {
+        int yearToFilter = 2023;
+
+            var medicamentosVendidosPorMesEn2023 = Enumerable.Range(1, 12)
+                .Select(month => new
+                {
+                    Mes = month,
+                    TotalMedicamentosVendidos = _context.Ventas
+                        .Where(venta => venta.FechaVenta.Year == yearToFilter && venta.FechaVenta.Month == month)
+                        .Join(
+                            _context.MedicamentoVentas,
+                            venta => venta.VentaId,
+                            medicamentoVenta => medicamentoVenta.VentaId,
+                            (venta, medicamentoVenta) => medicamentoVenta.CantidadVendida)
+                        .Sum()
+                })
                 .ToList();
 
-            var medicamentosMes = await _context.Medicamentos
-                .Where(m => medicamentoIdsMes.Contains(m.MedicamentoId))
-                .ToListAsync();
-
-            medicamentosPorMes.Add(mes, medicamentosMes);
-        }
-
-        return medicamentosPorMes;
+            return medicamentosVendidosPorMesEn2023;
     }
 
-    public async Task<Dictionary<int, int>> GetTotalMedicamentosVendidosPorMes2023()
+    public Task<int> TotalMedicamentosVendidosPrimerTrimestre()
     {
-        var fechaInicial = new DateTime(2023, 1, 1);
-        var fechaFinal = new DateTime(2023, 12, 31);
-
-        var totalMedicamentosPorMes = await _context.MedicamentoVentas
-            .Where(mv => mv.Venta.FechaVenta >= fechaInicial && mv.Venta.FechaVenta <= fechaFinal)
-            .GroupBy(mv => new { mv.Venta.FechaVenta.Month })
-            .Select(group => new
-            {
-                Month = group.Key.Month,
-                TotalVentas = group.Sum(mv => mv.CantidadVendida)
-            })
-            .ToListAsync();
-
-        // Crear un diccionario donde las claves son los meses (del 1 al 12) y los valores son los totales de medicamentos vendidos
-        var totalMedicamentosPorMesDict = new Dictionary<int, int>();
-
-        // Rellenar el diccionario con todos los meses del 1 al 12
-        for (int mes = 1; mes <= 12; mes++)
-        {
-            var mesEncontrado = totalMedicamentosPorMes.FirstOrDefault(item => item.Month == mes);
-            totalMedicamentosPorMesDict[mes] = mesEncontrado != null ? mesEncontrado.TotalVentas : 0;
-        }
-
-        return totalMedicamentosPorMesDict;
+        throw new NotImplementedException();
     }
 
+    public Task<Dictionary<int, List<Medicamento>>> GetMedicamentosVendidosPorMes2023()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Dictionary<int, int>> GetTotalMedicamentosVendidosPorMes2023()
+    {
+        throw new NotImplementedException();
+    }
 }

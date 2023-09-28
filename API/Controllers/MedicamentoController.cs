@@ -70,6 +70,20 @@ public class MedicamentoController : BaseApiController
 
     }
 
+    [HttpGet("GetNumeroMedicamentosPorProveedor{ProveedorId}")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<int>> GetNumeroMedicamentosPorProveedor(int ProveedorId)
+    {
+        int NumeroMedicamentoProveedor =await _unitOfWork.Medicamentos.NumeroMedicamentosPorProveedor(ProveedorId);
+        if(NumeroMedicamentoProveedor == 0) return NotFound();
+        return NumeroMedicamentoProveedor;
+
+    }
+
 
     [HttpGet("GetMedicamentosPorProveedorId{id}")]
     //[Authorize(Roles="")]
@@ -84,27 +98,37 @@ public class MedicamentoController : BaseApiController
 
     }
 
-    [HttpGet("GetMedicamentosPrecioMayorA50YStockMenorA100")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<MedicamentoSoloDto>>> GetMedicamentosPrecioMayorA50YStockMenorA100()
-    {
-        var medicamentos = await _unitOfWork.Medicamentos.GetMedicamentosPrecioMayorA50YStockMenorA100();
-        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoSoloDto>>(medicamentos);
-        return Ok(MedicamentosDto);
-    }
 
-    [HttpGet("NoVendidos")]
+    [HttpGet("GetMedicamentosNoVendidos")]
+    //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<List<MedicamentoSoloDto>>> GetMedicamentosNoVendidos()
+
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVnedidos()
     {
-        var medicamentos = await _unitOfWork.Medicamentos.MedicamentosNoVendidos();
-        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoSoloDto>>(medicamentos);
-        return Ok(MedicamentosDto);
-    }
+        IEnumerable<Medicamento> Medicamento = await  _unitOfWork.Medicamentos.MedicamentosNoVendidos();
+
+        return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
+
+    } 
+
+    [HttpGet("GetMedicamentosMasCaro")]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<MedicamentoDto>> GetMedicamentosMasCaro()
+    {
+        Medicamento Medicamento = await  _unitOfWork.Medicamentos.MedicamentoMasCaro();
+
+        return Ok(_mapper.Map<MedicamentoDto>(Medicamento));
+
+    } 
+    
+    
 
 
-    [HttpGet("GetMedicamentosPorProveedor/{NombreProveedor} :string")]
+    [HttpGet("GetMedicamentosPorProveedor{NombreProveedor} :string")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -229,7 +253,41 @@ public class MedicamentoController : BaseApiController
     
 
 
+        [HttpGet("compraronParacetamol")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetPacienteCompraronParacetamol()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetPacientesCompraronParacetamol();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
 
+        [HttpGet("menosVendido")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetMedicamentoMenosVendido()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetMedicamentoMenosVendido();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
+
+        [HttpGet("ventasxMes")]
+        // [Authorize(Roles = "Administrador, Gerente")]
+        // [MapToApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<dynamic>> GetTotalMedicamentosVendidosxMes()
+        {
+            var registros = await _unitOfWork.Medicamentos.GetTotalMedicamentosVendidosxMes();
+            if(registros == null) return NotFound();
+            return registros; 
+        }
 
     
     

@@ -2,11 +2,13 @@ namespace API.Extensions;
 
  using System.Text;
 using API.Helpers;
+using API.Services;
 using Application.UnitOfWork;
 /*  using API.Helpers;
 using API.Services;
 using Aplicacion.UnitOfWork; */
 using AspNetCoreRateLimit;
+using Domain.Entities;
 using Domain.Interfaces;
 //using Dominio.Interfaces;
  using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,8 +35,8 @@ using Domain.Interfaces;
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            // services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
-            // services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
+            services.AddScoped<IUserService, UserService>();
         }
  
         public static void ConfigureRateLimiting(this IServiceCollection services)
@@ -52,8 +54,8 @@ using Domain.Interfaces;
                 {
                     new() {
                         Endpoint = "*",
-                        Period = "20s",
-                        Limit = 2
+                        Period = "1s",
+                        Limit = 100
                     }
                 };
             });

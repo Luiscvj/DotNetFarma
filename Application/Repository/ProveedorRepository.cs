@@ -56,64 +56,48 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         return ListaProveedorMedicamentoCompraH;
      }
 
-    public async Task<IEnumerable<Proveedor>> ProveedoresMedicamentos50U()
-     {
-        var proveedor = await  _context.Proveedores.Where(e => e.Medicamentos.Any(medicamento => medicamento.Stock <50)).ToListAsync(); 
+    public async Task<dynamic> GetProveedoresMasHanSuministrado()
+    {
+         int yearToFilter = 2023; // Año que deseas filtrar
 
-        return proveedor;
+            return await _context.Proveedores
+                .Select(proveedor => new
+                {
+                    Proveedor = proveedor,
+                    CantidadMedicamentosSuministrados = _context.Compras
+                        .Where(compra => compra.FechaCompra.Year == yearToFilter && compra.ProveedorId == proveedor.ProveedorId)
+                        .SelectMany(compra => compra.MedicamentoCompras)
+                        .Sum(medicamentoCompra => medicamentoCompra.CantidadComprada)
+                })
+                .OrderByDescending(resultado => resultado.CantidadMedicamentosSuministrados)
+                .FirstOrDefaultAsync();
+    }
+
+    public async Task<dynamic> GetTotalGananciaProveedor()
+    {
+         return await _context.Proveedores
+                .Select(proveedor => new
+                {
+                    Proveedor = proveedor,
+                    TotalCompra = _context.Compras
+                        .Where(compra => compra.ProveedorId == proveedor.ProveedorId)
+                        .Join(
+                            _context.MedicamentoCompras,
+                            compra => compra.CompraId,
+                            medicamentoCompra => medicamentoCompra.CompraId,
+                            (compra, medicamentoCompra) => medicamentoCompra.PrecioCompra)
+                        .Sum()
+                })
+                .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Proveedor>> ProveedoresMedicamentos()
+     {
+         IEnumerable<Proveedor>   proveedor = await  _context.Proveedores.Where(e => e.Medicamentos.Any(medicamento => medicamento.Stock <50)).ToListAsync(); 
+         
+         return proveedor;
+
      }
 
-     public async Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023()
-   {
-      var fechaInicial = new DateTime(2023, 1, 1);
-      var fechaFinal = new DateTime(2023, 12, 31);
-
-      var proveedoresCon5MedicamentosDiferentes = _context.Proveedores
-         .Where(p =>
-            p.Compras
-                  .Where(c =>
-                     c.FechaCompra >= fechaInicial && c.FechaCompra <= fechaFinal)
-                  .SelectMany(c => c.MedicamentoCompras)
-                  .Select(mc => mc.MedicamentoId)
-                  .Distinct()
-                  .Count() >= 5)
-         .ToList();
-
-      return proveedoresCon5MedicamentosDiferentes;
-
-   }
-
-    public async Task<List<Proveedor>> GetProveedoresSinVenderMedicamentosUltimoAño()
-      {
-         var fechaInicial = DateTime.Now.AddYears(-1);
-
-         var proveedoresSinVentas = await _context.Proveedores
-            .Where(p => !p.Compras.Any(c => c.FechaCompra >= fechaInicial))
-            .ToListAsync();
-
-         return proveedoresSinVentas;
-      }
-
-
-    /* public async Task<List<Proveedor>> GetProveedores5MedicamentosDiferentes2023()
- {
-     var fechaInicial = new DateTime(2023, 1, 1);
-     var fechaFinal = new DateTime(2023, 12, 31);
-
-     var proveedores = await _context.Proveedores
-         .Where(p =>
-             p.Compras
-                 .Where(c =>
-                     c.FechaCompra >= fechaInicial && c.FechaCompra <= fechaFinal)
-                 .SelectMany(c => c.MedicamentoCompras)
-                 .GroupBy(mc => mc.MedicamentoId) // Agrupa por ID del medicamento
-                 .Where(group => group.Count() >= 5) // Filtra grupos con al menos 5 elementos
-                 .Any()) // Verifica si hay al menos un grupo con 5 elementos
-         .ToListAsync();
-
-     return proveedores;
- }
-  */
-
-
+    
 }

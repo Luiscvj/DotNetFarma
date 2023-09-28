@@ -4,7 +4,7 @@ namespace Domain.Interfaces;
 
 public interface IPaciente : IGenericRepository<Paciente>
 {
-    Task<List<Paciente>> PacientesParacetamol();
-    Task<List<Paciente>> PacientesSinComprasEn2023();
-    Task<Dictionary<string, decimal>> TotalGastadoPorPacienteEn2023();
+   public  Task<List<MedicamentoPorPacienteH>> MedicamentoPacientePorNombreMedicamento(string NombreMedicamento);
+   Task<dynamic> GetPacienteMasDineroGastado();
+
 }
