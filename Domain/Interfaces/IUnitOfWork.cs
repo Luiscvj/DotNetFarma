@@ -9,7 +9,7 @@ public interface IUnitOfWork
     public ICompra Compras { get;}
     public IDepartamento Departamentos { get; }
     public IEmpleado Empleados {get; }
-    public IEps Eps { get; }
+    public IEps Epses { get; }
     public IMedicamento Medicamentos { get; }
     public IMedicamentoCompra MedicamentoCompras { get; }
     public IMedicamentoVenta MedicamentoVentas { get; }

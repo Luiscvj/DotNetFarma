@@ -13,6 +13,8 @@ using API.Dtos.DepartamentoDtos;
 using API.Dtos.VentaDtos;
 using API.Dtos.MedicamentoCompraDtos;
 using API.Dtos.MedicamentoVentaDtos;
+using API.Dtos.CiudadDtos;
+using API.Dtos.EpsDto;
 
 namespace API.Profiles;
 
@@ -20,6 +22,8 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
+        CreateMap<Eps,EpsDto>().ReverseMap();
+        CreateMap<Ciudad,CiudadDto>().ReverseMap();
         CreateMap<Medicamento,MedicamentoSoloDto>().ReverseMap();
         CreateMap<Pais,PaisDto>().ReverseMap();
         CreateMap<Paciente,PacienteDto>().ReverseMap();

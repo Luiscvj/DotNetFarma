@@ -10,13 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(DotNetFarmaContext))]
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-    [Migration("20230924040450_InitialCreate")]
-    partial class InitialCreate
-========
-    [Migration("20230927133253_Migracion para el seed")]
-    partial class Migracionparaelseed
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
+    [Migration("20230928012155_InitialCreateMigration")]
+    partial class InitialCreateMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,8 +50,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ArlId");
 
                     b.ToTable("arl", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -83,7 +76,6 @@ namespace Persistence.Data.Migrations
                             Nombre = "Arl3",
                             Telefono = "2457324355"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Cargo", b =>
@@ -105,8 +97,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("Cargo", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -127,7 +117,6 @@ namespace Persistence.Data.Migrations
                             Descripcion = "... Vendedor",
                             Nombre = "Vendedor"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>
@@ -149,8 +138,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("DepartamentoId");
 
                     b.ToTable("ciudad", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -171,7 +158,6 @@ namespace Persistence.Data.Migrations
                             DepartamentoId = 1,
                             Nombre = "Giron"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Compra", b =>
@@ -191,8 +177,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("Compra", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -255,7 +239,6 @@ namespace Persistence.Data.Migrations
                             FechaCompra = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ProveedorId = 1
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Departamento", b =>
@@ -277,8 +260,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("departamento", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -299,7 +280,6 @@ namespace Persistence.Data.Migrations
                             Nombre = "Ciudad Mexico",
                             PaisId = 3
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Empleado", b =>
@@ -354,8 +334,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("EpsId");
 
                     b.ToTable("empleado", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -410,7 +388,6 @@ namespace Persistence.Data.Migrations
                             Nombres = "Sofia",
                             Telefono = "555-1234"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Eps", b =>
@@ -442,8 +419,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("EpsId");
 
                     b.ToTable("eps", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -470,7 +445,6 @@ namespace Persistence.Data.Migrations
                             Nombre = "Eps3",
                             Telefono = "2457324355"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Medicamento", b =>
@@ -501,15 +475,13 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("ProveedorId");
 
                     b.ToTable("medicamento", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
                         {
                             MedicamentoId = 1,
                             FechaExpiracion = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Paracetamol",
+                            NombreMedicamento = "Paracetamol",
                             Precio = 20.0,
                             ProveedorId = 1,
                             Stock = 150
@@ -518,7 +490,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 2,
                             FechaExpiracion = new DateTime(2024, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Ibuprofeno",
+                            NombreMedicamento = "Ibuprofeno",
                             Precio = 25.0,
                             ProveedorId = 2,
                             Stock = 50
@@ -527,7 +499,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 3,
                             FechaExpiracion = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Aspirina",
+                            NombreMedicamento = "Aspirina",
                             Precio = 15.0,
                             ProveedorId = 3,
                             Stock = 30
@@ -536,7 +508,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 4,
                             FechaExpiracion = new DateTime(2025, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Amoxicilina",
+                            NombreMedicamento = "Amoxicilina",
                             Precio = 40.0,
                             ProveedorId = 1,
                             Stock = 75
@@ -545,7 +517,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 5,
                             FechaExpiracion = new DateTime(2024, 1, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Cetirizina",
+                            NombreMedicamento = "Cetirizina",
                             Precio = 10.0,
                             ProveedorId = 2,
                             Stock = 110
@@ -554,7 +526,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 6,
                             FechaExpiracion = new DateTime(2024, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Losartan",
+                            NombreMedicamento = "Losartan",
                             Precio = 55.0,
                             ProveedorId = 3,
                             Stock = 95
@@ -563,7 +535,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 7,
                             FechaExpiracion = new DateTime(2024, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Metformina",
+                            NombreMedicamento = "Metformina",
                             Precio = 60.0,
                             ProveedorId = 1,
                             Stock = 180
@@ -572,7 +544,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 8,
                             FechaExpiracion = new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Atorvastatina",
+                            NombreMedicamento = "Atorvastatina",
                             Precio = 45.0,
                             ProveedorId = 2,
                             Stock = 200
@@ -581,7 +553,7 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 9,
                             FechaExpiracion = new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Clonazepam",
+                            NombreMedicamento = "Clonazepam",
                             Precio = 35.0,
                             ProveedorId = 3,
                             Stock = 25
@@ -590,12 +562,11 @@ namespace Persistence.Data.Migrations
                         {
                             MedicamentoId = 10,
                             FechaExpiracion = new DateTime(2025, 2, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nombre = "Loratadina",
+                            NombreMedicamento = "Loratadina",
                             Precio = 22.0,
                             ProveedorId = 1,
                             Stock = 120
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoCompra", b =>
@@ -624,8 +595,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("MedicamentoId");
 
                     b.ToTable("medicamento_compra", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -708,7 +677,6 @@ namespace Persistence.Data.Migrations
                             MedicamentoId = 10,
                             PrecioCompra = 20m
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicamentoVenta", b =>
@@ -737,8 +705,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("VentaId");
 
                     b.ToTable("medicamento_venta", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -829,7 +795,6 @@ namespace Persistence.Data.Migrations
                             PrecioVenta = 20m,
                             VentaId = 10
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Paciente", b =>
@@ -861,8 +826,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PacienteId");
 
                     b.ToTable("paciente", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -889,7 +852,6 @@ namespace Persistence.Data.Migrations
                             Nombre = "Luis",
                             Telefono = "555-9012"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Pais", b =>
@@ -906,8 +868,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("PaisId");
 
                     b.ToTable("pais", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -925,7 +885,6 @@ namespace Persistence.Data.Migrations
                             PaisId = 3,
                             Nombre = "Mexico"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
@@ -957,8 +916,6 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ProveedorId");
 
                     b.ToTable("proveedor", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -985,7 +942,6 @@ namespace Persistence.Data.Migrations
                             Nombre = "ProveedorC",
                             Telefono = "34578724"
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.RefreshToken", b =>
@@ -1004,7 +960,6 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
@@ -1108,8 +1063,6 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("PacienteId");
 
                     b.ToTable("venta", (string)null);
-<<<<<<<< HEAD:Persistence/Data/Migrations/20230924040450_InitialCreate.Designer.cs
-========
 
                     b.HasData(
                         new
@@ -1182,7 +1135,6 @@ namespace Persistence.Data.Migrations
                             FechaVenta = new DateTime(2023, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PacienteId = 2
                         });
->>>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65:Persistence/Data/Migrations/20230927133253_Migracion para el seed.Designer.cs
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>

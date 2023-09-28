@@ -102,16 +102,16 @@ namespace Persistence.DataSeeding;
             modelBuilder.Entity<Medicamento>()
                         .HasData
                         (
-                            new Medicamento {MedicamentoId = 1, Nombre = "Paracetamol", Precio = 20, Stock = 150, FechaExpiracion = new DateTime(2024, 06, 15), ProveedorId = 1},
-                            new Medicamento {MedicamentoId = 2, Nombre = "Ibuprofeno", Precio = 25, Stock = 50, FechaExpiracion = new DateTime(2024, 12, 01), ProveedorId = 2},
-                            new Medicamento {MedicamentoId = 3, Nombre = "Aspirina", Precio = 15, Stock = 30, FechaExpiracion = new DateTime(2024, 05, 20), ProveedorId = 3},
-                            new Medicamento {MedicamentoId = 4, Nombre = "Amoxicilina", Precio = 40, Stock = 75, FechaExpiracion = new DateTime(2025, 08, 11), ProveedorId = 1},
-                            new Medicamento {MedicamentoId = 5, Nombre = "Cetirizina", Precio = 10, Stock = 110, FechaExpiracion = new DateTime(2024, 01, 23), ProveedorId = 2},
-                            new Medicamento {MedicamentoId = 6, Nombre = "Losartan", Precio = 55, Stock = 95, FechaExpiracion = new DateTime(2024, 07, 30), ProveedorId = 3},
-                            new Medicamento {MedicamentoId = 7, Nombre = "Metformina", Precio = 60, Stock = 180, FechaExpiracion = new DateTime(2024, 09, 29), ProveedorId = 1},
-                            new Medicamento {MedicamentoId = 8, Nombre = "Atorvastatina", Precio = 45, Stock = 200, FechaExpiracion = new DateTime(2024, 10, 05), ProveedorId = 2},
-                            new Medicamento {MedicamentoId = 9, Nombre = "Clonazepam", Precio = 35, Stock = 25, FechaExpiracion = new DateTime(2024, 04, 21), ProveedorId = 3},
-                            new Medicamento {MedicamentoId = 10, Nombre = "Loratadina", Precio = 22, Stock = 120, FechaExpiracion = new DateTime(2025, 02, 19), ProveedorId = 1}
+                            new Medicamento {MedicamentoId = 1, NombreMedicamento = "Paracetamol", Precio = 20, Stock = 150, FechaExpiracion = new DateTime(2024, 06, 15), ProveedorId = 1},
+                            new Medicamento {MedicamentoId = 2, NombreMedicamento = "Ibuprofeno", Precio = 25, Stock = 50, FechaExpiracion = new DateTime(2024, 12, 01), ProveedorId = 2},
+                            new Medicamento {MedicamentoId = 3, NombreMedicamento = "Aspirina", Precio = 15, Stock = 30, FechaExpiracion = new DateTime(2024, 05, 20), ProveedorId = 3},
+                            new Medicamento {MedicamentoId = 4, NombreMedicamento = "Amoxicilina", Precio = 40, Stock = 75, FechaExpiracion = new DateTime(2025, 08, 11), ProveedorId = 1},
+                            new Medicamento {MedicamentoId = 5, NombreMedicamento = "Cetirizina", Precio = 10, Stock = 110, FechaExpiracion = new DateTime(2024, 01, 23), ProveedorId = 2},
+                            new Medicamento {MedicamentoId = 6, NombreMedicamento = "Losartan", Precio = 55, Stock = 95, FechaExpiracion = new DateTime(2024, 07, 30), ProveedorId = 3},
+                            new Medicamento {MedicamentoId = 7, NombreMedicamento = "Metformina", Precio = 60, Stock = 180, FechaExpiracion = new DateTime(2024, 09, 29), ProveedorId = 1},
+                            new Medicamento {MedicamentoId = 8, NombreMedicamento = "Atorvastatina", Precio = 45, Stock = 200, FechaExpiracion = new DateTime(2024, 10, 05), ProveedorId = 2},
+                            new Medicamento {MedicamentoId = 9, NombreMedicamento = "Clonazepam", Precio = 35, Stock = 25, FechaExpiracion = new DateTime(2024, 04, 21), ProveedorId = 3},
+                            new Medicamento {MedicamentoId = 10, NombreMedicamento = "Loratadina", Precio = 22, Stock = 120, FechaExpiracion = new DateTime(2025, 02, 19), ProveedorId = 1}
                         );
 
             modelBuilder.Entity<Venta>()

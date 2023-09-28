@@ -23,13 +23,8 @@ public class DotNetFarmaContext : DbContext
     public DbSet<Proveedor> Proveedores {get;set;}
     public DbSet<Rol> Roles {get;set;}
     public DbSet<Usuario> Usuarios {get;set;}
-<<<<<<< HEAD
-    public DbSet<Venta> Ventas { get; set; }
-
-=======
     public DbSet<Venta> Ventas {get;set;}
     public DbSet<UsuarioRoles> UsuarioRoles { get; set; }
->>>>>>> 1382bf47d5a22d4aecb8cd3b638cebf24e583a65
     protected override void ConfigureConventions(ModelConfigurationBuilder modelBuilder)
     {
         modelBuilder.Properties<string>().HaveMaxLength(150);

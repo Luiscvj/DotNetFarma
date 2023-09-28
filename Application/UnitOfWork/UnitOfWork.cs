@@ -176,6 +176,15 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
+    public IEps Epses
+    {
+        get
+        {
+            _eps ??= new EpsRepository(_context);
+            return _eps;
+        }
+    }
+
     public IRefreshToken RefreshIRefreshTokens
     {
         get
