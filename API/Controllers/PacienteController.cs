@@ -113,7 +113,7 @@ public class PacienteController : BaseApiController
     }
 
 
-    [HttpPut]
+    [HttpPut("{id}")]
    // [Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
