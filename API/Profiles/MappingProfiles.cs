@@ -13,6 +13,8 @@ using API.Dtos.DepartamentoDtos;
 using API.Dtos.VentaDtos;
 using API.Dtos.MedicamentoCompraDtos;
 using API.Dtos.MedicamentoVentaDtos;
+using API.Dtos.CiudadDtos;
+using API.Dtos.EpsDtos;
 
 namespace API.Profiles;
 
@@ -26,7 +28,11 @@ public class MappingProfiles : Profile
         CreateMap<Cargo,CargoDto>().ReverseMap();
         CreateMap<Compra,CompraDto>().ReverseMap();
         CreateMap<Compra,CompraProveedorDto>().ReverseMap();
+        CreateMap<Ciudad,CiudadDto>().ReverseMap();
+        CreateMap<Ciudad,CiudadEmpleadoDto>().ReverseMap();
         CreateMap<Empleado, EmpleadoDto>().ReverseMap();
+        CreateMap<Eps,EpsDto>().ReverseMap();
+        CreateMap<Eps,EpsEmpleadoDto>().ReverseMap();
         CreateMap<Departamento,DepartamentoDto>().ReverseMap();
         CreateMap<Pais,PaisDepartamentoDto>().ReverseMap();
         CreateMap<Medicamento,MedicamentoDto>().ReverseMap();
@@ -35,6 +41,7 @@ public class MappingProfiles : Profile
         CreateMap<Venta,VentaDto>().ReverseMap();
         CreateMap<MedicamentoCompra,MedicamentoCompraDto>().ReverseMap();
         CreateMap<MedicamentoVenta,MedicamentoVentaDto>().ReverseMap();
+        CreateMap<Arl,ArlDto>().ReverseMap();
       
     }
 }

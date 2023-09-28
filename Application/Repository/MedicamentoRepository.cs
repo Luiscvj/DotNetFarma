@@ -177,4 +177,10 @@ public class MedicamentoRepository : GenericRepository<Medicamento>, IMedicament
 
             return medicamentosVendidosPorMesEn2023;
     }
+
+    public async Task<Medicamento> ComprobarNombreMedicamentoParaActualizar(string NombreMedicamentoABuscar)
+    {
+        Medicamento medicamentoEncontrado =await  _context.Medicamentos.FirstOrDefaultAsync( medicamento => medicamento.Nombre.ToLower() == NombreMedicamentoABuscar.ToLower());
+        return medicamentoEncontrado;
+    }
 }

@@ -69,6 +69,19 @@ public class MedicamentoController : BaseApiController
 
     }
 
+    [HttpGet]
+    //[Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetAllMedicamentos()
+    {
+        IEnumerable<Medicamento> Medicamento =await _unitOfWork.Medicamentos.GetAll();
+
+        return Ok(_mapper.Map<IEnumerable<MedicamentoDto>>(Medicamento));
+
+    }
+
     [HttpGet("GetNumeroMedicamentosPorProveedor{ProveedorId}")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
