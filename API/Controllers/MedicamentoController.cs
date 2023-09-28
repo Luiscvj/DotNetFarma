@@ -98,13 +98,21 @@ public class MedicamentoController : BaseApiController
 
     }
 
+    [HttpGet("GetMedicamentosPrecioMayorA50YStockMenorA100")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<MedicamentoSoloDto>>> GetMedicamentosPrecioMayorA50YStockMenorA100()
+    {
+        var medicamentos = await _unitOfWork.Medicamentos.GetMedicamentosPrecioMayorA50YStockMenorA100();
+        var MedicamentosDto= _mapper.Map<IEnumerable<MedicamentoSoloDto>>(medicamentos);
+        return Ok(MedicamentosDto);
+    }
 
     [HttpGet("GetMedicamentosNoVendidos")]
     //[Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVnedidos()
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMedicamentosNoVendidos()
     {
         IEnumerable<Medicamento> Medicamento = await  _unitOfWork.Medicamentos.MedicamentosNoVendidos();
 

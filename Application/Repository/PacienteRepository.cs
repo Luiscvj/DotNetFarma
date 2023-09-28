@@ -53,7 +53,7 @@ public class PacienteRepository : GenericRepository<Paciente>, IPaciente
      {
         List<MedicamentoPorPacienteH> pacienteCompra2  = new List<MedicamentoPorPacienteH>();
       
-        Medicamento medicamentoBuscado = await _context.Medicamentos.FirstOrDefaultAsync(x => x.Nombre.ToLower() == NombreMedicamento.ToLower()); 
+        Medicamento medicamentoBuscado = await _context.Medicamentos.FirstOrDefaultAsync(x => x.NombreMedicamento.ToLower() == NombreMedicamento.ToLower()); 
 
        
         IEnumerable<Paciente> lstPaciente = await _context.Pacientes.Include(x => x.Ventas)    
