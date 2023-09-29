@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Repository;
 
@@ -32,5 +33,29 @@ public class MedicamentoCompraRepository : GenericRepository<MedicamentoCompra>,
                                    .Take(pageSize)
                                    .ToListAsync();
         return (totalRegistros, registros);
+    }
+
+
+    public async Task<List<MedicamentoCompraPorCompraH>> VerMedicamentoComprasFecha()
+    {
+        var registros = await  _context.MedicamentoCompras  
+                        .Include(mc => mc.Compra)
+                        .Include(c => c.Medicamento)
+                        .Select( mc => new  MedicamentoCompraPorCompraH
+                        {
+                            MedicamentoCompraId = mc.MedicamentoCompraId,
+                            CantidadComprada = mc.CantidadComprada,
+                            PrecioCompra = mc.PrecioCompra,
+                            FechaCompra = mc.Compra.FechaCompra,
+                            NombreMedicamento = mc.Medicamento.Nombre,
+                            MedicamentoId = mc.MedicamentoId,
+                            
+
+                        }).ToListAsync();
+
+
+
+
+        return registros;
     }
 }
