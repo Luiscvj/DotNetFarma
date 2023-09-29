@@ -29,7 +29,7 @@ public class UsuariosController: ControllerBase
         }
 
         [HttpPost("token")]
-        [OutputCache(NoStore = true, Duration = 0)]  
+        [OutputCache(NoStore = true, Duration = 60)]  
         public async Task<IActionResult> GetTokenAsync(LoginDto model)
         {
             var result = await _userService.GetTokenAsync(model);

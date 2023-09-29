@@ -17,7 +17,7 @@ public class PacienteController : BaseApiController
 
 
     [HttpPost]
-    [Authorize]
+    // [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -146,14 +146,4 @@ public class PacienteController : BaseApiController
             if(registros == null) return NotFound();
             return registros;  
         }
-    
-    
-
-
-
-
-    
-    
-    
-    
 }
