@@ -16,7 +16,7 @@ namespace API.Controllers
         {
         }
 
-        [HttpGet("all")]
+        [HttpGet("Getall")]
         // [Authorize(Roles = "Administrador, Gerente")]
         // [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]

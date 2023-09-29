@@ -123,8 +123,9 @@ public class PacienteController : BaseApiController
         if(PacienteDto == null) return BadRequest();
 
         Paciente Paciente =  await _unitOfWork.Pacientes.GetById(id);
-
-        _mapper.Map(PacienteDto,Paciente);
+        _mapper.Map(Paciente,PacienteDto);
+  
+        
         _unitOfWork.Pacientes.Update(Paciente);
 
         int numeroCambios = await _unitOfWork.SaveAsync();

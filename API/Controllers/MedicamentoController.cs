@@ -65,7 +65,7 @@ public class MedicamentoController : BaseApiController
     {
         Medicamento Medicamento =await _unitOfWork.Medicamentos.GetById(id);
 
-        return _mapper.Map<MedicamentoDto>(Medicamento);
+        return Ok(_mapper.Map<MedicamentoDto>(Medicamento));
 
     }
 

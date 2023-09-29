@@ -23,7 +23,7 @@ public class CompraController : BaseApiController
         return Ok(regiones);
     }*/
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    /* [Authorize(Roles = "Administrador")] */
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -33,7 +33,7 @@ public class CompraController : BaseApiController
         return _mapper.Map<List<CompraDto>>(compras);
     }
     [HttpGet("Pager")]
-    [Authorize]
+    /* [Authorize]*/
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
