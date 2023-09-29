@@ -3,7 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using API.Dtos;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers;
@@ -19,6 +21,7 @@ public class UsuariosController: ControllerBase
         _userService = userService;
     }
         [HttpPost("register")]
+        [Authorize]
         public async Task<ActionResult> RegisterAsync(RegisterDto model)
         {
             var result = await _userService.RegisterAsync(model);
@@ -26,6 +29,7 @@ public class UsuariosController: ControllerBase
         }
 
         [HttpPost("token")]
+        [OutputCache(NoStore = true, Duration = 0)]  
         public async Task<IActionResult> GetTokenAsync(LoginDto model)
         {
             var result = await _userService.GetTokenAsync(model);

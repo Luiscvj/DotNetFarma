@@ -5,7 +5,7 @@ public class Autorizacion
     public enum Roles
     {
         Administrador,
-        Gerente,
+        Gerente,    
         Empleado
     }
 

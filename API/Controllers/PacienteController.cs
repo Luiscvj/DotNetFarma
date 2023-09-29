@@ -2,6 +2,7 @@ using API.Dtos.PacienteDto;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -16,7 +17,7 @@ public class PacienteController : BaseApiController
 
 
     [HttpPost]
-//[Authorize(Roles="")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
